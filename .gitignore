@@ -1,14 +1,14 @@
-/administrator
-/bin
-/cache
-/cli
+/administrator/
+/bin/
+/cache/
+/cli/
 /includes/
 /language/
 /layouts/
 /libraries/
 /media/
-
 /plugins/
+/tmp/
 
 /templates/beez3/
 /templates/protostar/
@@ -42,8 +42,6 @@
 /images/joomla_black.png
 /images/powered_by.png
 
-/tmp/
-
 /modules/mod_articles_archive/
 /modules/mod_articles_categories/
 /modules/mod_articles_category/
@@ -70,3 +68,10 @@
 /modules/mod_whosonline/
 /modules/mod_wrapper/
 /modules/index.html
+
+/htaccess.txt
+/index.php
+/LICENSE.txt
+/README.txt
+/robots.txt
+/web.config.txt
