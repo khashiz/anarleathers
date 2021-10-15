@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE install PUBLIC "-//Joomla! 2.5//DTD template 1.0//EN" "https://www.joomla.org/xml/dtd/1.6/template-install.dtd">
+<extension version="3.1" type="template" client="site">
+	<name>anarleathers</name>
+	<creationDate>Fall 1400</creationDate>
+	<author>Khashayar Pouradabi</author>
+	<authorEmail>office@netparsi.com</authorEmail>
+	<authorUrl>www.netparsi.com</authorUrl>
+	<copyright>Copyright (C) 2005 - 2019 Open Source Matters, Inc. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<version>1.0</version>
+	<files>
+		<folder>css</folder>
+		<folder>img</folder>
+		<folder>js</folder>
+		<folder>font</folder>
+		<filename>index.php</filename>
+		<filename>templateDetails.xml</filename>
+	</files>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="presetcolor" type="color" label="TPL_NETP_PRESETCOLOR" />
+			</fieldset>
+			<fieldset name="contact" label="TPL_NETP_CONTACT">
+				<field name="email" type="text" label="TPL_NETP_EMAIL" />
+				<field name="cellphone" type="textarea" label="TPL_NETP_CELLPHONE" />
+				<field name="phone" type="textarea" label="TPL_NETP_PHONE" />
+				<field name="fax" type="text" label="TPL_NETP_FAX" />
+				<field name="address" type="textarea" label="TPL_NETP_ADDRESS" />
+				<field name="lat" type="text" label="TPL_NETP_LAT" />
+				<field name="lng" type="text" label="TPL_NETP_LNG" />
+				<field name="socials" type="repeatable" icon="list" label="TPL_NETP_SOCIALS">
+					<fieldset hidden="true" name="slides" repeat="true">
+						<field name="icon" class="width-100" type="text" label="TPL_NETP_ICON" />
+						<field name="link" type="text" label="TPL_NETP_URL" />
+						<field name="title" type="text" label="TPL_NETP_TITLE" />
+					</fieldset>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
+</extension>
