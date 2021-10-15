@@ -7,8 +7,8 @@ jQuery(document).ready(function () {
         scrollingSpeed: 500,
         fitToSection:false,
         afterLoad: function(origin, destination, direction){
-            if(destination.anchor == "leather"){
-                // alert("this is lether section");
+            if(origin.anchor === "leather" || destination.anchor === "leather"){
+                UIkit.scrollspy('div.sectionWrapper.leather > div', {target: "> div", cls: "uk-animation-fade", repeat: false, delay: 300});
             }
         }
     });

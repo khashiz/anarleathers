@@ -3,6 +3,11 @@
 @secondary: #fef9c0;
 @gray: #b7b7b7;
 @images: "../img";
+//Font
+@font-face {
+  font-family: "Pinar";
+  src: url("../font/Pinar-VF[wght-KSHD-DSTY].woff2")
+}
 //Mixins
 .border-radius (@radius: 5px) {
   border-radius: @radius;
@@ -32,8 +37,20 @@ div{
   }
   &.sectionWrapper{
     &.leather{
-      background: url("../img/bg-leather.jpg") top center no-repeat fixed;
+      background: url("../img/bg-leather.jpg") center no-repeat fixed;
       background-size: cover;
+      div{
+        &.miz{
+          right: 50%;
+          bottom: 50%;
+          .transform(translateX(129px) translateY(374px));
+        }
+        &.women{
+          right: 0;
+          bottom: 50%;
+          .transform(translateX(104px) translateY(436px));
+        }
+      }
     }
   }
   &.uk-drop{
@@ -54,6 +71,8 @@ a{
 
 
 // Utilities
+::selection{background-color: @primary}
+.font{font-family: "Pinar", sans-serif}
 .uk-text-zero{font-size: 0;}
 .hoverPrimary{
   &:hover{

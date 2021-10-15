@@ -51,11 +51,11 @@ $total = count($socialsicons['icon']);
 <div class="uk-position-fixed uk-position-top-right uk-position-z-index uk-text-zero">
     <div class="uk-padding-small mainNav">
         <div class="uk-flex uk-flex-column uk-text-primary" data-uk-scrollspy="cls: uk-animation-slide-right; target: > *; delay: 200;">
-            <div><a href="<?php echo JUri::base().'#main/intro'; ?>" class="uk-padding-small uk-text-primary uk-display-inline-block uk-border-rounded hoverIcon" title="<?php echo JText::sprintf('NAV_MAIN_PAGE') ?>" data-uk-tooltip="title: <?php echo JText::sprintf('NAV_MAIN_PAGE') ?>; pos: left-center; offset: 15;"><img src="<?php echo JUri::base().'images/sprite.svg#eye' ?>" alt="" width="24" height="24" data-uk-svg></a></div>
-            <div><a href="#offcanvas-usage" data-uk-toggle class="uk-padding-small uk-text-primary uk-display-inline-block uk-border-rounded hoverIcon" title="<?php echo JText::sprintf('NAV_MENU') ?>" data-uk-tooltip="title: <?php echo JText::sprintf('NAV_MENU') ?>; pos: left-center; offset: 15;"><img src="<?php echo JUri::base().'images/sprite.svg#menu' ?>" alt="" width="24" height="24" data-uk-svg></a></div>
-            <div><a href="#" class="uk-padding-small uk-text-primary uk-display-inline-block uk-border-rounded hoverIcon" title="<?php echo JText::sprintf('NAV_MENU') ?>" data-uk-tooltip="title: <?php echo JText::sprintf('NAV_MENU') ?>; pos: left-center; offset: 15;"><img src="<?php echo JUri::base().'images/sprite.svg#cart' ?>" alt="" width="24" height="24" data-uk-svg></a></div>
-            <div><a href="#" class="uk-padding-small uk-text-primary uk-display-inline-block uk-border-rounded hoverIcon" title="<?php echo JText::sprintf('NAV_MENU') ?>" data-uk-tooltip="title: <?php echo JText::sprintf('NAV_MENU') ?>; pos: left-center; offset: 15;"><img src="<?php echo JUri::base().'images/sprite.svg#wishlist' ?>" alt="" width="24" height="24" data-uk-svg></a></div>
-            <div><a href="#" class="uk-padding-small uk-text-primary uk-display-inline-block uk-border-rounded hoverIcon" title="<?php echo JText::sprintf('NAV_MENU') ?>" data-uk-tooltip="title: <?php echo JText::sprintf('NAV_MENU') ?>; pos: left-center; offset: 15;"><img src="<?php echo JUri::base().'images/sprite.svg#user' ?>" alt="" width="24" height="24" data-uk-svg></a></div>
+            <div><a href="<?php echo JUri::base().'#main/intro'; ?>" class="uk-padding-small uk-text-primary uk-display-inline-block uk-border-rounded hoverIcon" title="<?php echo JText::sprintf('NAV_MAIN_PAGE') ?>" data-uk-tooltip="cls: uk-active font; title: <?php echo JText::sprintf('NAV_MAIN_PAGE') ?>; pos: left-center; offset: 15;"><img src="<?php echo JUri::base().'images/sprite.svg#eye' ?>" alt="" width="24" height="24" data-uk-svg></a></div>
+            <div><a href="#mainMenu" data-uk-toggle class="uk-padding-small uk-text-primary uk-display-inline-block uk-border-rounded hoverIcon" title="<?php echo JText::sprintf('NAV_MENU') ?>" data-uk-tooltip="cls: uk-active font; pos: left-center; offset: 15;"><img src="<?php echo JUri::base().'images/sprite.svg#menu' ?>" alt="" width="24" height="24" data-uk-svg></a></div>
+            <div><a href="#" class="uk-padding-small uk-text-primary uk-display-inline-block uk-border-rounded hoverIcon" title="<?php echo JText::sprintf('NAV_CART') ?>" data-uk-tooltip="cls: uk-active font; pos: left-center; offset: 15;"><img src="<?php echo JUri::base().'images/sprite.svg#cart' ?>" alt="" width="24" height="24" data-uk-svg></a></div>
+            <div><a href="#" class="uk-padding-small uk-text-primary uk-display-inline-block uk-border-rounded hoverIcon" title="<?php echo JText::sprintf('NAV_WISHLIST') ?>" data-uk-tooltip="cls: uk-active font; pos: left-center; offset: 15;"><img src="<?php echo JUri::base().'images/sprite.svg#wishlist' ?>" alt="" width="24" height="24" data-uk-svg></a></div>
+            <div><a href="#" class="uk-padding-small uk-text-primary uk-display-inline-block uk-border-rounded hoverIcon" title="<?php echo JFactory::getUser()->guest ? JText::sprintf('NAV_LOGIN') : JText::sprintf('NAV_MENU'); ?>" data-uk-tooltip="cls: uk-active font; pos: left-center; offset: 15;"><img src="<?php echo JUri::base().'images/sprite.svg#user' ?>" alt="" width="24" height="24" data-uk-svg></a></div>
         </div>
     </div>
 </div>
@@ -70,7 +70,7 @@ $total = count($socialsicons['icon']);
                     <div id="socialIcons" class="uk-child-width-auto uk-flex-nowrap uk-flex-row-reverse uk-grid-small" data-uk-grid data-uk-scrollspy="cls: uk-animation-slide-right; target: > div; repeat: true; delay: 100;">
                         <?php for($i=0;$i<$total;$i++) { ?>
                             <?php if ($socialsicons['link'][$i] != '') { ?>
-                                <div><a href="<?php echo $socialsicons['link'][$i]; ?>" target="_blank" title="<?php echo $socialsicons['title'][$i]; ?>" data-uk-tooltip class="uk-flex uk-flex-center uk-flex-middle uk-text-primary"><img src="<?php echo JURI::base().'images/sprite.svg#'.$socialsicons['icon'][$i] ?>" width="24" height="24" alt="" class="uk-preserve-width" data-uk-svg></a></div>
+                                <div><a href="<?php echo $socialsicons['link'][$i]; ?>" target="_blank" title="<?php echo $socialsicons['title'][$i]; ?>" data-uk-tooltip="cls: uk-active font;" class="uk-flex uk-flex-center uk-flex-middle uk-text-primary"><img src="<?php echo JURI::base().'images/sprite.svg#'.$socialsicons['icon'][$i] ?>" width="24" height="24" alt="" class="uk-preserve-width" data-uk-svg></a></div>
                             <?php } ?>
                         <?php } ?>
                     </div>
@@ -82,24 +82,12 @@ $total = count($socialsicons['icon']);
 <div id="anarContainer">
     <div class="section" data-section="leather">
         <div class="uk-height-1-1 sectionWrapper leather">
-            <div class="uk-child-width-1-3@m" data-uk-grid data-uk-scrollspy="cls: uk-animation-fade; target: .uk-card; delay: 500; repeat: true">
-                <div>
-                    <div class="uk-card uk-card-default uk-card-body">
-                        <h3 class="uk-card-title">Fade</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    </div>
+            <div class="uk-container uk-height-1-1 uk-position-relative" data-uk-scrollspy="target: > div;">
+                <div class="uk-position-absolute miz">
+                    <a href="" class="uk-display-inline-block"><img src="<?php echo JUri::base().'images/sectionLeather/miz.png'; ?>" width="974" height="628" alt="" class="uk-preserve-width"></a>
                 </div>
-                <div>
-                    <div class="uk-card uk-card-default uk-card-body">
-                        <h3 class="uk-card-title">Fade</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    </div>
-                </div>
-                <div>
-                    <div class="uk-card uk-card-default uk-card-body">
-                        <h3 class="uk-card-title">Fade</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    </div>
+                <div class="uk-position-absolute women">
+                    <a href="" class="uk-display-inline-block"><img src="<?php echo JUri::base().'images/sectionLeather/women.png'; ?>" width="258" height="692" alt="" class="uk-preserve-width"></a>
                 </div>
             </div>
         </div>
@@ -142,7 +130,18 @@ $total = count($socialsicons['icon']);
     </div>
 </div>
 
+<div id="mainMenu" data-uk-offcanvas="overlay: true; flip: true;">
+    <div class="uk-offcanvas-bar uk-width-1-2">
 
+        <button class="uk-offcanvas-close" type="button" uk-close></button>
+
+
+        <h3>Title</h3>
+
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+    </div>
+</div>
 
 <jdoc:include type="modules" name="pagetop" style="xhtml" />
 <jdoc:include type="message" />
