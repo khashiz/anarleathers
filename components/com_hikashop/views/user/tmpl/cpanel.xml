@@ -6,4 +6,17 @@
 	<layout title="COM_HIKASHOP_USER_PANEL_VIEW_DEFAULT_TITLE">
 		<message></message>
 	</layout>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="gridsize" type="list" label="TPL_NETP_GRIDSIZE" default="uk-container-expand">
+					<option value="uk-container-xsmall">TPL_NETP_XSMALL</option>
+					<option value="uk-container-small">TPL_NETP_SMALL</option>
+					<option value="uk-container-normal">TPL_NETP_NORMAL</option>
+					<option value="uk-container-large">TPL_NETP_LARGE</option>
+					<option value="uk-container-expand">TPL_NETP_EXPANDED</option>
+				</field>
+			</fieldset>
+		</fields>
+	</config>
 </metadata>

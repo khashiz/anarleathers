@@ -12,10 +12,19 @@ jQuery(document).ready(function () {
             }
         }
     });
-    fullpage_api.setAllowScrolling(false);
+    // fullpage_api.setAllowScrolling(false);
 
     UIkit.util.on('#socialsDrop', 'hidden', function () {
         UIkit.scrollspy('#socialIcons', {target: "> div"});
     });
-
+    UIkit.util.on('#utilitiesDrop', 'hidden', function () {
+        UIkit.scrollspy('#utilityIcons', {target: "> div"});
+    });
 });
+
+function shapeon(property) {
+    jQuery('svg.homeMain').addClass(property);
+}
+function shapeoff() {
+    jQuery('svg.homeMain').attr('class', ' homeMain uk-svg uk-height-1-1');
+}

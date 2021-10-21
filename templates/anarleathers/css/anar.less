@@ -2,6 +2,9 @@
 @primary: #760000;
 @secondary: #fef9c0;
 @gray: #b7b7b7;
+@gold: #a4946c;
+@danger: #DC2626;
+@success: #22C55E;
 @images: "../img";
 //Font
 @font-face {
@@ -29,7 +32,52 @@
   -moz-box-shadow: @shadow;
   -webkit-box-shadow: @shadow;
 }
+body{
+  &:not(.featured){
+    background: url("@{images}/bg-main.jpg") center top repeat;
+  }
+}
 div{
+  &.hmWrapper{
+    span{
+      &.line{
+        &.one{}
+        &.two,
+        &.three{
+          content: '';
+          position: absolute;
+          height: 300%;
+          top: 50%;
+          width: 2px;
+          background: linear-gradient(0deg,transparent 0, #eee 50%,transparent 100%);
+          left: 50%;
+          transform: translateX(-1px);
+          -moz-transform: translateX(-1px);
+        }
+        &.two{
+          -webkit-transform: translateY(-50%) rotate(60deg);
+        }
+        &.three{
+          -webkit-transform: translateY(-50%) rotate(120deg);
+        }
+      }
+    }
+    &:before{
+      content: '';
+      position: absolute;
+      height: 100%;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(0deg, transparent 0%, #eee 50%, transparent 100%);
+      left: 50%;
+      .transform(translateX(-1px));
+    }
+  }
+  &.homeMainWrapper{
+    padding-top: 93px;
+    padding-bottom: 94px;
+  }
   &.anchorsWrapper{
     a{
       .transition(color .3s ease-out);
@@ -56,6 +104,88 @@ div{
   &.uk-drop{
     width: fit-content;
   }
+  &#loginModal{
+    > div{
+      backdrop-filter: blur(10px);
+      .loginWrapper{
+        background-color: rgba(0, 0, 0, .7);
+        div{
+          &.seperator{
+            background-color: #000;
+            height: 2px;
+          }
+        }
+      }
+    }
+  }
+  &.cardFloatingLogo{
+    .transform(translateY(-90px) translateX(40px));
+    svg{
+      &.text{
+        .transform(translateY(-15px));
+      }
+    }
+  }
+  &.userMenu{
+    ul{
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      li{
+        a{
+          font-size: 14px;
+          display: block;
+          font-variation-settings: "wght" 600, "DSTY" 3, "KSHD" 120;
+          color: @gold;
+          padding: 10px 15px;
+          text-decoration: none;
+          .font;
+          .border-radius(5px);
+          .transition();
+          &:hover{
+            background-color: rgba(0, 0, 0, .05);
+            color: @primary;
+          }
+        }
+        &.active{
+          a{
+            color: @primary;
+          }
+        }
+      }
+    }
+  }
+  &.userMenuDrop{
+    &:before{
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 15px;
+      width: 0;
+      height: 0;
+      border: 10px solid transparent;
+      border-right-color: @gold;
+      border-bottom-color: @gold;
+      .transform(translateY(-16px));
+    }
+    &:after{
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 17px;
+      width: 0;
+      height: 0;
+      border: 10px solid transparent;
+      border-right-color: #fff;
+      border-bottom-color: #fff;
+      .transform(translateY(-12px));
+    }
+  }
+  &.alert{
+    &.alert-warning{
+      color: @danger;
+    }
+  }
 }
 a{
   &.hoverIcon{
@@ -66,24 +196,119 @@ a{
     }
   }
 }
+svg{
+  &.homeMain{
+    > *{
+      .transition(all .3s ease-out);
+    }
+    > *:not(g){
+      fill-opacity: 0;
+      stroke: #ddd;
+      stroke-width: 2;
+    }
+    > g{
+      fill: @primary;
+    }
+    &.leather{
+      #triangleSmall{
+        stroke: @primary;
+      }
+      > g{fill: #ddd;}
+    }
+    &.decor{
+      #hexagon{
+        stroke: @primary;
+      }
+      > g{fill: #ddd;}
+    }
+    &.style{
+      #triangleBig{
+        stroke: @primary;
+      }
+      > g{fill: #ddd;}
+    }
+    &.jewelry{
+      #eye{
+        stroke: @primary;
+      }
+      g#logoShape{
+        fill: @primary;
+      }
+      > g#logoText{fill: #ddd;}
+    }
+  }
+}
 
-
+.hikashop_product_price_full{
+  font-variation-settings: "wght" 600, "DSTY" 3, "KSHD" 150;
+  color: #000;
+  text-shadow: 1px 1px 1px #fff;
+}
+.sectionTitle{
+  font-size: 16px;
+  font-variation-settings: "wght" 600;
+}
 
 
 // Utilities
 ::selection{background-color: @primary}
+.ltr{direction: ltr;}
 .font{font-family: "Pinar", sans-serif}
+.noBorder{border: none;}
 .uk-text-zero{font-size: 0;}
+.uk-text-tiny{font-size: 12px;}
+.uk-text-white{color: #fff;}
+.uk-text-danger{color: @danger;}
+.uk-text-gold{color: @gold;}
+.uk-background-transparent{background-color: transparent;}
 .hoverPrimary{
   &:hover{
     color: @primary !important;
   }
 }
+.hoverGold{
+  &:hover{
+    color: @gold !important;
+  }
+}
 
 // UIKit Overrides
+.uk-card{
+  &.uk-card-bordered{
+    border: 2px solid @gold;
+  }
+  .floatingLogo{
+    padding-top: 80px;
+  }
+}
 .uk-text-primary{
   color: @primary !important;
 }
 .uk-text-muted{
   color: @gray !important;
+}
+.uk-button{
+  &.uk-button-gold{
+    background-color: @gold;
+    color: #fff;
+  }
+}
+.uk-input{
+  background-color: #fff;
+  border: 2px solid @gold;
+  padding: 0 15px;
+  font-size: 14px;
+  &:focus{
+    border-color: @gold;
+  }
+  &[readonly]{
+    background-color: #f0f0f0;
+    cursor: not-allowed;
+  }
+}
+.uk-form-label{
+  font-variation-settings: "wght" 600, "KSHD" 120;
+}
+.uk-border-rounded-large{
+  .border-radius(20px);
 }
