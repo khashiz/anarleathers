@@ -22,14 +22,14 @@ $dest = 'hikashop_user_addresses_show';
 
 if(!isset($this->edit) || $this->edit !== true ) {
 ?>
-		<div class="hika_edit">
-			<a href="<?php echo hikashop_completeLink($update_url, 'ajax');?>" onclick="return window.addressMgr.get(this,'<?php echo $dest; ?>');">
-				<i class="fas fa-pen"></i> <span><?php echo JText::_('HIKA_EDIT'); ?></span>
-			</a>
-			<a href="<?php echo hikashop_completeLink($delete_url, 'ajax');?>" onclick="return window.addressMgr.delete(this,<?php echo (int)@$this->address->address_id; ?>);">
-				<i class="fas fa-trash"></i> <span><?php echo JText::_('HIKA_DELETE'); ?></span>
-			</a>
-		</div>
+    <div class="uk-position-bottom-left uk-text-zero uk-padding-small uk-background-muted uk-border-pill">
+        <div class="uk-padding-small uk-padding-remove-vertical">
+            <div class="uk-grid-small uk-grid-divider" data-uk-grid>
+                <div><a class="uk-text-small uk-text-tiny uk-text-secondary font f600" href="<?php echo hikashop_completeLink($update_url, 'ajax');?>" onclick="return window.addressMgr.get(this,'<?php echo $dest; ?>');"><?php echo JText::_('HIKA_EDIT'); ?></a></div>
+                <div><a class="uk-text-small uk-text-tiny uk-text-danger font f600" href="<?php echo hikashop_completeLink($delete_url, 'ajax');?>" onclick="return window.addressMgr.delete(this,<?php echo (int)@$this->address->address_id; ?>);"><?php echo JText::_('HIKA_DELETE'); ?></a></div>
+            </div>
+        </div>
+    </div>
 <?php
 } else {
 	if(!empty($this->ajax)) {
@@ -59,12 +59,14 @@ if(isset($this->edit) && $this->edit === true) {
 	if(!empty($this->extraData->address_top)) { echo implode("\r\n", $this->extraData->address_top); }
 	?>
 
-    <div class="uk-grid-medium uk-child-width-1-1 uk-child-width-1-2@m" data-uk-grid>
 
-        <?php foreach($this->fields as $fieldname => $field) { ?>
-            <div id="hikashop_address_<?php echo $fieldname; ?>" class="hika_options">
-                <div class="hikashop_user_address_<?php echo $fieldname;?>">
-                    <label class="uk-display-block uk-margin-small-bottom uk-form-label uk-text-tiny font"><?php echo $this->fieldsClass->trans($field->field_realname); if($field->field_required) echo '&ensp;<span class="uk-text-tiny uk-text-danger">*</span>'; ?></label></div>
+    <div class="uk-margin-medium-bottom">
+        <div class="uk-grid-medium uk-child-width-1-1 uk-child-width-1-2@m" data-uk-grid>
+
+            <?php foreach($this->fields as $fieldname => $field) { ?>
+                <div id="hikashop_address_<?php echo $fieldname; ?>" class="hika_options">
+                    <div class="hikashop_user_address_<?php echo $fieldname;?>">
+                        <label class="uk-display-block uk-margin-small-bottom uk-form-label uk-text-tiny font"><?php echo $this->fieldsClass->trans($field->field_realname); if($field->field_required) echo '&ensp;<span class="uk-text-tiny uk-text-danger">*</span>'; ?></label></div>
                     <div class="hikashop_user_address_<?php echo $fieldname;?>"><?php
                         $onWhat = 'onchange';
                         if($field->field_type == 'radio')
@@ -83,9 +85,10 @@ if(isset($this->edit) && $this->edit === true) {
                         );
                         ?>
                     </div>
-            </div>
-        <?php } ?>
+                </div>
+            <?php } ?>
 
+        </div>
     </div>
 
     <?php
@@ -101,10 +104,14 @@ if(isset($this->edit) && $this->edit === true) {
 	<input type="hidden" name="data[address][address_user_id]" value="<?php echo @$this->address->address_user_id; ?>"/>
 	<?php echo JHTML::_('form.token'); ?>
 
-	<div style="float:right">
-		<a href="<?php echo hikashop_completeLink($save_url, 'ajax');?>" onclick="return window.addressMgr.form(this,'<?php echo $dest; ?>');" class="<?php echo $this->config->get('css_button','hikabtn'); ?> hikabtn-success hikashop_checkout_address_ok_button"><i class="fa fa-save"></i> <?php echo JText::_('HIKA_OK'); ;?></a>
-	</div>
-	<a href="<?php echo hikashop_completeLink($show_url, 'ajax');?>" onclick="return window.addressMgr.get(this,'<?php echo $dest; ?>');" class="<?php echo $this->config->get('css_button','hikabtn'); ?> hikabtn-danger hikashop_checkout_address_cancel_button"><i class="fa fa-times"></i> <?php echo JText::_('HIKA_CANCEL'); ;?></a>
+    <div class="uk-grid-small" data-uk-grid>
+        <div class="uk-width-2-3 uk-width-auto@m">
+            <a href="<?php echo hikashop_completeLink($save_url, 'ajax');?>" onclick="return window.addressMgr.form(this,'<?php echo $dest; ?>');" class="uk-button uk-button-gold uk-border-pill uk-width-1-1 uk-height-1-1 font hikashop_checkout_address_ok_button"><?php echo JText::_('HIKA_SAVE'); ;?></a>
+        </div>
+        <div class="uk-width-1-3 uk-width-auto@m">
+            <a href="<?php echo hikashop_completeLink($show_url, 'ajax');?>" onclick="return window.addressMgr.get(this,'<?php echo $dest; ?>');" class="uk-button uk-button-default uk-border-pill uk-width-1-1 font hikashop_checkout_address_cancel_button"><?php echo JText::_('HIKA_CANCEL'); ;?></a>
+        </div>
+    </div>
 </div>
 <?php
 } else {

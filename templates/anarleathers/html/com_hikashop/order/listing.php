@@ -7,39 +7,46 @@
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
-?><div id="hikashop_order_listing">
-<?php
-	echo $this->toolbarHelper->process($this->toolbar, $this->title);
 ?>
+<div id="hikashop_order_listing">
+<?php echo $this->toolbarHelper->process($this->toolbar, $this->title); ?>
 <form action="<?php echo hikashop_completeLink('order'); ?>" method="post" name="adminForm" id="adminForm">
 
-<div class="hk-row-fluid">
-	<div class="hkc-md-12 hikashop_search_zone">
-		<div class="hikashop_search_block">
-			<input type="text" name="search" id="hikashop_search" value="<?php echo $this->escape($this->pageInfo->search);?>" placeholder="<?php echo JText::_('HIKA_SEARCH'); ?>" class="inputbox" onchange="this.form.submit();" />
-			<button class="hikabtn hikabtn-primary" onclick="this.form.submit();"><?php echo JText::_('GO'); ?></button>
-<?php
-	foreach($this->leftFilters as $name => $filterObj) {
-		if(is_string($filterObj))
-			echo $filterObj;
-		else
-			echo $filterObj->displayFilter($name, $this->pageInfo->filter);
-	}
-?>		</div>
-		<div class="hikashop_order_sort"><?php
-	foreach($this->rightFilters as $name => $filterObj) {
-		if(is_string($filterObj))
-			echo $filterObj;
-		else
-			echo $filterObj->displayFilter($name, $this->pageInfo->filter);
-	}
-?>
+<div class="uk-margin-medium-bottom ordersListTop">
+	<div class="uk-grid-small" data-uk-grid>
+		<div class="uk-width-auto">
+            <div>
+                <div class="uk-grid-small" data-uk-grid>
+                    <div class="uk-width-auto@m"><input type="text" name="search" id="hikashop_search" value="<?php echo $this->escape($this->pageInfo->search);?>" placeholder="<?php echo JText::_('HIKA_SEARCH_ORDERS'); ?>" class="uk-input uk-width-1-1 uk-border-pill font" onchange="this.form.submit();" /></div>
+                    <div class="uk-width-auto@m"><button class="uk-button uk-button-gold uk-border-pill font uk-height-1-1" onclick="this.form.submit();"><?php echo JText::_('HIKA_SEARCH_GO'); ?></button></div>
+                </div>
+            </div>
+            <?php
+                foreach($this->leftFilters as $name => $filterObj) {
+                    if(is_string($filterObj))
+                        echo $filterObj;
+                    else
+                        echo $filterObj->displayFilter($name, $this->pageInfo->filter);
+                }
+            ?>
+        </div>
+		<div class="uk-width-expand">
+            <?php
+            foreach($this->rightFilters as $name => $filterObj) {
+                if ($name === 'order_status') {
+                    if(is_string($filterObj))
+                        echo $filterObj;
+                    else
+                        echo $filterObj->displayFilter($name, $this->pageInfo->filter, 'class="uk-width-1-1 uk-width-small@m uk-border-pill font uk-select uk-select"');
+                }
+            }
+            ?>
 		</div>
 	</div>
 </div>
 
-<div class="hikashop_order_listing">
-	<div class="hikashop_orders_content">
+<div>
+	<div>
 <?php
 	$url_itemid = (!empty($this->Itemid) ? '&Itemid=' . $this->Itemid : '');
 	$cancel_orders = false;
@@ -48,6 +55,8 @@ defined('_JEXEC') or die('Restricted access');
 
 	$i = 0;
 	$k = 0;
+	echo '<h3 class="uk-text-primary uk-margin-bottom sectionTitle font">'.JText::sprintf("HIKA_MY_ORDERS").'</h3>';
+	if (count($this->rows)) {
 	foreach($this->rows as &$row) {
 		$order_link = hikashop_completeLink('order&task=show&cid='.$row->order_id.$url_itemid.$cancel_url);
 ?>
@@ -219,12 +228,18 @@ defined('_JEXEC') or die('Restricted access');
 		$k = 1 - $k;
 	}
 	unset($row);
+    } else { ?>
+        <div class="uk-placeholder uk-placeholder-large uk-border-rounded-large uk-margin-remove">
+            <p class="uk-text-center uk-text-muted uk-margin-large-top uk-margin-large-bottom font"><?php echo JText::sprintf('HIKA_CPANEL_NO_ORDERS'); ?></p>
+        </div>
+        <?php
+    }
 ?>
 <!-- PAGINATION -->
 		<div class="hikashop_orders_footer">
 			<div class="pagination">
-				<?php $this->pagination->form = '_bottom'; echo $this->pagination->getListFooter(); ?>
-				<?php echo '<span class="hikashop_results_counter">'.$this->pagination->getResultsCounter().'</span>'; ?>
+				<?php // $this->pagination->form = '_bottom'; echo $this->pagination->getListFooter(); ?>
+				<?php echo '<span class="hikashop_results_counter uk-hidden">'.$this->pagination->getResultsCounter().'</span>'; ?>
 			</div>
 		</div>
 <!-- EO PAGINATION -->

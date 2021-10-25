@@ -7,7 +7,7 @@
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
-?><span class="hikashop_product_price_full">
+?><span class="hikashop_product_price_full uk-text-center uk-text-tiny font uk-flex uk-flex-column">
 <?php
 
 $config = hikashop_config();
@@ -37,7 +37,7 @@ if(empty($this->row->prices)) {
 			$price->price_currency_id = hikashop_getCurrency();
 		}
 
-		echo '<span class="hikashop_product_price">';
+		echo '<span class="hikashop_product_price uk-display-block uk-flex-last uk-text-small">';
 
 		if($price_with_tax) {
 			echo $this->currencyHelper->format(@$price->price_value_with_tax,$price->price_currency_id);
@@ -84,7 +84,7 @@ if(empty($this->row->prices)) {
 			echo JText::_('PRICE_DISCOUNT_END').'</span>';
 
 		} elseif(!empty($this->row->discount) && $show_discount == 2) {
-			echo '<span class="hikashop_product_price_before_discount">'.JText::_('PRICE_DISCOUNT_START');
+			echo '<span class="hikashop_product_price_before_discount uk-display-block uk-text-danger uk-text-line-through">'.JText::_('PRICE_DISCOUNT_START');
 			if($price_with_tax) {
 				echo $this->currencyHelper->format($price->price_value_without_discount_with_tax,$price->price_currency_id);
 			}

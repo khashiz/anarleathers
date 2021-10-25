@@ -21,17 +21,17 @@ if(!empty($this->title)) {
 if(empty($this->data))
 	return;
 
-$toolbar_classname = $this->config->get('front_toolbar_btn_classname', 'hikabtn');
+$toolbar_classname = $this->config->get('front_toolbar_btn_classname', 'uk-button uk-button-gold uk-border-pill font');
 if(empty($toolbar_classname))
 	$toolbar_classname = 'hikabtn';
 
 ?>
-<div class="hika_toolbar">
-	<div class="hika_toolbar_btn hika_btn_32">
+<div class="uk-margin-medium-top">
+	<div class="uk-child-width-auto uk-grid-small" data-uk-grid>
 <?php
 foreach($this->data as $key => $tool) {
+    if ($tool['name'] === 'تکمیل خرید') {
 	if(empty($tool['url']) && !empty($tool['sep'])) {
-		echo '<div class="sep"></div>';
 		continue;
 	}
 
@@ -42,7 +42,7 @@ foreach($this->data as $key => $tool) {
 		$fa_stack = is_array($tool['fa']['html']) ? 'fa-stack ': '';
 		$fa_content = is_array($tool['fa']['html']) ? implode('', $tool['fa']['html']) : $tool['fa']['html'];
 
-		$content = '<span class="btnIcon hk-icon '.$fa_stack.'fa-'.$fa_size.'x">'.$fa_content.'</span>';
+		$content = '';
 
 		$tool['dropdown']['options']['fa'] = $tool['fa'];
 	}
@@ -56,7 +56,7 @@ foreach($this->data as $key => $tool) {
 				$tool['linkattribs'] = '';
 			if(!empty($tool['javascript']))
 				$tool['linkattribs'].= ' onclick="' . $tool['javascript'] . '"';
-			echo '<a class="'.$toolbar_classname.'" href="'.$tool['url'].'" '.$tool['linkattribs'].'>' . $content . '</a>';
+			echo '<div><a class="'.$toolbar_classname.'" href="'.$tool['url'].'" '.$tool['linkattribs'].'>' . $content . '</a></div>';
 		} else {
 			$attr = $this->popupHelper->getAttr(@$tool['linkattribs'], 'hikabtn');
 			echo $this->popupHelper->display(
@@ -81,11 +81,10 @@ foreach($this->data as $key => $tool) {
 			echo $tool['dropdown'];
 		}
 	}else {
-		echo '<div class="'.$toolbar_classname.'">' . $content . '</div>';
+		echo '<div><div class="'.$toolbar_classname.'">' . $content . '</div></div>';
 	}
 	unset($content);
-}
+} }
 ?>
 	</div>
-	<div style="clear:both"></div>
 </div>

@@ -92,7 +92,7 @@ foreach($this->addresses as $address) {
 	if($this->two_columns && $address->address_type != 'billing')
 		continue;
 ?>
-	<div class="hikashop_user_address address_selection" id="hikashop_user_address_<?php echo $address->address_id; ?>">
+	<div class="hikashop_user_address address_selection uk-position-relative" id="hikashop_user_address_<?php echo $address->address_id; ?>">
 <?php
 		$this->address_id = (int)$address->address_id;
 		$this->address = $address;
@@ -111,20 +111,25 @@ if(!empty($this->two_columns)) {
 	</div>
 	<div class="hikashop_shipping_addresses">
 		<h3 class="uk-margin-bottom uk-text-secondary uk-text-primary sectionTitle font"><?php echo JText::_('HIKASHOP_SHIPPING_ADDRESSES'); ?></h3>
-<?php
-	foreach($this->addresses as $address) {
-		if($address->address_type != 'shipping')
-			continue;
-?>
-	<div class="hikashop_user_address address_selection" id="hikashop_user_address_<?php echo $address->address_id; ?>">
-        <?php
-            $this->address_id = (int)$address->address_id;
-            $this->address = $address;
-            $this->setLayout('show');
-            echo $this->loadTemplate();
-        ?>
-	</div>
-<?php } ?>
+        <?php if (count($this->addresses)) { ?>
+            <?php
+            foreach($this->addresses as $address) {
+                if($address->address_type != 'shipping')
+                    continue;
+                ?>
+                <div class="hikashop_user_address address_selection uk-position-relative" id="hikashop_user_address_<?php echo $address->address_id; ?>">
+                    <?php
+                    $this->address_id = (int)$address->address_id;
+                    $this->address = $address;
+                    $this->setLayout('show');
+                    echo $this->loadTemplate();
+                    ?>
+                </div>
+                <hr class="uk-margin-medium-bottom uk-margin-medium-top">
+            <?php } ?>
+        <?php } else { ?>
+            <p class="uk-text-small uk-text-muted font"><?php echo JText::sprintf('NO_ADDRESS_YET'); ?></p>
+        <?php } ?>
 		<div>
 			<a class="uk-button uk-button-default uk-text-bold uk-box-shadow-small uk-border-pill font" href="#newAddress" onclick="return window.addressMgr.new('shipping');"><?php echo JText::_('HIKASHOP_NEW_SHIPPING_ADDRESS'); ?></a>
 		</div>

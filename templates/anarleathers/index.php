@@ -109,9 +109,10 @@ $total = count($socialsicons['icon']);
         </div>
         <div class="section active">
             <div class="slide jewelry" data-anchor="jewelry">
-                <div>
-                    <h1>jewelry</h1>
-                    <a href="#main/intro">Introoooooooooo</a>
+                <div class="uk-height-1-1 sectionWrapper jewelry">
+                    <div class="uk-container uk-height-1-1 uk-position-relative" data-uk-scrollspy="target: > div;">
+                        <div class="">fdffefrfefef</div>
+                    </div>
                 </div>
             </div>
             <div class="slide hmWrapper active" data-anchor="intro">
@@ -136,16 +137,18 @@ $total = count($socialsicons['icon']);
                 </div>
             </div>
             <div class="slide decor" data-anchor="decor">
-                <div>
-                    <h1>decor</h1>
-                    <a href="#main/intro">Introoooooooooo</a>
+                <div class="uk-height-1-1 sectionWrapper decor">
+                    <div class="uk-container uk-height-1-1 uk-position-relative" data-uk-scrollspy="target: > div;">
+                        <div class="">fdffefrfefef</div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="section" style="background-color: blue">
-            <div>
-                <h1>Enjoy it</h1>
-                <a href="#main/intro">Introoooooooooo</a>
+        <div class="section">
+            <div class="uk-height-1-1 sectionWrapper style">
+                <div class="uk-container uk-height-1-1 uk-position-relative" data-uk-scrollspy="target: > div;">
+                    <div class="">fdffefrfefef</div>
+                </div>
             </div>
         </div>
     </div>

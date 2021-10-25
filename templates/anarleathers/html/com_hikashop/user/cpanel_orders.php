@@ -18,7 +18,7 @@ $print_invoice = false;
 
 if(empty($this->cpanel_data->cpanel_orders)) {
 ?>
-	<div class="uk-placeholder uk-placeholder-large uk-border-rounded-large">
+	<div class="uk-placeholder uk-placeholder-large uk-border-rounded-large uk-margin-remove">
 		<p class="uk-text-center uk-text-muted uk-margin-large-top uk-margin-large-bottom font"><?php echo JText::_('HIKA_CPANEL_NO_ORDERS'); ?></p>
 	</div>
 <?php

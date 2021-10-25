@@ -1,17 +1,11 @@
 <?php
-/**
- * @package	HikaShop for Joomla!
- * @version	4.4.3
- * @author	hikashop.com
- * @copyright	(C) 2010-2021 HIKARI SOFTWARE. All rights reserved.
- * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
- */
-defined('_JEXEC') or die('Restricted access');
-?>{address_company}
-{address_title} {address_firstname} {address_lastname}
-{address_street}
-{address_post_code} {address_city} {address_state}
-{address_country}
-<?php if(!empty($this->address->address_telephone)) echo JText::sprintf('TELEPHONE_IN_ADDRESS','{address_telephone}');?>
-
-<?php if(!empty($this->address->address_vat)) echo JText::sprintf('VAT_IN_ADDRESS','{address_vat}'); ?>
+ defined('_JEXEC') or die('Restricted access');
+?>
+<div class="uk-text-small uk-text-secondary font"><span class="uk-text-gold f700">{address_title}</span>
+{address_state} ، {address_city} ، {address_street}
+<span class="uk-text-muted"><?php echo JText::sprintf('POST_CODE'); ?> : </span>{address_post_code}
+<span class="uk-text-muted"><?php echo JText::sprintf('TAHVIL_GIRANDE'); ?> : </span>{address_firstname} {address_lastname}
+<?php if(!empty($this->address->address_telephone)) { ?>
+<span class="uk-text-muted"><?php echo JText::sprintf('TELEPHONE_IN_ADDRESS'); ?> : </span>{address_telephone}
+<?php } ?>
+</div>

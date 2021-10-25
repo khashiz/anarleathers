@@ -9,6 +9,17 @@
 
 defined('_JEXEC') or die;
 
+$user = JFactory::getUser();
+
+
+$db = JFactory::getDbo();
+$userQuery = $db->getQuery(true);
+$userQuery
+    ->select($db->quoteName(array('user_cms_id', 'mobile')))
+    ->from($db->quoteName('#__hikashop_user'))
+    ->where($db->quoteName('user_cms_id') . ' = ' . $user->id);
+$userInfo = $db->setQuery($userQuery)->loadObject();
+
 $id = '';
 
 if ($tagId = $params->get('tag_id', ''))
@@ -22,6 +33,15 @@ if ($tagId = $params->get('tag_id', ''))
     <div>
         <div class="uk-card uk-card-default uk-card-bordered uk-border-rounded-large">
             <div class="uk-card-body uk-padding-small userMenu">
+                <span class="uk-card uk-card-default uk-card-bordered uk-display-inline-block uk-border-circle uk-padding-small uk-position-absolute uk-text-gold avatar">
+                    <img src="<?php echo JUri::base().'images/sprite.svg#userOutline'; ?>" width="48" height="48" data-uk-svg>
+                </span>
+                <div class="uk-text-center uk-margin-medium-top uk-margin-bottom uk-text-gold userName">
+                    <span class="uk-display-block font"><?php echo $user->name; ?></span>
+                    <?php if (!empty($userInfo->mobile)) { ?>
+                        <span class="uk-display-block font"><?php echo $userInfo->mobile; ?></span>
+                    <?php } ?>
+                </div>
                 <ul class="nav menu<?php echo $class_sfx; ?> mod-list"<?php echo $id; ?>>
                     <?php foreach ($list as $i => &$item)
                     {

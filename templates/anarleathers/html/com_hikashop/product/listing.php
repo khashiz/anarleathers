@@ -7,7 +7,13 @@
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
-?><?php
+?>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+
+<?php
 if(!$this->module && isset($this->element->category_canonical) && !empty($this->element->category_canonical)) {
 	$canonicalUrl = hikashop_cleanURL($this->element->category_canonical);
 
@@ -152,17 +158,31 @@ hikaInput::get()->set('hikashop_front_end_main',0);
 if(($this->params->get('show_image') && !empty($this->element->file_path)) || ($this->params->get('show_description', !$this->module) && !empty($this->element->category_description))) {
 ?>
 		<div class="hikashop_category_description uk-margin-large-bottom">
-            <div class="uk-child-width-auto uk-flex-center" data-uk-grid>
+            <div class="uk-flex-center uk-grid-column-large uk-grid-row-collapse" data-uk-grid>
 <?php
 	if($this->params->get('show_image') && !empty($this->element->file_path)){
 		jimport('joomla.filesystem.file');
 		if(JFile::exists($this->image->getPath($this->element->file_path,false))){
 ?>
-            <div class="uk-text-white">
-			<img src="<?php echo $this->image->getPath($this->element->file_path); ?>" class="hikashop_category_image" title="<?php echo $this->escape(@$this->element->file_description); ?>" alt="<?php echo $this->escape(@$this->element->file_name); ?>" data-uk-svg/>
+            <div class="uk-width-1-1 uk-width-auto uk-text-white">
+                <img src="<?php echo $this->image->getPath($this->element->file_path); ?>" class="hikashop_category_image" title="<?php echo $this->escape(@$this->element->file_description); ?>" alt="<?php echo $this->escape(@$this->element->file_name); ?>" class="uk-wiith-1-1" height="150" data-uk-svg/>
             </div>
-            <div>
-                <img src="<?php echo JUri::base().'images/sprite.svg#anar' ?>" width="" height="150" alt="" data-uk-svg>
+            <div class="uk-width-1-1 uk-width-auto">
+                <div>
+                    <div class="uk-grid-small uk-flex-center uk-child-width-auto" data-uk-grid>
+                        <div>
+                            <div class="uk-height-1-1 uk-flex uk-flex-middle">
+                                <div class="catEngTitleWrapper">
+                                    <div><img src="<?php echo JUri::base().'images/sprite.svg#anarText' ?>" width="200" data-uk-svg></div>
+                                    <div><span class="uk-display-block uk-text-center uk-text-uppercase uk-text-primary fontEn catEngTitle"><?php echo $this->element->eng_title; ?></span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="uk-visible@m">
+                            <img src="<?php echo JUri::base().'images/sprite.svg#anar' ?>" width="" height="150" alt="" data-uk-svg>
+                        </div>
+                    </div>
+                </div>
             </div>
 <?php
 		}
@@ -202,6 +222,7 @@ if(!empty($this->fields)) {
 		}
 	}
 	$custom_fields_html = ob_get_clean();
+	/*
 	if(!empty($custom_fields_html)) {
 ?>
 		<div id="hikashop_category_custom_info_main" class="hikashop_category_custom_info_main">
@@ -211,7 +232,7 @@ if(!empty($this->fields)) {
 			</table>
 		</div>
 <?php
-	}
+	} */
 }
 hikaInput::get()->set('hikashop_front_end_main',$val);
 

@@ -17,13 +17,15 @@ if(!empty($this->row->extraData->top)) { echo implode("\r\n",$this->row->extraDa
 
 ?>
 <div class="hikashop_listing_img_title" id="div_<?php echo $mainDivName.'_'.$this->row->product_id;  ?>">
-    <div>
-        <img src="<?php echo JUri::base().'images/com_hikashop/upload/'.$this->row->title_shape; ?>" width="" height="" alt="" data-uk-scv>
+    <div class="uk-margin-bottom listItemTitleSVG">
+        <a href="<?php echo $link;?>" class="uk-display-inline-block">
+            <img src="<?php echo JUri::base().'images/svg/titles/'.$this->row->title_shape.'.svg'; ?>" width="" height="80" alt="" data-uk-svg>
+        </a>
     </div>
 <!-- IMAGE -->
 <?php if($this->config->get('thumbnail', 1)) { ?>
-	<div>
-		<div>
+	<div class="uk-position-relative listItemIMGContainer">
+		<div class="uk-position-relative">
 <?php if($haveLink) { ?>
 			<a href="<?php echo $link;?>" title="<?php echo $this->escape($this->row->product_name); ?>" class="uk-display-inline-block">
 <?php } ?>

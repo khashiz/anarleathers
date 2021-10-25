@@ -292,7 +292,7 @@ if(!empty($this->options['privacy'])) {
 	<div class="hkform-group control-group hikashop_registration_privacy_line">
 		<div class="<?php echo $labelcolumnclass;?> hkcontrol-label">
 <?php
-	$text = JText::_('PLG_SYSTEM_PRIVACYCONSENT_FIELD_LABEL').'<span class="hikashop_field_required_label">*</span>';
+	$text = JText::_('PLG_SYSTEM_PRIVACYCONSENT_FIELD_LABEL').'<span class="hikashop_field_required_label">*yyyy</span>';
 	if(!empty($this->options['privacy_id'])) {
 		$popupHelper = hikashop_get('helper.popup');
 		$text = $popupHelper->display(
@@ -324,7 +324,7 @@ if(!empty($this->options['privacy_guest'])) {
 	<div class="hkform-group control-group" id="hikashop_registration_privacy_guest_area">
 		<div class="<?php echo $labelcolumnclass;?> hkcontrol-label">
 <?php
-	$text = JText::_( 'PLG_CONTENT_CONFIRMCONSENT_CONSENTBOX_LABEL' ) . '<span class="hikashop_field_required_label">*</span>';
+	$text = JText::_( 'PLG_CONTENT_CONFIRMCONSENT_CONSENTBOX_LABEL' ) . '<span class="hikashop_field_required_label">frfrfrff*</span>';
 	if(!empty($this->options['privacy_guest_id'])) {
 		$popupHelper = hikashop_get('helper.popup');
 		$text = $popupHelper->display(

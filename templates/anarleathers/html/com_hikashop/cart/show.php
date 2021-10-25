@@ -7,8 +7,11 @@
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
-?><?php if(empty($this->print_cart)) {
+?>
+<div class="uk-flex uk-flex-column">
+<?php if(empty($this->print_cart) && $this->cart->cart_type != 'wishlist') {
 	echo $this->toolbarHelper->process($this->toolbar, $this->title); ?>
+<div class="uk-flex-first">
 <form method="POST" id="hikashop_show_cart_form" name="hikashop_show_cart_form" action="<?php echo hikashop_completeLink('cart&task=show&cid='.(int)$this->cart->cart_id); ?>">
 <!-- CART NAME -->
 <?php
@@ -59,12 +62,14 @@ defined('_JEXEC') or die('Restricted access');
 <?php
 }
 ?>
-<table id="hikashop_cart_product_listing" class="hikashop_cart_products adminlist table table-striped table-hover" style="width:100%">
+    <h3 class="uk-text-primary uk-margin-bottom sectionTitle font"><?php echo JText::sprintf('HIKA_CART_TITLE_'.$this->cart->cart_type); ?></h3>
+    <?php if (count($this->cart->products)) { ?>
+<table id="hikashop_cart_product_listing" class="uk-table uk-table-middle uk-table-striped uk-margin-remove uk-text-zero">
 	<thead>
 		<tr>
 <!-- SELECT ALL HEADER -->
 <?php if($this->checkbox_column) { ?>
-			<th style="width:1%" data-title="<?php echo JText::_('SELECT_ALL'); ?>" ><input type="checkbox" onchange="window.hikashop.checkAll(this);" /></th>
+			<th data-title="<?php echo JText::_('SELECT_ALL'); ?>" ><input type="checkbox" class="uk-checkbox  " onchange="window.hikashop.checkAll(this);" /></th>
 <?php } ?>
 <!-- EO SELECT ALL HEADER -->
 <!-- PRODUCT NAME HEADER -->
@@ -82,14 +87,12 @@ defined('_JEXEC') or die('Restricted access');
 ?>
 <!-- EO CUSTOM PRODUCT FIELDS HEADER -->
 <!-- STATUS HEADER -->
-			<th class="hikashop_cart_status_title title"><?php
+			<th class="uk-text-center hikashop_cart_status_title title"><?php
 				echo JText::_('HIKASHOP_CHECKOUT_STATUS');
 			?></th>
 <!-- EO STATUS HEADER -->
 <!-- UNIT PRICE HEADER -->
-			<th class="hikashop_cart_price_title title"><?php
-				echo JText::_('CART_PRODUCT_UNIT_PRICE');
-			?></th>	
+			<th class="uk-text-center hikashop_cart_price_title title"><?php echo JText::_('CART_PRODUCT_UNIT_PRICE'); ?></th>
 <!-- EO UNIT PRICE HEADER -->
 <!-- QUANTITY HEADER -->
 			<th class="hikashop_cart_quantity_title title"><?php
@@ -97,7 +100,7 @@ defined('_JEXEC') or die('Restricted access');
 			?></th>
 <!-- EO QUANTITY HEADER -->
 <!-- TOTAL PRICE HEADER -->
-			<th class="hikashop_cart_price_title title"><?php
+			<th class="uk-text-center hikashop_cart_price_title title"><?php
 				echo JText::_('CART_PRODUCT_TOTAL_PRICE');
 			?></th>
 <!-- EO TOTAL PRICE HEADER -->
@@ -107,15 +110,15 @@ defined('_JEXEC') or die('Restricted access');
 	$cols = 5 + ($this->checkbox_column ? 1 : 0) + (hikashop_level(2) ? count($this->productFields) : 0);
 ?>
 <!-- CART TOTAL AMOUNT -->
-	<tfoot>
+	<tfoot class="uk-placeholder">
 		<tr>
-			<td class="hika_show_cart_total_text" colspan="<?php echo $cols - 2; ?>"><?php
+			<td class="hika_show_cart_total_text uk-text-left font uk-text-secondary" colspan="<?php echo $cols - 2; ?>"><?php
 				echo JText::_('HIKASHOP_TOTAL');
 			?></td>
-			<td class="hika_show_cart_total_quantity"><?php
+			<td class="hika_show_cart_total_quantity uk-text-center font uk-text-secondary"><?php
 				echo (int)@$this->cart->package['total_items'];
 			?></td>
-			<td class="hika_show_cart_total_price"><?php
+			<td class="hika_show_cart_total_price uk-text-center font uk-text-gold hikashop_product_price_full uk-text-small"><?php
 	if(!empty($this->cart->total->prices)) {
 		if($this->config->get('price_with_tax')) {
 			echo $this->currencyClass->format($this->cart->total->prices[0]->price_value_with_tax, $this->cart->total->prices[0]->price_currency_id);
@@ -165,14 +168,17 @@ defined('_JEXEC') or die('Restricted access');
 		$cart_product = $this->cart->cart_products[$k];
 		$status = 'err';
 		$text = '';
+		$classes = 'uk-text-danger';
 		if (empty($product) || (!empty($product->product_sale_end) && $product->product_sale_end < time())) {
 			$text = JText::_('HIKA_NOT_SALE_ANYMORE');
 		} elseif ($product->product_quantity == -1) {
 			$text = JText::sprintf('X_ITEMS_IN_STOCK', JText::_('HIKA_UNLIMITED'));
 			$status = 'ok';
+			$classes = 'uk-text-success';
 		} elseif (($product->product_quantity - $product->cart_product_quantity) >= 0) {
 			$text = JText::sprintf('X_ITEMS_IN_STOCK', $product->product_quantity);
 			$status = 'ok';
+            $classes = 'uk-text-success';
 		} else {
 			$text = JText::_('NOT_ENOUGH_STOCK');
 		}
@@ -187,7 +193,7 @@ defined('_JEXEC') or die('Restricted access');
 <?php
 			if ($status == 'ok') {
 ?>
-				<input type="checkbox" name="products[]" value="<?php echo (int)$k; ?>" id="cb<?php echo $k; ?>"/>
+				<input type="checkbox" name="products[]" class="uk-checkbox" value="<?php echo (int)$k; ?>" id="cb<?php echo $k; ?>"/>
 <?php
 			}
 ?>
@@ -197,22 +203,24 @@ defined('_JEXEC') or die('Restricted access');
 ?>
 <!-- EO PRODUCT CHECKBOX -->
 <!-- PRODUCT NAME -->
-			<td data-title="<?php echo JText::_('CART_PRODUCT_NAME'); ?>" ><?php
+			<td data-title="<?php echo JText::_('CART_PRODUCT_NAME'); ?>" >
+                 <div class="uk-grid-small uk-flex-middle" data-uk-grid>
+                <?php
 		$image_path = (!empty($product->images) ? @$product->images[0]->file_path : '');
 		$img = $this->imageHelper->getThumbnail($image_path, array('width' => $width, 'height' => $height), $image_options);
 		if($img->success) {
 			$attributes = '';
 			if($img->external)
 				$attributes = ' width="'.$img->req_width.'" height="'.$img->req_height.'"';
-			echo '<img class="hikashop_cart_product_image" title="'.$this->escape(@$product->images[0]->file_description).'" alt="'.$this->escape(@$product->images[0]->file_name).'" src="'.$img->url.'" style="float:left; margin-right:3px;" '.$attributes.' />';
+			echo '<div><span class="uk-card uk-card-default uk-border-rounded uk-box-shadow-small uk-display-inline-block uk-padding-small"><img class="hikashop_cart_product_image" title="'.$this->escape(@$product->images[0]->file_description).'" alt="'.$this->escape(@$product->images[0]->file_name).'" src="'.$img->url.'" '.$attributes.' /></span></div>';
 		}
 
 ?>
-				<span class="hikashop_cart_product_name">
+				<div><span class="hikashop_cart_product_name">
 <?php
 		if(empty($this->print_cart)) {
 ?>
-					<a href="<?php echo hikashop_contentLink('product&task=show&cid='.$product->product_id.'&name='.$product->alias, $product); ?>">
+					<a class="font uk-text-small uk-text-secondary" href="<?php echo hikashop_contentLink('product&task=show&cid='.$product->product_id.'&name='.$product->alias, $product); ?>">
 <?php
 		}
 		echo $product->product_name;
@@ -283,11 +291,11 @@ defined('_JEXEC') or die('Restricted access');
 		if($edit) {
 			$popupHelper = hikashop_get('helper.popup');
 			echo ' '.$popupHelper->display(
-				'<i class="fas fa-pen"></i>',
+				JText::sprintf('HIKA_EDIT'),
 				'HIKASHOP_EDIT_CART_PRODUCT',
 				hikashop_completeLink('cart&task=product_edit&cart_id='.$this->cart->cart_id.'&cart_product_id='.$cart_product->cart_product_id.'&tmpl=component&'.hikashop_getFormToken().'=1'),
 				'edit_cart_product',
-				576, 480, 'title="'.JText::_('EDIT_THE_OPTIONS_OF_THE_PRODUCT').'"', '', 'link'
+				576, 480, 'class="uk-text-meta uk-lint-reset uk-text-tiny uk-display-block font" title="'.JText::_('EDIT_THE_OPTIONS_OF_THE_PRODUCT').'"', '', 'link'
 			);
 		}
 
@@ -300,7 +308,9 @@ defined('_JEXEC') or die('Restricted access');
 		if(!empty($product->extraData) && !empty($product->extraData->cart))
 			echo '<div class="hikashop_cart_product_extradata"><p>' . implode('</p><p>', $product->extraData->cart) . '</p></div>';
 
-			?></td>
+			?>
+                </div>
+                 </div></td>
 <!-- EO PRODUCT NAME -->
 <!-- CUSTOM PRODUCT FIELDS -->
 <?php
@@ -320,12 +330,12 @@ defined('_JEXEC') or die('Restricted access');
 ?>
 <!-- EO CUSTOM PRODUCT FIELDS -->
 <!-- STATUS -->
-			<td data-title="<?php echo JText::_('HIKASHOP_CHECKOUT_STATUS'); ?>" style="text-align:center"><?php
+			<td class="uk-text-center" data-title="<?php echo JText::_('HIKASHOP_CHECKOUT_STATUS'); ?>"><?php
 	$tooltip_images = array(
 		'ok' => '<i class="fa fa-check-circle"></i>',
 		'err' => '<i class="fa fa-times-circle"></i>'
 	);
-	echo hikashop_hktooltip($text, '', $tooltip_images[$status]);
+	echo '<span class="uk-text-small '.$classes.'" data-uk-tooltip="'.$text.'">'.$tooltip_images[$status].'</span>';
 			?></td>
 <!-- EO STATUS -->
 <!-- UNIT PRICE -->
@@ -338,6 +348,7 @@ defined('_JEXEC') or die('Restricted access');
 <!-- EO UNIT PRICE -->
 <!-- QUANTITY -->
 			<td data-title="<?php echo JText::_('PRODUCT_QUANTITY'); ?>">
+                <div class="uk-grid-small uk-grid-divider" data-uk-grid>
 <?php
 	if(!empty($this->manage)) {
 		if($this->cart->cart_type == 'wishlist') {
@@ -361,9 +372,13 @@ defined('_JEXEC') or die('Restricted access');
 <?php
 	if(!empty($this->manage)) {
 ?>
-				<a title="<?php echo JText::_('HIKA_DELETE'); ?>" class="hikashop_no_print" href="#delete" onclick="var qtyField = document.getElementById('<?php echo $this->last_quantity_field_id; ?>'); if(!qtyField) return false; qtyField.value = 0; return window.hikashop.submitform('apply','hikashop_show_cart_form');" title="<?php echo JText::_('HIKA_DELETE'); ?>">
-					<i class="fas fa-trash"></i>
-				</a>
+				<div>
+                    <div class="uk-height-1-1 uk-flex uk-flex-middle">
+                        <a title="<?php echo JText::_('HIKA_DELETE'); ?>" class="hikashop_no_print uk-text-small uk-text-danger" data-uk-tooltip="cls: uk-active font;" href="#delete" onclick="var qtyField = document.getElementById('<?php echo $this->last_quantity_field_id; ?>'); if(!qtyField) return false; qtyField.value = 0; return window.hikashop.submitform('apply','hikashop_show_cart_form');" title="<?php echo JText::_('HIKA_DELETE'); ?>">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </div>
+                </div>
 <?php
 	}
 
@@ -394,7 +409,7 @@ defined('_JEXEC') or die('Restricted access');
 <?php
 	}
 ?>
-			</td>
+                </div></td>
 <!-- EO QUANTITY -->
 <!-- TOTAL PRICE -->
 			<td data-title="<?php echo JText::_('CART_PRODUCT_TOTAL_PRICE'); ?>"> <?php
@@ -412,7 +427,7 @@ defined('_JEXEC') or die('Restricted access');
 	}
 ?>
 			<!-- For responsive display -->
-		<tr class="hika_show_cart_total_text_2">
+		<tr class="hika_show_cart_total_text_2 uk-hidden">
 			<td data-title="<?php echo JText::_('PRODUCT_QUANTITY'); ?>" class="hika_show_cart_total_quantity"><?php
 				echo (int)@$this->cart->package['total_items'];
 			?></td>
@@ -435,6 +450,11 @@ defined('_JEXEC') or die('Restricted access');
 		</tr>
 	</tbody>
 </table>
+    <?php } else { ?>
+        <div class="uk-placeholder uk-placeholder-large uk-border-rounded-large uk-margin-remove">
+            <p class="uk-text-center uk-text-muted uk-margin-large-top uk-margin-large-bottom font"><?php echo JText::sprintf('NO_PRODUCTS_INLIST') ?></p>
+        </div>
+    <?php } ?>
 <?php if(empty($this->print_cart)) { ?>
 	<input type="hidden" name="option" value="<?php echo HIKASHOP_COMPONENT; ?>" />
 	<input type="hidden" name="ctrl" value="cart"/>
@@ -444,6 +464,8 @@ defined('_JEXEC') or die('Restricted access');
 	<input type="hidden" name="addto_id" value=""/>
 	<?php echo JHTML::_('form.token'); ?>
 </form>
+</div>
+    </div>
 <script type="text/javascript">
 if(!window.checkout) window.checkout = {};
 window.Oby.registerAjax(['checkout.cart.updated','cart.updated'], function(params){
