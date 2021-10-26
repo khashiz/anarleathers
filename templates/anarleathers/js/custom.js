@@ -6,11 +6,14 @@ jQuery(document).ready(function () {
         controlArrows: false,
         scrollingSpeed: 500,
         fitToSection:false,
-        afterLoad: function(origin, destination, direction){
-            if(origin.anchor === "leather" || destination.anchor === "leather"){
-                UIkit.scrollspy('div.sectionWrapper.leather > div', {target: "> div", cls: "uk-animation-fade", repeat: false, delay: 300});
-            }
-        }
+        // afterLoad: function(origin, destination, direction){
+        //     if(origin.anchor === "leather" || destination.anchor === "leather"){
+        //         UIkit.scrollspy('div.sectionWrapper.leather > div', {target: "> div", cls: "uk-animation-fade", repeat: false, delay: 300});
+        //     }
+        //     if(origin.anchor === "style" || destination.anchor === "style"){
+        //         UIkit.scrollspy('div.sectionWrapper.decor .animateShow', {target: ".animateShow", cls: "uk-animation-fade", repeat: false, delay: 300});
+        //     }
+        // }
     });
     // fullpage_api.setAllowScrolling(false);
 
