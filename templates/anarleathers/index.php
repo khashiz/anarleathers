@@ -35,6 +35,7 @@ JHtml::_('stylesheet', 'anar.css', array('version' => 'auto', 'relative' => true
 
 // Add js
 JHtml::_('script', 'uikit.min.js', array('version' => 'auto', 'relative' => true));
+JHtml::_('script', 'persianumber.min.js', array('version' => 'auto', 'relative' => true));
 JHtml::_('script', 'fullpage.min.js', array('version' => 'auto', 'relative' => true));
 JHtml::_('script', 'custom.js', array('version' => 'auto', 'relative' => true));
 

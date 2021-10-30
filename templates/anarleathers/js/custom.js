@@ -1,4 +1,5 @@
 jQuery(document).ready(function () {
+    jQuery('.fnum').persiaNumber('fa');
     jQuery('#anarContainer').fullpage({
         anchors: ['leather', 'main', 'style'],
         menu: '#menu',

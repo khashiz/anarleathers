@@ -8,7 +8,7 @@
  */
 defined('_JEXEC') or die('Restricted access');
 ?><?php if(empty($this->ajax)) { ?>
-<div id="hikashop_checkout_payment_<?php echo $this->step; ?>_<?php echo $this->module_position; ?>" data-checkout-step="<?php echo $this->step; ?>" data-checkout-pos="<?php echo $this->module_position; ?>" class="hikashop_checkout_payment">
+<div id="hikashop_checkout_payment_<?php echo $this->step; ?>_<?php echo $this->module_position; ?>" data-checkout-step="<?php echo $this->step; ?>" data-checkout-pos="<?php echo $this->module_position; ?>" class="uk-width-1-1 uk-width-1-2@m hikashop_checkout_payment">
 <?php } ?>
 	<div class="hikashop_checkout_loading_elem"></div>
 	<div class="hikashop_checkout_loading_spinner"></div>
@@ -21,7 +21,7 @@ $cart = $this->checkoutHelper->getCart();
 if(!empty($cart->usable_methods->payment)) {
 	if(!empty($this->options['show_title'])) {
 ?>
-<legend><?php echo JText::_('HIKASHOP_PAYMENT_METHOD');?></legend>
+<h3 class="uk-margin-bottom uk-margin-remove-top uk-text-secondary uk-text-primary sectionTitle font"><?php echo JText::_('HIKASHOP_PAYMENT_METHOD');?></h3>
 <?php
 	}
 
@@ -30,7 +30,7 @@ if(!empty($cart->usable_methods->payment)) {
 	<fieldset class="hika_payment_field hikashop_checkout_payment_block">
 		<select id="hikashop_payment_selector_<?php echo $this->step.'_'.$this->module_position; ?>"
 				name="checkout[payment][id]"
-				class="hikashop_field_dropdown"
+				class="hikashop_field_dropdown ffffff"
 				onchange="window.checkout.paymentSelected(this.options[this.selectedIndex]);">
 <?php
 		foreach($cart->usable_methods->payment as $payment) {
@@ -57,7 +57,7 @@ if(!empty($cart->usable_methods->payment)) {
 	}
 	else {
 ?>
-<table style="width:100%" class="hikashop_payment_methods_table table table-bordered table-striped table-hover">
+<div>
 <?php
 	}
 	foreach($cart->usable_methods->payment as $payment) {
@@ -75,7 +75,7 @@ if(!empty($cart->usable_methods->payment)) {
 			'id' => (int)$payment->payment_id,
 		);
 ?>
-<tr><td>
+<div>
 <?php
 		if($this->options['payment_selector'] != 2) {
 			if(empty($this->options['read_only'])) {
@@ -84,31 +84,26 @@ if(!empty($cart->usable_methods->payment)) {
 <?php
 			}
 ?>
-	<label for="<?php echo $input_id; ?>" style="cursor:pointer;">
-		<span class="hikashop_checkout_payment_name"><?php echo $payment->payment_name;?></span>
+	<label class="uk-display-block" for="<?php echo $input_id; ?>">
+		<span class="hikashop_checkout_payment_name uk-text-small uk-text-secondary f600 font"><?php echo $payment->payment_name;?></span>
 	</label>
-	<span class="hikashop_checkout_payment_cost"><?php
-		echo $this->checkoutHelper->getDisplayPrice($payment, 'payment', $this->options);
-	?></span>
-<?php
-			if(!empty($payment->payment_images)) {
-?>
-	<span class="hikashop_checkout_payment_images">
-<?php
-				$images = explode(',', $payment->payment_images);
-				foreach($images as $image) {
-					$img = $this->checkoutHelper->getPluginImage($image, 'payment');
-					if(empty($img))
-						continue;
-?>
-		<img src="<?php echo $img->url; ?>" alt=""/>
-<?php
-				}
-?>
-	</span>
-<?php
-			}
-?>
+	<span class="hikashop_checkout_payment_cost">
+        <?php echo $this->checkoutHelper->getDisplayPrice($payment, 'payment', $this->options); ?>
+    </span>
+
+            <?php /* if(!empty($payment->payment_images)) { ?>
+                <span class="hikashop_checkout_payment_images">
+                    <?php
+                    $images = explode(',', $payment->payment_images);
+                    foreach($images as $image) {
+                        $img = $this->checkoutHelper->getPluginImage($image, 'payment');
+                        if(empty($img))
+                            continue;
+                        ?>
+                        <img src="<?php echo $img->url; ?>" alt=""/>
+                    <?php } ?>
+                </span>
+            <?php } */ ?>
 <?php
 			if(!empty($payment->payment_description)) {
 ?>
@@ -263,11 +258,11 @@ if(!empty($cart->usable_methods->payment)) {
 <?php
 		}
 ?>
-</td></tr>
+</div>
 <?php
 		}
 ?>
-</table>
+</div>
 <?php
 }
 

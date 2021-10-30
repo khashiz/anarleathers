@@ -4,6 +4,7 @@
 @gray: #b7b7b7;
 @gold: #a4946c;
 @brown: #58402e;
+@lightbrown: #9e8469;
 @danger: #DC2626;
 @success: #22C55E;
 @images: "../img";
@@ -330,6 +331,11 @@ svg{
 .userName{
   font-variation-settings: "wght" 600;
 }
+hr{
+  &.productSingleSep{
+    border-color: @brown;
+  }
+}
 span{
   &.avatar{
     top: 0;
@@ -343,6 +349,7 @@ span{
 
 // Utilities
 ::selection{background-color: @primary}
+img{image-rendering: optimizequality;image-rendering: -webkit-optimize-contrast;}
 .f500{font-variation-settings: "wght" 500;}
 .f600{font-variation-settings: "wght" 600;}
 .f700{font-variation-settings: "wght" 700;}
@@ -355,6 +362,9 @@ span{
 .uk-text-zero{font-size: 0;}
 .uk-text-tiny{font-size: 12px;}
 .uk-text-white{color: #fff;}
+.uk-text-lightBrown{color: @lightbrown;}
+.uk-text-brown{color: @brown;}
+.uk-text-error,
 .uk-text-danger{color: @danger;}
 .uk-text-gold{color: @gold;}
 .uk-text-line-through{text-decoration: line-through;}

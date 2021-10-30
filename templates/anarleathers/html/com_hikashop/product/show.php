@@ -57,7 +57,6 @@ if(!empty($this->links->next)) {
 	'</div>';
 }
 ?>
-	<div class='clear_both'></div>
 <script type="text/javascript">
 function hikashop_product_form_check() {
 	var d = document, el = d.getElementById('hikashop_product_quantity_main');

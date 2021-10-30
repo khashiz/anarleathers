@@ -23,6 +23,7 @@ if(isset($this->element->main)){
 	}
 }
 ?>
+<p class="uk-display-block uk-margin-small-bottom uk-margin-remove-top uk-h3 uk-text-brown ltr">
 <!-- WEIGHT -->
 <?php
 if ($this->config->get('weight_display', 0)) {
@@ -35,39 +36,26 @@ if ($this->config->get('weight_display', 0)) {
 }
 ?>
 <!-- EO WEIGHT -->
+
 <!-- WIDTH -->
-<?php
-if ($this->config->get('dimensions_display', 0) && bccomp($this->element->product_width, 0, 3)) {
-?>
-	<span id="hikashop_product_width_main" class="hikashop_product_width_main">
-		<?php echo JText::_('PRODUCT_WIDTH').': '.rtrim(rtrim($this->element->product_width,'0'),',.').' '.JText::_($this->element->product_dimension_unit); ?><br />
-	</span>
-<?php
-}
-?>
+<?php if ($this->config->get('dimensions_display', 0) && bccomp($this->element->product_width, 0, 3)) { ?>
+	<span id="hikashop_product_width_main" class="hikashop_product_width_main" data-uk-tooltip="title:<?php echo JText::_('PRODUCT_WIDTH'); ?>; cls: uk-active font;"><?php echo rtrim(rtrim($this->element->product_width,'0'),',.'); ?></span> ×
+<?php } ?>
 <!-- EO WIDTH -->
+
 <!-- LENGTH -->
-<?php
-if ($this->config->get('dimensions_display', 0) && bccomp($this->element->product_length, 0, 3)) {
-?>
-	<span id="hikashop_product_length_main" class="hikashop_product_length_main">
-		<?php echo JText::_('PRODUCT_LENGTH').': '.rtrim(rtrim($this->element->product_length,'0'),',.').' '.JText::_($this->element->product_dimension_unit); ?><br />
-	</span>
-<?php
-}
-?>
+<?php if ($this->config->get('dimensions_display', 0) && bccomp($this->element->product_length, 0, 3)) { ?>
+	<span id="hikashop_product_length_main" class="hikashop_product_length_main" data-uk-tooltip="title:<?php echo JText::_('PRODUCT_LENGTH'); ?>; cls: uk-active font;"><?php echo rtrim(rtrim($this->element->product_length,'0'),',.'); ?></span> ×
+<?php } ?>
 <!-- LENGTH -->
+
 <!-- HEIGHT -->
-<?php
-if ($this->config->get('dimensions_display', 0) && bccomp($this->element->product_height, 0, 3)) {
-?>
-	<span id="hikashop_product_height_main" class="hikashop_product_height_main">
-		<?php echo JText::_('PRODUCT_HEIGHT').': '.rtrim(rtrim($this->element->product_height,'0'),',.').' '.JText::_($this->element->product_dimension_unit); ?><br />
-	</span>
-<?php
-}
-?>
+<?php if ($this->config->get('dimensions_display', 0) && bccomp($this->element->product_height, 0, 3)) { ?>
+    <span id="hikashop_product_height_main" class="hikashop_product_height_main" data-uk-tooltip="title:<?php echo JText::_('PRODUCT_HEIGHT'); ?>; cls: uk-active font;"><?php echo rtrim(rtrim($this->element->product_height,'0'),',.'); ?></span>
+<?php } ?>
 <!-- EO HEIGHT -->
+cm
+</p>
 <!-- BRAND -->
 <?php
 if($this->config->get('manufacturer_display', 0) && !empty($this->element->product_manufacturer_id)){

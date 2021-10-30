@@ -27,6 +27,7 @@ if($this->identified) {
 		$leftClass .= ' hkc-md-6';
 	}
 ?>
+    ccccc
 <div id="<?php echo $mainId; ?>" class="<?php echo $mainClass; ?>">
 	<div id="<?php echo $leftId; ?>" class="<?php echo $leftClass; ?>">
 		<fieldset class="hika_address_field" id="hikashop_checkout_billing_address">

@@ -13,8 +13,8 @@ defined('_JEXEC') or die('Restricted access');
 <input type="hidden" name="cart_id" value="<?php echo $this->cart_id; ?>"/>
 <input type="submit" style="display:none;"/>
 <div id="hikashop_checkout" data-checkout-step="<?php echo $this->step; ?>" class="hikashop_checkout_page hikashop_checkout_page_step<?php echo $this->step; ?>">
-	<div class="hikashop_checkout_loading_elem"></div>
-	<div class="hikashop_checkout_loading_spinner"></div>
+	<div class="hikashop_checkout_loading_elem uk-position-absolute"></div>
+	<div class="hikashop_checkout_loading_spinner uk-position-absolute"></div>
 <!-- PROGRESS BAR -->
 <?php
 if((int)$this->config->get('display_checkout_bar', 2) > 0) {
@@ -36,13 +36,15 @@ if(!empty($this->extraData['checkout']) && !empty($this->extraData['checkout']->
 ?>
 <!-- EO TOP EXTRA DATA -->
 <!-- CHECKOUT -->
-<?php
-foreach($this->workflow['steps'][$this->workflow_step]['content'] as $k => $content) {
-	$handleEnter[] = 'window.checkout.handleEnter(\''.$content['task'].'\','.$this->step.','.$k.');';
-	echo $this->displayBlock($content['task'], $k, @$content['params']);
-	$last = $k;
-}
-?>
+    <div data-uk-grid>
+        <?php
+        foreach($this->workflow['steps'][$this->workflow_step]['content'] as $k => $content) {
+            $handleEnter[] = 'window.checkout.handleEnter(\''.$content['task'].'\','.$this->step.','.$k.');';
+            echo $this->displayBlock($content['task'], $k, @$content['params']);
+            $last = $k;
+        }
+        ?>
+    </div>
 <!-- EO CHECKOUT -->
 <!-- BOTTOM EXTRA DATA -->
 <?php

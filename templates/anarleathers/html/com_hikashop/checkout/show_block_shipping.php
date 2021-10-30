@@ -8,7 +8,7 @@
  */
 defined('_JEXEC') or die('Restricted access');
 ?><?php if(empty($this->ajax)) { ?>
-<div id="hikashop_checkout_shipping_<?php echo $this->step; ?>_<?php echo $this->module_position; ?>" data-checkout-step="<?php echo $this->step; ?>" data-checkout-pos="<?php echo $this->module_position; ?>" class="hikashop_checkout_shipping">
+<div id="hikashop_checkout_shipping_<?php echo $this->step; ?>_<?php echo $this->module_position; ?>" data-checkout-step="<?php echo $this->step; ?>" data-checkout-pos="<?php echo $this->module_position; ?>" class="uk-width-1-1 uk-width-1-2@m hikashop_checkout_shipping">
 <?php } ?>
 	<div class="hikashop_checkout_loading_elem"></div>
 	<div class="hikashop_checkout_loading_spinner"></div>
@@ -34,7 +34,7 @@ if(!empty($cart->usable_methods->shipping)) {
 <?php
 		if(!empty($this->options['show_title'])) {
 ?>
-	<legend><?php echo JText::_('HIKASHOP_SHIPPING_METHOD');?></legend>
+	<h3 class="uk-margin-bottom uk-margin-remove-top uk-text-secondary uk-text-primary sectionTitle font"><?php echo JText::_('HIKASHOP_SHIPPING_METHOD');?></h3>
 <?php
 		}
 		if(!empty($group->name) || $several_groups) {
@@ -121,7 +121,7 @@ if(!empty($cart->usable_methods->shipping)) {
 		}
 		else {
 ?>
-	<table style="width:100%" class="hikashop_shipping_methods_table table table-bordered table-striped table-hover">
+	<div>
 <?php
 		}
 		foreach($cart->usable_methods->shipping as $shipping) {
@@ -155,7 +155,7 @@ if(!empty($cart->usable_methods->shipping)) {
 			);
 			if($this->options['shipping_selector'] != 2) {
 ?>
-<tr><td>
+<div>
 <?php
 				if(empty($this->options['read_only'])){
 ?>
@@ -163,12 +163,12 @@ if(!empty($cart->usable_methods->shipping)) {
 <?php
 				}
 ?>
-		<label for="<?php echo $input_id; ?>" style="cursor:pointer;">
-			<span class="hikashop_checkout_shipping_name"><?php echo $shipping->shipping_name;?></span>
+		<label class="uk-display-block" for="<?php echo $input_id; ?>">
+			<span class="hikashop_checkout_shipping_name uk-text-small uk-text-secondary f600 font"><?php echo $shipping->shipping_name;?></span>
 		</label>
-		<span class="hikashop_checkout_shipping_cost"><?php
-			echo $this->checkoutHelper->getDisplayPrice($shipping, 'shipping', $this->options);
-		?></span>
+		<span class="hikashop_checkout_shipping_cost uk-hidden">
+            <?php echo $this->checkoutHelper->getDisplayPrice($shipping, 'shipping', $this->options); ?>
+        </span>
 <?php
 				if(!empty($shipping->shipping_images)) {
 ?>
@@ -216,12 +216,12 @@ if(!empty($cart->usable_methods->shipping)) {
 			}
 			if($this->options['shipping_selector'] != 2) {
 ?>
-	</td></tr>
+	</div>
 <?php		}
 		}
 		if($this->options['shipping_selector'] != 2) {
 ?>
-	</table>
+	</div>
 <?php
 		}
 

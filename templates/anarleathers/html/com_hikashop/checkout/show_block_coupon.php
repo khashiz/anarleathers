@@ -8,38 +8,48 @@
  */
 defined('_JEXEC') or die('Restricted access');
 ?><?php if(empty($this->ajax)) { ?>
-<div id="hikashop_checkout_coupon_<?php echo $this->step; ?>_<?php echo $this->module_position; ?>" data-checkout-step="<?php echo $this->step; ?>" data-checkout-pos="<?php echo $this->module_position; ?>" class="hikashop_checkout_coupon">
+<div class="uk-width-1-1">
+    <hr class="uk-divider-icon uk-margin-remove">
+</div>
+<div id="hikashop_checkout_coupon_<?php echo $this->step; ?>_<?php echo $this->module_position; ?>" data-checkout-step="<?php echo $this->step; ?>" data-checkout-pos="<?php echo $this->module_position; ?>" class="hikashop_checkout_coupon uk-width-1-1">
 <?php } ?>
 	<div class="hikashop_checkout_loading_elem"></div>
 	<div class="hikashop_checkout_loading_spinner"></div>
 
 <?php
-	$this->checkoutHelper->displayMessages('coupon');
-
 	$cart = $this->checkoutHelper->getCart();
 	if(empty($cart->coupon)) {
 ?>
-	<label for="hikashop_checkout_coupon_input_<?php echo $this->step; ?>_<?php echo $this->module_position; ?>"><?php echo JText::_('HIKASHOP_ENTER_COUPON'); ?></label>
-	<div class="input-append">
-		<input class="hikashop_checkout_coupon_field" id="hikashop_checkout_coupon_input_<?php echo $this->step; ?>_<?php echo $this->module_position; ?>" type="text" name="checkout[coupon]" value=""/>
-		<button type="submit" onclick="return window.checkout.submitCoupon(<?php echo $this->step.','.$this->module_position; ?>);" class="<?php echo $this->config->get('css_button','hikabtn'); ?> hikabtn-primary hikabtn_checkout_coupon_add"><?php
-			echo JText::_('ADD');
-		?></button>
-		</div>
+        <div class="uk-margin-bottom">
+            <div data-uk-grid>
+                <div class="uk-width-expand"><h3 class="uk-margin-remove uk-text-secondary uk-text-primary sectionTitle font"><?php echo JText::_('HIKASHOP_HAVE_COUPON'); ?></h3></div>
+                <div class="uk-width-auto"><?php $this->checkoutHelper->displayMessages('coupon'); ?></div>
+            </div>
+        </div>
+	<div>
+        <div class="uk-grid-small" data-uk-grid>
+            <div class="uk-width-expand">
+                <input class="uk-input uk-border-pill font uk-height-1-1 hikashop_checkout_coupon_field" id="hikashop_checkout_coupon_input_<?php echo $this->step; ?>_<?php echo $this->module_position; ?>" type="text" name="checkout[coupon]" value=""/>
+            </div>
+            <div class="uk-width-small">
+                <button type="submit" onclick="return window.checkout.submitCoupon(<?php echo $this->step.','.$this->module_position; ?>);" class="uk-button uk-button-default uk-text-bold uk-box-shadow-small uk-border-pill font uk-width-1-1 uk-height-1-1"><?php echo JText::_('HIKA_APPLY_COUPON'); ?></button>
+            </div>
+        </div>
+    </div>
 <?php
 	} else {
-		echo JText::sprintf('HIKASHOP_COUPON_LABEL', @$cart->coupon->discount_code);
+	    echo '<div class="uk-child-width-auto uk-grid-small uk-text-zero" data-uk-grid>';
+		echo '<div><p class="uk-margin-remove uk-text-small uk-text-secondary font f500">'.JText::sprintf('HIKASHOP_COUPON_LABEL', @$cart->coupon->discount_code).'</p></div>';
 		if(empty($cart->cart_params->coupon_autoloaded)) {
 			global $Itemid;
 			$url_itemid = '';
 			if(!empty($Itemid))
 				$url_itemid = '&Itemid=' . $Itemid;
 ?>
-	<a href="#removeCoupon" onclick="return window.checkout.removeCoupon(<?php echo $this->step; ?>,<?php echo $this->module_position; ?>);" title="<?php echo JText::_('REMOVE_COUPON'); ?>">
-		<i class="fas fa-trash"></i>
-	</a>
+	<div><a href="#removeCoupon" class="uk-text-danger uk-text-small font f500" onclick="return window.checkout.removeCoupon(<?php echo $this->step; ?>,<?php echo $this->module_position; ?>);" title="<?php echo JText::_('REMOVE_COUPON'); ?>"><?php echo JText::sprintf('REMOVE_COUPON'); ?></a></div>
 <?php
 		}
+		echo '</div>';
 	}
 
 	if(empty($this->ajax)) { ?>

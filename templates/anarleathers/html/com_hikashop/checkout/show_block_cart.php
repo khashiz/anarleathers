@@ -8,14 +8,14 @@
  */
 defined('_JEXEC') or die('Restricted access');
 ?><?php if(empty($this->ajax)) { ?>
-<div id="hikashop_checkout_cart_<?php echo $this->step; ?>_<?php echo $this->module_position; ?>" data-checkout-step="<?php echo $this->step; ?>" data-checkout-pos="<?php echo $this->module_position; ?>" class="hikashop_checkout_cart">
+<div id="hikashop_checkout_cart_<?php echo $this->step; ?>_<?php echo $this->module_position; ?>" data-checkout-step="<?php echo $this->step; ?>" data-checkout-pos="<?php echo $this->module_position; ?>" class="uk-width-1-1 hikashop_checkout_cart">
 <?php } ?>
 	<div class="hikashop_checkout_loading_elem"></div>
 	<div class="hikashop_checkout_loading_spinner"></div>
 <?php
 	$this->checkoutHelper->displayMessages('cart');
 ?>
-<table class="table table-striped table-hover" width="100%">
+<table class="uk-hidden">
 	<thead>
 		<tr>
 <?php
@@ -175,7 +175,7 @@ defined('_JEXEC') or die('Restricted access');
 			continue;
 		$this->productClass->addAlias($product);
 ?>
-		<tr class="row<?php echo $k; ?>">
+		<tr class="uk-hidden row<?php echo $k; ?>">
 <!-- IMAGE -->
 <?php
 		if(!empty($this->options['show_cart_image'])) {
@@ -406,92 +406,9 @@ defined('_JEXEC') or die('Restricted access');
 	}
 ?>
 
-<?php
-	$taxes = round($displayingPrices->total->price_value_with_tax - $displayingPrices->total->price_value, $this->currencyClass->getRounding($cart->full_total->prices[0]->price_currency_id));
-	if(!empty($this->options['show_price']) && (!empty($cart->coupon) || !empty($cart->shipping) || !empty($cart->additional) || $taxes > 0)) {
-?>
-<!-- SEPARATOR ROW -->
-		<tr class="margin"><td colspan="<?php echo $row_count; ?>" class="hikashop_cart_empty_footer"></td></tr>
-<!-- EO SEPARATOR ROW -->
-<!-- SUBTOTAL ROW -->
-		<tr>
-			<td colspan="<?php echo $row_count - 2; ?>" class="hikashop_cart_empty_footer"></td>
-			<td id="hikashop_checkout_cart_total2_title" class="hikashop_cart_subtotal_title hikashop_cart_title"><?php
-				echo JText::_('SUBTOTAL');
-			?></td>
-			<td class="hikashop_cart_subtotal_value" data-title="<?php echo JText::_('SUBTOTAL'); ?>">
-				<span class="hikashop_checkout_cart_subtotal"><?php
-					if(!empty($this->options['price_with_tax']))
-						echo $this->currencyClass->format(@$cart->total->prices[0]->price_value_with_tax,@$cart->total->prices[0]->price_currency_id);
-					else
-						echo $this->currencyClass->format(@$cart->total->prices[0]->price_value,@$cart->total->prices[0]->price_currency_id);
-				?></span>
-			</td>
-		</tr>
-<!-- EO SUBTOTAL ROW -->
-<!-- COUPON ROW -->
-<?php
-		}
-		if(!empty($this->options['show_price']) && !empty($cart->coupon) && !empty($this->options['show_coupon'])) {
-?>
-		<tr>
-			<td colspan="<?php echo $row_count - 2; ?>" class="hikashop_cart_empty_footer"></td>
-			<td id="hikashop_checkout_cart_coupon_title" class="hikashop_cart_coupon_title hikashop_cart_title"><?php
-				echo JText::_('HIKASHOP_COUPON');
-			?></td>
-			<td class="hikashop_cart_coupon_value" data-title="<?php echo JText::_('HIKASHOP_COUPON'); ?>">
-				<span class="hikashop_checkout_cart_coupon"><?php
-					if(empty($this->options['price_with_tax']))
-						echo $this->currencyClass->format(@$cart->coupon->discount_value_without_tax * -1, @$cart->coupon->discount_currency_id);
-					else
-						echo $this->currencyClass->format(@$cart->coupon->discount_value * -1, @$cart->coupon->discount_currency_id);
-				?></span>
-			</td>
-		</tr>
-<?php
-		}
-?>
-<!-- EO COUPON ROW -->
-<!-- SHIPPING ROW -->
-<?php
-		if(!empty($this->options['show_price']) && !empty($cart->shipping) && !empty($this->options['show_shipping'])) {
-?>
-		<tr>
-			<td colspan="<?php echo $row_count - 2; ?>" class="hikashop_cart_empty_footer"></td>
-			<td id="hikashop_checkout_cart_shipping_title" class="hikashop_cart_shipping_title hikashop_cart_title"><?php
-				echo JText::_('HIKASHOP_SHIPPING');
-			?></td>
-			<td class="hikashop_cart_shipping_value" data-title="<?php echo JText::_('HIKASHOP_SHIPPING'); ?>">
-				<span class="hikashop_checkout_cart_shipping">
-<?php
-			if(isset($this->value)) {
-				echo $this->value;
-			} else {
-				$shipping_price = null;
-				foreach($cart->shipping as $shipping) {
-					if(!isset($shipping->shipping_price) && isset($shipping->shipping_price_with_tax) ) {
-						$shipping->shipping_price = $shipping->shipping_price_with_tax;
-					}
-					if(isset($shipping->shipping_price)) {
-						if($shipping_price === null)
-							$shipping_price = 0.0;
-						if(empty($this->options['price_with_tax']) || !isset($shipping->shipping_price_with_tax))
-							$shipping_price += $shipping->shipping_price;
-						else
-							$shipping_price += $shipping->shipping_price_with_tax;
-					}
-				}
-				if($shipping_price !== null)
-					echo $this->currencyClass->format($shipping_price, $cart->full_total->prices[0]->price_currency_id);
-			}
-?>
-				</span>
-			</td>
-		</tr>
-<?php
-		}
-?>
-<!-- EO SHIPPING ROW -->
+
+
+
 <!-- ADDITIONAL ROW -->
 <?php
 		if(!empty($cart->additional)) {
@@ -595,27 +512,104 @@ defined('_JEXEC') or die('Restricted access');
 		}
 ?>
 <!-- EO PAYMENT ROW -->
-<!-- TOTAL ROW -->
-<?php
-		if(!empty($this->options['show_price'])) {
-?>
-		<tr>
-			<td colspan="<?php echo $row_count - 2; ?>" class="hikashop_cart_empty_footer"></td>
-			<td id="hikashop_checkout_cart_final_total_title" class="hikashop_cart_total_title hikashop_cart_title"><?php
-				echo JText::_('HIKASHOP_TOTAL');
-			?></td>
-			<td class="hikashop_cart_total_value" data-title="<?php echo Jtext::_('HIKASHOP_TOTAL'); ?>">
-				<span class="hikashop_checkout_cart_final_total"><?php
-					echo $this->currencyClass->format($displayingPrices->total->price_value_with_tax, $displayingPrices->price_currency_id);
-				?></span>
-			</td>
-		</tr>
-<?php
-		}
-?>
-<!-- EO TOTAL ROW -->
+
 	</tbody>
 </table>
+
+
+    <!-- SUBTOTAL ROW -->
+    <?php $taxes = round($displayingPrices->total->price_value_with_tax - $displayingPrices->total->price_value, $this->currencyClass->getRounding($cart->full_total->prices[0]->price_currency_id)); ?>
+    <?php if(!empty($this->options['show_price']) && (!empty($cart->coupon) || !empty($cart->shipping) || !empty($cart->additional) || $taxes > 0)) { ?>
+    <div class="uk-grid-small" data-uk-grid>
+        <div class="uk-width-expand" data-uk-leader>
+            <span id="hikashop_checkout_cart_total2_title" class="uk-text-small uk-text-secondary f500 font"><?php echo JText::_('SUBTOTAL'); ?></span>
+        </div>
+        <div>
+            <span class="hikashop_checkout_cart_subtotal uk-text-small uk-text-primary f600 font fnum">
+                <?php
+                if(!empty($this->options['price_with_tax']))
+                    echo $this->currencyClass->format(@$cart->total->prices[0]->price_value_with_tax,@$cart->total->prices[0]->price_currency_id);
+                else
+                    echo $this->currencyClass->format(@$cart->total->prices[0]->price_value,@$cart->total->prices[0]->price_currency_id);
+                ?>
+            </span>
+        </div>
+    </div>
+    <?php } ?>
+    <!-- EO SUBTOTAL ROW -->
+
+    <!-- COUPON ROW -->
+    <?php if(!empty($this->options['show_price']) && !empty($cart->coupon) && !empty($this->options['show_coupon'])) { ?>
+        <div class="uk-grid-small" uk-grid>
+            <div class="uk-width-expand" data-uk-leader>
+                <span id="hikashop_checkout_cart_coupon_title" class="uk-text-small uk-text-secondary f500 font"><?php echo JText::_('HIKASHOP_COUPON'); ?></span>
+            </div>
+            <div>
+                <span class="hikashop_checkout_cart_coupon uk-text-small uk-text-primary f600 font fnum">
+                    <?php
+                    if(empty($this->options['price_with_tax']))
+                        echo $this->currencyClass->format(@$cart->coupon->discount_value_without_tax * -1, @$cart->coupon->discount_currency_id);
+                    else
+                        echo $this->currencyClass->format(@$cart->coupon->discount_value * -1, @$cart->coupon->discount_currency_id);
+                    ?>
+                </span>
+            </div>
+        </div>
+    <?php } ?>
+    <!-- EO COUPON ROW -->
+
+    <!-- SHIPPING ROW -->
+    <?php if(!empty($this->options['show_price']) && !empty($cart->shipping) && !empty($this->options['show_shipping'])) { ?>
+        <div class="uk-grid-small" data-uk-grid>
+            <div class="uk-width-expand" data-uk-leader>
+                <span id="hikashop_checkout_cart_shipping_title" class="uk-text-small uk-text-secondary f500 font"><?php echo JText::_('HIKASHOP_SHIPPING_COST'); ?></span>
+            </div>
+            <div>
+                <span class="hikashop_checkout_cart_shipping uk-text-small uk-text-primary f600 font fnum">
+                    <?php
+                    if(isset($this->value)) {
+                        echo $this->value;
+                    } else {
+                        $shipping_price = null;
+                        foreach($cart->shipping as $shipping) {
+                            if(!isset($shipping->shipping_price) && isset($shipping->shipping_price_with_tax) ) {
+                                $shipping->shipping_price = $shipping->shipping_price_with_tax;
+                            }
+                            if(isset($shipping->shipping_price)) {
+                                if($shipping_price === null)
+                                    $shipping_price = 0.0;
+                                if(empty($this->options['price_with_tax']) || !isset($shipping->shipping_price_with_tax))
+                                    $shipping_price += $shipping->shipping_price;
+                                else
+                                    $shipping_price += $shipping->shipping_price_with_tax;
+                            }
+                        }
+                        if($shipping_price !== null)
+                            echo $this->currencyClass->format($shipping_price, $cart->full_total->prices[0]->price_currency_id);
+                    }
+                    ?>
+				</span>
+            </div>
+        </div>
+    <?php } ?>
+    <!-- EO SHIPPING ROW -->
+
+    <!-- TOTAL ROW -->
+    <?php if(!empty($this->options['show_price'])) { ?>
+        <div class="uk-grid-small" uk-grid>
+            <div class="uk-width-expand" data-uk-leader>
+                <span id="hikashop_checkout_cart_final_total_title" class="uk-text-small uk-text-secondary f500 font"><?php echo JText::_('HIKASHOP_TOTAL_COST'); ?></span>
+            </div>
+            <div><span class="hikashop_checkout_cart_final_total uk-text-small uk-text-primary f600 font fnum"><?php echo $this->currencyClass->format($displayingPrices->total->price_value_with_tax, $displayingPrices->price_currency_id); ?></span></div>
+        </div>
+    <?php } ?>
+    <!-- EO TOTAL ROW -->
+
+
+
+
+
+
 <?php
 
 	if(!empty($this->extraData[$this->module_position]) && !empty($this->extraData[$this->module_position]->bottom)) { echo implode("\r\n", $this->extraData[$this->module_position]->bottom); }

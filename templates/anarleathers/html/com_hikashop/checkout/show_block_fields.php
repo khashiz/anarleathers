@@ -30,12 +30,12 @@ if(!empty($cart->order_fields)) {
 	}
 }
 
-$labelcolumnclass = 'hkc-sm-4';
-$inputcolumnclass = 'hkc-sm-8';
+$labelcolumnclass = '';
+$inputcolumnclass = '';
 
 if(empty($this->ajax)) {
 ?>
-<div id="hikashop_checkout_fields_<?php echo $this->step; ?>_<?php echo $this->module_position; ?>" data-checkout-step="<?php echo $this->step; ?>" data-checkout-pos="<?php echo $this->module_position; ?>" class="hikashop_checkout_fields">
+<div id="hikashop_checkout_fields_<?php echo $this->step; ?>_<?php echo $this->module_position; ?>" data-checkout-step="<?php echo $this->step; ?>" data-checkout-pos="<?php echo $this->module_position; ?>" class="hikashop_checkout_fields uk-width-1-1">
 <?php } ?>
 	<div class="hikashop_checkout_loading_elem"></div>
 	<div class="hikashop_checkout_loading_spinner"></div>
@@ -44,12 +44,12 @@ if(empty($this->ajax)) {
 	$this->checkoutHelper->displayMessages('fields');
 
 ?>
-<fieldset class="hkform-horizontal">
+<fieldset class="uk-padding-remove uk-margin-remove noBorder">
 <?php
 	if(!empty($fields)) {
 		if(!empty($this->options['show_title'])) {
 ?>
-	<legend><?php echo JText::_('ADDITIONAL_INFORMATION'); ?></legend>
+	<h3 class="uk-margin-bottom uk-margin-remove-top uk-text-secondary uk-text-primary sectionTitle font"><?php echo JText::_('ORDER_NOTES'); ?></h3>
 <?php
 		}
 		foreach($fields as $fieldName => $oneExtraField) {
@@ -59,7 +59,7 @@ if(empty($this->ajax)) {
 			if(empty($value) && !empty($this->options['read_only']))
 				continue;
 ?>
-	<div class="hkform-group control-group hikashop_checkout_<?php echo $fieldName;?>_line" id="hikashop_order_<?php echo $this->step . '_' . $this->module_position . '_' . $oneExtraField->field_namekey; ?>">
+	<div class="hikashop_checkout_<?php echo $fieldName;?>_line" id="hikashop_order_<?php echo $this->step . '_' . $this->module_position . '_' . $oneExtraField->field_namekey; ?>">
 <?php
 			$requiredDisplay = true;
 			if(!empty($this->options['read_only'])) {
@@ -69,7 +69,7 @@ if(empty($this->ajax)) {
 			if(!empty($this->options['read_only'])) {
 				$label = str_replace('</label>',' :</label>',$label);
 			}
-			echo $label;
+//			echo $label;
 ?>
 		<div class="<?php echo $inputcolumnclass;?>">
 <?php
