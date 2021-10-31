@@ -181,7 +181,7 @@ if(hikaInput::get()->getVar('hikashop_front_end_main', 0) && hikaInput::get()->g
 	if(hikashop_level(1) && $this->params->get('product_contact_button', 0) && ($contact == 2 || ($contact == 1 && !empty($this->row->product_contact)))) {
 		$css_button = $this->config->get('css_button', 'hikabtn');
 ?>
-	<a href="<?php echo hikashop_completeLink('product&task=contact&cid=' . (int)$this->row->product_id . $this->itemid); ?>" class="<?php echo $css_button; ?>"><?php
+	<a href="<?php echo hikashop_completeLink('product&task=contact&cid=' . (int)$this->row->product_id . $this->itemid); ?>" class="uk-button uk-button-gold uk-button-outline uk-height-1-1 uk-box-shadow-small uk-border-pill uk-button-large uk-padding-remove-horizontal uk-width-1-1 font"><?php
 		echo JText::_('CONTACT_US_FOR_INFO');
 	?></a>
 <?php

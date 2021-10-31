@@ -90,11 +90,11 @@ if($this->params->get('characteristic_display') != 'list') {
 								}
 
 								$name = '_'.$value->characteristic_id.'_'.$value2->characteristic_id;
-								$radio = "\n\t<span class=\"hikashop_product_characteristic_span".$classspan."\"><input type=\"radio\" class=\"hikashop_product_characteristic".$class."\" name=\"hikashop_product_characteristic\"".$extra." id=\"hikashop_product_characteristic".$name."\" value=\"".$name."\" ".$this->options;
+								$radio = "\n\t<span class=\"hikashop_product_characteristic_span".$classspan."\">fffffffffff<input type=\"radio\" class=\"hikashop_product_characteristic".$class."\" name=\"hikashop_product_characteristic\"".$extra." id=\"hikashop_product_characteristic".$name."\" value=\"".$name."\" ".$this->options;
 								if($this->characteristics[$value->characteristic_parent_id]->default->characteristic_id == $value->characteristic_id && !empty($this->characteristics[$value2->characteristic_parent_id]->default->characteristic_id) && $this->characteristics[$value2->characteristic_parent_id]->default->characteristic_id == $value2->characteristic_id) {
 									$radio .= ' checked';
 								}
-								$radio .= " /></span>";
+								$radio .= " />mmmmmmmmmmmmm</span>";
 								$html .= '<td>'.$radio.'</td>';
 							}
 						}
@@ -115,13 +115,13 @@ if($this->params->get('characteristic_display') != 'list') {
 		default:
 		case 'radio':
 		case 'dropdown':
-			$main_html = '<table class="hikashop_product_characteristics_table">';
+			$main_html = '<div>';
 			$config = hikashop_config();
 			$count = count($this->characteristics);
 			$i = 0;
 			foreach($this->characteristics as $characteristic) {
 				$i++;
-				$main_html.='<tr class="hikashop_characteristic_line_'.$characteristic->characteristic_id.'" data-characrow="'.$i.'">';
+				$main_html.='<div class="hikashop_characteristic_line_'.$characteristic->characteristic_id.'" data-characrow="'.$i.'">';
 				$values = array();
 				$switch_done = false;
 				if(!empty($characteristic->values)) {
@@ -207,11 +207,11 @@ if($this->params->get('characteristic_display') != 'list') {
 				$html = JHTML::_('select.'.$characteristic->characteristic_display_method.'list', $this->values, @$characteristic->characteristic_id, 'class="custom-select" size="1"' . $options, 'value', 'text', $selected, $id );
 				if($this->params->get('characteristic_display_text') && isset($characteristic->characteristic_value)) {
 
-					$html = hikashop_translate($characteristic->characteristic_value).'</td><td>'.$html;
+					$html = hikashop_translate($characteristic->characteristic_value).'vvvvvvv'.$html;
 				}
-				$main_html .= '<td>'.$html.'</td></tr>';
+				$main_html .= $html.'</div>';
 			}
-			$main_html .= '</table>';
+			$main_html .= '</div>';
 			$html = $main_html;
 
 			if($characteristics_dynamic_display) {

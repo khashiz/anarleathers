@@ -148,7 +148,7 @@ if(!empty($this->variant_name)) {
         </div>
         <!-- EO MAIN IMAGE -->
         <!-- THUMBNAILS -->
-        <div id="hikashop_small_image_div<?php echo $variant_name;?>" class="uk-child-width-1-2 uk-grid-small" data-uk-grid data-uk-lightbox="animation: slide">
+        <div id="hikashop_small_image_div<?php echo $variant_name;?>" class="thumbsWrapper" data-uk-lightbox="animation: slide">
             <?php
             if( !empty($this->element->images) && count($this->element->images) > 1) {
                 $firstThunb = true;
@@ -195,7 +195,7 @@ if(!empty($this->variant_name)) {
                     }
                     if(empty($variant_name)) {
                         if ($i != 0)
-                            echo '<div class="'.(($i==1)?'uk-width-1-1':"").'">'.$this->popup->image($html, $img->origin_url, $id, $attr, array('gallery' => 'hikashop_main_image')).'</div>';
+                            echo $this->popup->image($html, $img->origin_url, $id, $attr, array('gallery' => 'hikashop_main_image'));
                     } else {
                         echo $this->popup->image($html, $img->origin_url, $id, $attr, array('gallery' => 'hikashop_main_image_VARIANT_NAME'));
                     }

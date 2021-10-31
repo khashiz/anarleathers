@@ -105,7 +105,7 @@ $imgInfo = $db->setQuery($imgQuery)->loadObject();
         <!-- IMAGE -->
         <?php
         $this->row =& $this->element;
-        $this->setLayout('show_block_img');
+        $this->setLayout('show_block_product_img');
         echo $this->loadTemplate();
         ?>
         <!-- EO IMAGE -->
@@ -115,12 +115,12 @@ $imgInfo = $db->setQuery($imgQuery)->loadObject();
 	</div>
 
 	<div id="hikashop_product_right_part">
-        <div data-uk-sticky="offset: 70">
+        <div data-uk-sticky="offset: 70; bottom: true;">
             <!-- RIGHT BEGIN EXTRA DATA -->
             <?php if(!empty($this->element->extraData->rightBegin)) { echo implode("\r\n",$this->element->extraData->rightBegin); } ?>
             <!-- EO RIGHT BEGIN EXTRA DATA -->
             <div>
-                <div class="uk-grid-large" data-uk-grid>
+                <div class="uk-grid-row-medium uk-grid-column-large" data-uk-grid>
                     <?php if(!empty($this->element->constellation)) { ?>
                         <div class="uk-width-1-1 uk-width-expand@m">
                             <?php $this->setLayout('show_block_constellation'); echo $this->loadTemplate(); ?>
@@ -174,6 +174,72 @@ $imgInfo = $db->setQuery($imgQuery)->loadObject();
                         <!-- CHARACTERISTICS -->
                         <?php if($this->params->get('characteristic_display') != 'list') { $this->setLayout('show_block_characteristic'); echo $this->loadTemplate(); } ?>
                         <!-- EO CHARACTERISTICS -->
+                        <!-- CUSTOM ITEM FIELDS -->
+                        <?php
+                        if(!$this->params->get('catalogue') && ($this->config->get('display_add_to_cart_for_free_products') || ($this->config->get('display_add_to_wishlist_for_free_products', 1) && hikashop_level(1) && $this->params->get('add_to_wishlist') && $this->config->get('enable_wishlist', 1)) || !empty($this->element->prices))) {
+                            if(!empty($this->itemFields)) {
+                                $form = ',\'hikashop_product_form\'';
+                                if ($this->config->get('redirect_url_after_add_cart', 'stay_if_cart') == 'ask_user') {
+                                    ?>
+                                    <input type="hidden" name="popup" value="1"/>
+                                    <?php
+                                }
+                                $this->setLayout('show_block_custom_item');
+                                echo $this->loadTemplate();
+                            }
+                        }
+                        ?>
+                        <!-- EO CUSTOM ITEM FIELDS -->
+                    </div>
+                    <!-- DESCRIPTION -->
+                    <?php if (!empty($this->element->product_description)) { ?>
+                        <div id="hikashop_product_description_main" class="hikashop_product_description_main uk-width-1-1" itemprop="description">
+                            <div>
+                                <hr class="productSingleSep uk-margin-remove">
+                                <a href="#moreDescription" data-uk-toggle="target: #moreDescription; animation: uk-animation-fade" class="uk-display-block uk-padding-small uk-text-small uk-text-left font f500 productDescToggler"><?php echo JText::sprintf('MORE_DETAILS'); ?><img src="<?php echo JUri::base().'images/sprite.svg#chevron-down'; ?>" width="20" class="uk-margin-small-right" data-uk-svg></a>
+                                <hr class="productSingleSep uk-margin-remove">
+                            </div>
+                            <div class="uk-text-justify font f500 uk-text-secondary" id="moreDescription" hidden>
+                                <?php echo JHTML::_('content.prepare',preg_replace('#<hr *id="system-readmore" */>#i','',$this->element->product_description)); ?>
+                                <hr class="productSingleSep uk-margin-remove">
+                            </div>
+                        </div>
+                    <?php } ?>
+                    <!-- EO DESCRIPTION -->
+                    <div class="uk-width-1-1">
+                        <div>
+                            <div class="uk-flex">
+                                <!-- ADD TO CART BUTTON -->
+                                <?php if(empty($this->element->characteristics) || $this->params->get('characteristic_display') != 'list') { ?>
+                                    <div id="hikashop_product_quantity_main" class="hikashop_product_quantity_main uk-width-expand uk-flex">
+                                        <?php
+                                        $this->row =& $this->element;
+                                        $this->formName = $form;
+                                        $this->ajax = 'if(hikashopCheckChangeForm(\'item\',\'hikashop_product_form\')){ return hikashopModifyQuantity(\'' . (int)$this->element->product_id . '\',field,1' . $form . ',\'cart\'); } else { return false; }';
+                                        $this->setLayout('quantity');
+                                        echo $this->loadTemplate();
+                                        ?>
+                                    </div>
+                                <?php } ?>
+                                <!-- EO ADD TO CART BUTTON -->
+                                <!-- CONTACT US BUTTON -->
+                                <div id="hikashop_product_contact_mai" class="hikashop_product_contact_main uk-width-1-4">
+                                    <?php
+                                    $contact = (int)$this->config->get('product_contact', 0);
+                                    if(hikashop_level(1) && ($contact == 2 || ($contact == 1 && !empty($this->element->product_contact)))) {
+                                        $css_button = $this->config->get('css_button', 'uk-button uk-button-gold uk-button-outline uk-height-1-1 uk-box-shadow-small uk-border-pill uk-button-large uk-padding-remove-horizontal uk-width-1-1 font');
+                                        ?>
+                                        <a rel="noindex, nofollow" href="#askQuestion" data-uk-toggle class="uk-button uk-button-gold uk-button-outline uk-height-1-1 uk-box-shadow-small uk-border-pill uk-button-large uk-padding-remove-horizontal uk-width-1-1 font" data-caption="" data-type="iframe"><?php echo JText::_('CONTACT_US_FOR_INFO'); ?></a>
+                                        <div id="askQuestion" data-uk-modal>
+                                            <div class="uk-modal-dialog uk-modal-body">
+                                                <iframe src="<?php echo hikashop_completeLink('product&task=contact&cid=' . (int)$this->element->product_id . $this->url_itemid).'?tmpl=component'; ?>" class="uk-width-1-1 uk-height-large" frameborder="0"></iframe>
+                                            </div>
+                                        </div>
+                                    <?php } ?>
+                                </div>
+                                <!-- EO CONTACT US BUTTON -->
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -213,60 +279,11 @@ $imgInfo = $db->setQuery($imgQuery)->loadObject();
             ?>
             <!-- EO OPTIONS -->
 
-            <!-- CUSTOM ITEM FIELDS -->
-            <?php
-            if(!$this->params->get('catalogue') && ($this->config->get('display_add_to_cart_for_free_products') || ($this->config->get('display_add_to_wishlist_for_free_products', 1) && hikashop_level(1) && $this->params->get('add_to_wishlist') && $this->config->get('enable_wishlist', 1)) || !empty($this->element->prices))) {
-                if(!empty($this->itemFields)) {
-                    $form = ',\'hikashop_product_form\'';
-                    if ($this->config->get('redirect_url_after_add_cart', 'stay_if_cart') == 'ask_user') {
-                        ?>
-                        <input type="hidden" name="popup" value="1"/>
-                        <?php
-                    }
-                    $this->setLayout('show_block_custom_item');
-                    echo $this->loadTemplate();
-                }
-            }
-            ?>
-            <!-- EO CUSTOM ITEM FIELDS -->
-
             <!-- PRICE WITH OPTIONS -->
             <?php if($this->params->get('show_price')) { ?>
                 <span id="hikashop_product_price_with_options_main" class="hikashop_product_price_with_options_main"></span>
             <?php } ?>
             <!-- EO PRICE WITH OPTIONS -->
-
-            <!-- ADD TO CART BUTTON -->
-            <?php if(empty($this->element->characteristics) || $this->params->get('characteristic_display') != 'list') { ?>
-                <div id="hikashop_product_quantity_main" class="hikashop_product_quantity_main">
-                    <?php
-                    $this->row =& $this->element;
-                    $this->formName = $form;
-                    $this->ajax = 'if(hikashopCheckChangeForm(\'item\',\'hikashop_product_form\')){ return hikashopModifyQuantity(\'' . (int)$this->element->product_id . '\',field,1' . $form . ',\'cart\'); } else { return false; }';
-                    $this->setLayout('quantity');
-                    echo $this->loadTemplate();
-                    ?>
-                </div>
-                <div id="hikashop_product_quantity_alt" class="hikashop_product_quantity_main_alt" style="display:none;">
-                    <?php echo JText::_('ADD_TO_CART_AVAILABLE_AFTER_CHARACTERISTIC_SELECTION'); ?>
-                </div>
-            <?php } ?>
-            <!-- EO ADD TO CART BUTTON -->
-
-<!-- CONTACT US BUTTON -->
-		<div id="hikashop_product_contact_main" class="hikashop_product_contact_main"><?php
-	$contact = (int)$this->config->get('product_contact', 0);
-	if(hikashop_level(1) && ($contact == 2 || ($contact == 1 && !empty($this->element->product_contact)))) {
-		$css_button = $this->config->get('css_button', 'hikabtn');
-?>
-			<a rel="noindex, nofollow" href="<?php echo hikashop_completeLink('product&task=contact&cid=' . (int)$this->element->product_id . $this->url_itemid); ?>" class="<?php echo $css_button; ?>"><?php
-				echo JText::_('CONTACT_US_FOR_INFO');
-			?></a>
-<?php
-	}
-?>
-		</div>
-<!-- EO CONTACT US BUTTON -->
 
 
 <!-- CUSTOM PRODUCT FIELDS -->
@@ -304,11 +321,7 @@ $imgInfo = $db->setQuery($imgQuery)->loadObject();
 <!-- BOTTOM BEGIN EXTRA DATA -->
 <?php if(!empty($this->element->extraData->bottomBegin)) { echo implode("\r\n",$this->element->extraData->bottomBegin); } ?>
 <!-- EO BOTTOM BEGIN EXTRA DATA -->
-<!-- DESCRIPTION -->
-	<div id="hikashop_product_description_main" class="hikashop_product_description_main" itemprop="description"><?php
-		echo JHTML::_('content.prepare',preg_replace('#<hr *id="system-readmore" */>#i','',$this->element->product_description));
-	?></div>
-<!-- EO DESCRIPTION -->
+
 <!-- MANUFACTURER URL -->
 	<span id="hikashop_product_url_main" class="hikashop_product_url_main"><?php
 		if(!empty($this->element->product_url)) {

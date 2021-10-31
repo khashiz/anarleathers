@@ -211,7 +211,7 @@ if(!empty($this->fields)){
 ?>
 <!-- EO TOTAL PRICE WITH OPTIONS -->
 <!-- CONTACT BUTTON -->
-	<div id="hikashop_product_contact_main" class="hikashop_product_contact_main">
+	<div id="hikashop_product_contact_main" class="hikashop_product_contact_main">fffffff
 <?php
 	$contact = $this->config->get('product_contact', 0);
 	if(hikashop_level(1) && ($contact == 2 || ($contact == 1 && !empty($this->element->product_contact)))) {

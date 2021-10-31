@@ -7,74 +7,66 @@
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
-?><div id="hikashop_product_contact_<?php echo hikaInput::get()->getInt('cid');?>_page" class="hikashop_product_contact_page">
-	<form action="<?php echo hikashop_completeLink('product'); ?>" id="hikashop_contact_form" name="hikashop_contact_form" method="post"  onsubmit="return checkFields();">
-		<fieldset>
-			<div class="" style="float:left">
-<!-- TITLE -->
-				<h1><?php
-if(!empty($this->product->product_id)) {
-	$doc = JFactory::getDocument();
-	$doc->setMetaData( 'robots', 'noindex' );
-	if(!empty($this->product->images)) {
-		$image = reset($this->product->images);
-		$img = $this->imageHelper->getThumbnail($image->file_path, array(50,50), array('default' => true), true);
-		if($img->success) {
-			echo '<img src="'.$img->url.'" alt="" style="vertical-align:middle"/> ';
-		}
-	}
-	echo @$this->product->product_name;
-} else {
-	echo @$this->title;
-}
-				?></h1>
-<!-- EO TITLE -->
-			</div>
-			<div class="toolbar" id="toolbar" style="float: right;">
-<!-- OK BUTTON -->
-				<button class="hikabtn hikabtn-success" type="submit"><i class="fa fa-check"></i> <?php echo JText::_('OK'); ?></button>
-<!-- EO OK BUTTON -->
-<!-- CANCEL BUTTON -->
-<?php if(hikaInput::get()->getCmd('tmpl', '') != 'component') { ?>
-				<button class="hikabtn hikabtn-danger" type="button" onclick="history.back(); return false;"><i class="fa fa-times"></i> <?php echo JText::_('HIKA_CANCEL'); ?></button>
-<?php } ?>
-<!-- EO CANCEL BUTTON -->
-			</div>
-			<div style="clear:both"></div>
-		</fieldset>
-<?php
-	$formData = hikaInput::get()->getVar('formData','');
-	if(empty($formData))
-		$formData = new stdClass();
-	if(isset($this->element->name) && !isset($formData->name)){
-		$formData->name = $this->element->name;
-	}
-	if(isset($this->element->email) && !isset($formData->email)){
-		$formData->email = $this->element->email;
-	}
 ?>
-		<dl>
-<!-- NAME -->
-			<dt id="hikashop_contact_name_name" class="hikashop_contact_item_name">
-				<label for="data[contact][name]"><?php echo JText::_( 'HIKA_USER_NAME' ); ?> <span class="hikashop_field_required_label">*</span></label>
-			</dt>
-			<dd id="hikashop_contact_value_name" class="hikashop_contact_item_value">
-				<input id="hikashop_contact_name" type="text" name="data[contact][name]" size="40" value="<?php echo $this->escape(@$formData->name);?>" />
-			</dd>
-<!-- EO NAME -->
-<!-- EMAIL -->
-			<dt id="hikashop_contact_name_email" class="hikashop_contact_item_name">
-				<label for="data[contact][email]"><?php echo JText::_( 'HIKA_EMAIL' ); ?> <span class="hikashop_field_required_label">*</span></label>
-			</dt>
-			<dd id="hikashop_contact_value_email" class="hikashop_contact_item_value">
-				<input id="hikashop_contact_email" type="text" name="data[contact][email]" size="40" value="<?php echo $this->escape(@$formData->email);?>" />
-			</dd>
-<!-- EO EMAIL -->
+<div id="hikashop_product_contact_<?php echo hikaInput::get()->getInt('cid');?>_page" class="hikashop_product_contact_page">
+	<form action="<?php echo hikashop_completeLink('product'); ?>" id="hikashop_contact_form" name="hikashop_contact_form" method="post"  onsubmit="return checkFields();">
+		<fieldset class="uk-padding-remove uk-margin-remove noBorder">
+			<div>
+                <!-- TITLE -->
+				<h1 class="font f700 uk-text-large uk-flex uk-flex-middle uk-padding-small uk-background-muted uk-border-rounded">
+                    <?php
+                    if(!empty($this->product->product_id)) {
+                        $doc = JFactory::getDocument();
+                        $doc->setMetaData( 'robots', 'noindex' );
+                        if(!empty($this->product->images)) {
+                            $image = reset($this->product->images);
+                            $img = $this->imageHelper->getThumbnail($image->file_path, array(50,50), array('default' => true), true);
+                            if($img->success) {
+                                echo '<span class="uk-card uk-card-default uk-border-rounded uk-box-shadow-small uk-display-inline-block uk-padding-small uk-margin-left"><img src="'.$img->url.'" alt="" style="vertical-align:middle"/></span>';
+                            }
+                        }
+                        echo @$this->product->product_name;
+                    } else {
+                        echo @$this->title;
+                    }
+				?>
+                </h1>
+                <!-- EO TITLE -->
+			</div>
+		</fieldset>
+        <?php
+            $formData = hikaInput::get()->getVar('formData','');
+            if(empty($formData))
+                $formData = new stdClass();
+            if(isset($this->element->name) && !isset($formData->name)){
+                $formData->name = $this->element->name;
+            }
+            if(isset($this->element->email) && !isset($formData->email)){
+                $formData->email = $this->element->email;
+            }
+        ?>
+		<div data-uk-grid>
+            <!-- NAME -->
+			<div id="hikashop_contact_name_name" class="uk-width-1-2">
+				<label for="data[contact][name]" class="uk-display-block uk-margin-small-bottom uk-form-label uk-text-tiny font"><?php echo JText::_( 'HIKA_USER_NAME' ); ?>&ensp;<span class="uk-text-danger uk-text-tiny">*</span></label>
+                <div id="hikashop_contact_value_name">
+                    <input id="hikashop_contact_name" type="text" name="data[contact][name]" size="40" class="uk-input uk-border-pill font" value="<?php echo $this->escape(@$formData->name);?>" />
+                </div>
+			</div>
+            <!-- EO NAME -->
+            <!-- EMAIL -->
+			<div id="hikashop_contact_name_email" class="uk-width-1-2">
+				<label for="data[contact][email]" class="uk-display-block uk-margin-small-bottom uk-form-label uk-text-tiny font"><?php echo JText::_( 'HIKA_EMAIL' ); ?>&ensp;<span class="uk-text-danger uk-text-tiny">*</span></label>
+                <div id="hikashop_contact_value_email">
+                    <input id="hikashop_contact_email" type="text" name="data[contact][email]" size="40" class="uk-input uk-border-pill font uk-text-left ltr" value="<?php echo $this->escape(@$formData->email);?>" />
+                </div>
+			</div>
+            <!-- EO EMAIL -->
 <!-- CUSTOM CONTACT FIELDS -->
 <?php
 	if(!empty($this->contactFields)){
 ?>
-		</dl>
+		</div>
 <?php
 		foreach ($this->contactFields as $fieldName => $oneExtraField) {
 			$itemData = @$formData->$fieldName;
@@ -127,14 +119,12 @@ if(!empty($this->product->product_id)) {
 ?>
 <!-- EO EXTRA DATA FIELDS -->
 <!-- ADDITIONAL INFORMATION -->
-			<dt id="hikashop_contact_name_altbody" class="hikashop_contact_item_name">
-				<label for="data[contact][altbody]"><?php echo JText::_( 'ADDITIONAL_INFORMATION' ); ?> <span class="hikashop_field_required_label">*</span></label>
-			</dt>
-			<dd id="hikashop_contact_value_altbody" class="hikashop_contact_item_value">
-				<textarea id="hikashop_contact_altbody" cols="60" rows="10" name="data[contact][altbody]" style="width:100%;"><?php
-					if(isset($formData->altbody)) echo $formData->altbody;
-				?></textarea>
-			</dd>
+			<div id="hikashop_contact_name_altbody" class="uk-width-1-1">
+				<label for="data[contact][altbody]" class="uk-display-block uk-margin-small-bottom uk-form-label uk-text-tiny font"><?php echo JText::_( 'ADDITIONAL_INFORMATION_QUESTION' ); ?>&ensp;<span class="uk-text-danger uk-text-tiny">*</span></label>
+                <div id="hikashop_contact_value_altbody">
+                    <textarea id="hikashop_contact_altbody" rows="4" class="uk-textarea uk-border-rounded-large font" name="data[contact][altbody]"><?php if(isset($formData->altbody)) echo $formData->altbody; ?></textarea>
+                </div>
+			</div>
 <!-- EO ADDITIONAL INFORMATION -->
 <!-- CONFIRM CONSENT -->
 <?php
@@ -200,5 +190,15 @@ if(!empty($this->product->product_id)) {
 	}
 	echo JHTML::_( 'form.token' );
 ?>
+        <div class="toolbar" id="toolbar">
+            <!-- OK BUTTON -->
+            <button class="uk-button uk-button-gold uk-button-outline uk-height-1-1 uk-box-shadow-small uk-border-pill font" type="submit"><?php echo JText::_('HIKA_SEND'); ?></button>
+            <!-- EO OK BUTTON -->
+            <!-- CANCEL BUTTON -->
+            <?php if(hikaInput::get()->getCmd('tmpl', '') != 'component') { ?>
+                <button class="hikabtn hikabtn-danger" type="button" onclick="history.back(); return false;"><i class="fa fa-times"></i> <?php echo JText::_('HIKA_CANCEL'); ?></button>
+            <?php } ?>
+            <!-- EO CANCEL BUTTON -->
+        </div>
 	</form>
 </div>

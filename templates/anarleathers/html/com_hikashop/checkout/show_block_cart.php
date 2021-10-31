@@ -175,7 +175,7 @@ defined('_JEXEC') or die('Restricted access');
 			continue;
 		$this->productClass->addAlias($product);
 ?>
-		<tr class="uk-hidden row<?php echo $k; ?>">
+		<tr class="row<?php echo $k; ?>">
 <!-- IMAGE -->
 <?php
 		if(!empty($this->options['show_cart_image'])) {
@@ -409,40 +409,6 @@ defined('_JEXEC') or die('Restricted access');
 
 
 
-<!-- ADDITIONAL ROW -->
-<?php
-		if(!empty($cart->additional)) {
-			$exclude_additionnal = explode(',', $this->config->get('order_additional_hide', ''));
-			foreach($cart->additional as $k => $additional) {
-				if(in_array($additional->name, $exclude_additionnal))
-					continue;
-				if(empty($this->options['show_price']) && !empty($additional->price_value))
-					continue;
-?>
-		<tr id="hikashop_checkout_cart_additional_<?php echo str_replace(' ','_',$k); ?>_line" >
-			<td colspan="<?php echo $row_count - 2; ?>" class="hikashop_cart_empty_footer"></td>
-			<td id="hikashop_checkout_cart_additional_<?php echo str_replace(' ','_',$k); ?>_title" class="hikashop_cart_additional_title hikashop_cart_title"><?php
-				echo JText::_($additional->name);
-			?></td>
-			<td class="hikashop_cart_additional_value" data-title="<?php echo JText::_($additional->name); ?>">
-				<span class="hikashop_checkout_cart_additional">
-<?php
-				if(!empty($additional->price_value) || empty($additional->value)) {
-					if($taxes == 0 || empty($this->options['price_with_tax']))
-						echo $this->currencyClass->format(@$additional->price_value,$additional->price_currency_id);
-					else
-						echo $this->currencyClass->format(@$additional->price_value_with_tax,$additional->price_currency_id);
-				} else
-					echo $additional->value;
-?>
-				</span>
-			</td>
-		</tr>
-<?php
-			}
-		}
-?>
-<!-- EO ADDITIONAL ROW -->
 <!-- TAXES ROW -->
 <?php
 		if(!empty($this->options['show_price']) && $taxes > 0){
@@ -538,25 +504,37 @@ defined('_JEXEC') or die('Restricted access');
     <?php } ?>
     <!-- EO SUBTOTAL ROW -->
 
-    <!-- COUPON ROW -->
-    <?php if(!empty($this->options['show_price']) && !empty($cart->coupon) && !empty($this->options['show_coupon'])) { ?>
-        <div class="uk-grid-small" uk-grid>
-            <div class="uk-width-expand" data-uk-leader>
-                <span id="hikashop_checkout_cart_coupon_title" class="uk-text-small uk-text-secondary f500 font"><?php echo JText::_('HIKASHOP_COUPON'); ?></span>
+    <!-- ADDITIONAL ROW -->
+    <?php if(!empty($cart->additional)) { ?>
+        <?php $exclude_additionnal = explode(',', $this->config->get('order_additional_hide', '')); ?>
+        <?php foreach($cart->additional as $k => $additional) { ?>
+            <?php
+            if(in_array($additional->name, $exclude_additionnal))
+                continue;
+            if(empty($this->options['show_price']) && !empty($additional->price_value))
+                continue;
+            ?>
+            <div class="uk-grid-small" data-uk-grid>
+                <div class="uk-width-expand" id="hikashop_checkout_cart_additional_<?php echo str_replace(' ','_',$k); ?>_line" data-uk-leader>
+                    <span id="hikashop_checkout_cart_additional_<?php echo str_replace(' ','_',$k); ?>_title" class="uk-text-small uk-text-secondary f500 font"><?php echo JText::_($additional->name); ?></span>
+                </div>
+                <div>
+                    <span class="hikashop_checkout_cart_additional uk-text-small uk-text-primary f600 font fnum">
+                        <?php
+                        if(!empty($additional->price_value) || empty($additional->value)) {
+                            if($taxes == 0 || empty($this->options['price_with_tax']))
+                                echo $this->currencyClass->format(@$additional->price_value,$additional->price_currency_id);
+                            else
+                                echo $this->currencyClass->format(@$additional->price_value_with_tax,$additional->price_currency_id);
+                        } else
+                            echo $additional->value;
+                        ?>
+                    </span>
+                </div>
             </div>
-            <div>
-                <span class="hikashop_checkout_cart_coupon uk-text-small uk-text-primary f600 font fnum">
-                    <?php
-                    if(empty($this->options['price_with_tax']))
-                        echo $this->currencyClass->format(@$cart->coupon->discount_value_without_tax * -1, @$cart->coupon->discount_currency_id);
-                    else
-                        echo $this->currencyClass->format(@$cart->coupon->discount_value * -1, @$cart->coupon->discount_currency_id);
-                    ?>
-                </span>
-            </div>
-        </div>
+        <?php } ?>
     <?php } ?>
-    <!-- EO COUPON ROW -->
+    <!-- EO ADDITIONAL ROW -->
 
     <!-- SHIPPING ROW -->
     <?php if(!empty($this->options['show_price']) && !empty($cart->shipping) && !empty($this->options['show_shipping'])) { ?>
@@ -593,6 +571,26 @@ defined('_JEXEC') or die('Restricted access');
         </div>
     <?php } ?>
     <!-- EO SHIPPING ROW -->
+
+    <!-- COUPON ROW -->
+    <?php if(!empty($this->options['show_price']) && !empty($cart->coupon) && !empty($this->options['show_coupon'])) { ?>
+        <div class="uk-grid-small" uk-grid>
+            <div class="uk-width-expand" data-uk-leader>
+                <span id="hikashop_checkout_cart_coupon_title" class="uk-text-small uk-text-secondary f500 font"><?php echo JText::_('HIKASHOP_COUPON'); ?></span>
+            </div>
+            <div>
+                <span class="hikashop_checkout_cart_coupon uk-text-small uk-text-primary f600 font fnum">
+                    <?php
+                    if(empty($this->options['price_with_tax']))
+                        echo $this->currencyClass->format(@$cart->coupon->discount_value_without_tax * -1, @$cart->coupon->discount_currency_id);
+                    else
+                        echo $this->currencyClass->format(@$cart->coupon->discount_value * -1, @$cart->coupon->discount_currency_id);
+                    ?>
+                </span>
+            </div>
+        </div>
+    <?php } ?>
+    <!-- EO COUPON ROW -->
 
     <!-- TOTAL ROW -->
     <?php if(!empty($this->options['show_price'])) { ?>

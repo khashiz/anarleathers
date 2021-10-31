@@ -94,7 +94,7 @@ if($start_date > 0 && $start_date > $now) {
 <?php
 $stock_class = ($stock != 0) ? "" : " hikashop_product_no_stock";
 ?>
-<span class="hikashop_product_stock_count<?php echo $stock_class; ?>">
+<span class="uk-hidden hikashop_product_stock_count<?php echo $stock_class; ?>">
 <?php
 	if(!empty($this->row->product_stock_message))
 		echo JText::sprintf($this->row->product_stock_message, $stock);
@@ -105,54 +105,55 @@ $stock_class = ($stock != 0) ? "" : " hikashop_product_no_stock";
 ?>
 </span>
 <!-- EO STOCK MESSAGE -->
+
 <!-- WAITLIST BUTTON -->
-<?php
-
-if($waitlist_btn) {
-?>
-	<a class="<?php echo $css_button; ?>" rel="nofollow" href="<?php echo hikashop_completeLink('product&task=waitlist&cid='.$this->row->product_id); ?>"><span><?php
-		echo JText::_('ADD_ME_WAITLIST');
-	?></span></a>
-<?php
-}
-?>
+<?php if($waitlist_btn) { ?>
+	<a class="<?php echo $css_button; ?>" rel="nofollow" href="<?php echo hikashop_completeLink('product&task=waitlist&cid='.$this->row->product_id); ?>">
+        <span><?php echo JText::_('ADD_ME_WAITLIST'); ?></span>
+    </a>
+<?php } ?>
 <!-- EO WAITLIST BUTTON -->
-<!-- QUANTITY INPUT -->
-<?php
 
-if(($add_to_cart || $add_to_wishlist) && $display_quantity_field) {
-	$this->setLayout('show_quantity');
-	echo $this->loadTemplate();
-}
-?>
+<!-- QUANTITY INPUT -->
+<?php if(($add_to_cart || $add_to_wishlist) && $display_quantity_field) {
+    $this->setLayout('show_quantity');
+    echo $this->loadTemplate();
+} ?>
 <!-- EO QUANTITY INPUT -->
+
 <!-- ADD TO CART BUTTON -->
-<?php
-if($add_to_cart) {
-?>
-	<a class="<?php echo $css_button . ' ' . $css_button_cart; ?>" rel="nofollow" href="<?php echo hikashop_completeLink($classical_url); ?>" onclick="if(window.hikashop.addToCart) { return window.hikashop.addToCart(this); }" data-addToCart="<?php echo $this->row->product_id; ?>" data-addTo-div="hikashop_product_form" data-addTo-class="add_in_progress"><span><?php
-		if(!empty($this->row->product_addtocart_message))
-			echo JText::_($this->row->product_addtocart_message);
-		else if(!empty($this->row->main->product_addtocart_message))
-		        echo JText::_($this->row->main->product_addtocart_message);
-		else
-			echo JText::_('ADD_TO_CART');
-	?></span></a>
-<?php
-}
-?>
+<?php if($add_to_cart) { ?>
+    <div class="uk-width-expand">
+        <a class="uk-button uk-button-gold uk-button-outline uk-height-1-1 uk-box-shadow-small uk-border-pill uk-width-1-1 uk-button-large uk-padding-remove-horizontal font" rel="nofollow" href="<?php echo hikashop_completeLink($classical_url); ?>" onclick="if(window.hikashop.addToCart) { return window.hikashop.addToCart(this); }" data-addToCart="<?php echo $this->row->product_id; ?>" data-addTo-div="hikashop_product_form" data-addTo-class="add_in_progress">
+            <span>
+                <?php
+                if(!empty($this->row->product_addtocart_message))
+                    echo JText::_($this->row->product_addtocart_message);
+                else if(!empty($this->row->main->product_addtocart_message))
+                    echo JText::_($this->row->main->product_addtocart_message);
+                else
+                    echo JText::_('ADD_TO_CART');
+                ?>
+            </span>
+        </a>
+    </div>
+<?php } ?>
 <!-- EO ADD TO CART BUTTON -->
+
+
 <!-- WISHLIST BUTTON -->
-<?php
-if($add_to_wishlist) {
-?>
-	<a class="<?php echo $css_button . ' ' . $css_button_wishlist; ?>" rel="nofollow" href="<?php echo hikashop_completeLink($classical_url); ?>" onclick="if(window.hikashop.addToWishlist) { return window.hikashop.addToWishlist(this); }" data-addToWishlist="<?php echo $this->row->product_id; ?>" data-addTo-div="hikashop_product_form" data-addTo-class="add_in_progress"><span><?php
-		if(!empty($this->row->product_addtowishlist_message))
-			echo JText::_($this->row->product_addtowishlist_message);
-		else
-			echo JText::_('ADD_TO_WISHLIST');
-	?></span></a>
-<?php
-}
-?>
+<?php if($add_to_wishlist) { ?>
+    <div class="uk-width-1-3 uk-margin-left uk-margin-right">
+        <a class="uk-button uk-button-gold font uk-border-pill uk-button-large uk-padding-remove-horizontal uk-width-1-1 <?php echo $css_button . ' ' . $css_button_wishlist; ?>" rel="nofollow" href="<?php echo hikashop_completeLink($classical_url); ?>" onclick="if(window.hikashop.addToWishlist) { return window.hikashop.addToWishlist(this); }" data-addToWishlist="<?php echo $this->row->product_id; ?>" data-addTo-div="hikashop_product_form" data-addTo-class="add_in_progress">
+            <span>
+                <?php
+                if(!empty($this->row->product_addtowishlist_message))
+                    echo JText::_($this->row->product_addtowishlist_message);
+                else
+                    echo JText::_('ADD_TO_WISHLIST');
+                ?>
+            </span>
+        </a>
+    </div>
+<?php } ?>
 <!-- EO WISHLIST BUTTON -->

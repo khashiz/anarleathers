@@ -190,7 +190,7 @@ defined('_JEXEC') or die('Restricted access');
 ?>
 <!-- EO ADD TO CART BUTTON -->
 <!-- CONTACT US BUTTON -->
-		<div id="hikashop_product_contact_main" class="hikashop_product_contact_main"><?php
+		<div id="hikashop_product_contact_main" class="hikashop_product_contact_main">rggrgrgrgrgtrgrtgr<?php
 	$contact = (int)$this->config->get('product_contact', 0);
 	if(hikashop_level(1) && ($contact == 2 || ($contact == 1 && !empty($this->element->product_contact)))) {
 		$css_button = $this->config->get('css_button', 'hikabtn');

@@ -204,7 +204,7 @@ if(empty($this->element->variants) || $this->params->get('characteristic_display
 
 		$variant_name = implode('_', $variant_name);
 		$this->variant_name = '_' . $variant_name;
-		$this->setLayout('show_block_img');
+		$this->setLayout('show_block_product_img');
 		echo $this->loadTemplate();
 
 		if(!empty($variant->product_name)) {
@@ -228,7 +228,7 @@ if(empty($this->element->variants) || $this->params->get('characteristic_display
 			$this->params->set('show_price', (int)$this->config->get('show_price'));
 		}
 		if ($this->params->get('show_price')) {
-			$this->setLayout('listing_price');
+			$this->setLayout('show_block_price');
 			echo $this->loadTemplate();
 		}
 	?></div>
@@ -333,12 +333,12 @@ if(empty($this->element->variants) || $this->params->get('characteristic_display
 <?php
 			if($this->productlayout != 'show_tabular') {
 ?>
-		<h4><?php echo JText::_('SPECIFICATIONS');?></h4>
-<?php
+
+                <?php
 			}
 ?>
-		<table class="hikashop_product_custom_info_<?php echo $variant_name; ?>">
-<?php
+
+        <?php
 
 			$this->fieldsClass->prefix = '';
 			foreach($this->fields as $fieldName => $oneExtraField) {
@@ -350,19 +350,16 @@ if(empty($this->element->variants) || $this->params->get('characteristic_display
 
 				if(!empty($variant->$fieldName) || (isset($variant->$fieldName) && $variant->$fieldName === '0')) {
 ?>
-			<tr class="hikashop_product_custom_<?php echo $oneExtraField->field_namekey; ?>_line">
-				<td class="key">
-					<span id="hikashop_product_custom_name_<?php echo $oneExtraField->field_id; ?>_<?php echo $variant_name; ?>" class="hikashop_product_custom_name"><?php echo $this->fieldsClass->getFieldName($oneExtraField); ?></span>
-				</td>
-				<td>
-					<span id="hikashop_product_custom_value_<?php echo $oneExtraField->field_id; ?>_<?php echo $variant_name; ?>" class="hikashop_product_custom_value"><?php echo $this->fieldsClass->show($oneExtraField,$variant->$fieldName); ?></span>
-				</td>
-			</tr>
+                    <?php if ($oneExtraField->field_namekey == 'constellation') { ?>
+			<div class="hikashop_product_custom_<?php echo $oneExtraField->field_namekey; ?>_line">
+                <div id="hikashop_product_custom_value_<?php echo $oneExtraField->field_id; ?>_<?php echo $variant_name; ?>" class="hikashop_product_custom_value"><?php echo $this->fieldsClass->show($oneExtraField,$variant->$fieldName); ?></div>
+			</div>
+                    <?php } ?>
 <?php
 				}
 			}
 ?>
-		</table>
+
 	</div>
 <?php
 		}

@@ -169,6 +169,9 @@ div{
   &.uk-drop{
     width: fit-content;
   }
+  &#moreDescription{
+    padding-top: 20px;
+  }
   &#loginModal{
     > div{
       backdrop-filter: blur(10px);
@@ -180,6 +183,23 @@ div{
             height: 2px;
           }
         }
+      }
+    }
+  }
+  &#hikashop_item_engraving_file{
+    label{
+      margin: 0 !important;
+      color: @lightbrown;
+    }
+    span{
+      &.hikashop_product_custom_item_value {
+        display: block;
+        background: transparent;
+        border: 1px dashed #aaa;
+        padding: 10px;
+        font-size: 0;
+        border-radius: 8px;
+        text-align: center;
       }
     }
   }
@@ -263,6 +283,55 @@ div{
     background: radial-gradient(closest-side , rgba(0, 0, 0,.15), transparent);
     .transform(translateX(-50%));
   }
+  &.thumbsWrapper{
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 10px;
+    > a{
+      &:first-child{
+        grid-column-start: 1;
+        grid-column-end:   3;
+      }
+    }
+  }
+  &.hikashop_product_characteristics{
+    font-size: 0;
+    padding-top: 10px;
+    .hikashop_characteristic_line_4{
+      .controls{
+        text-align: left;
+        label{
+          input{
+            display: inline-block;
+            height: 30px;
+            width: 30px;
+            overflow: hidden;
+            margin-top: -4px;
+            vertical-align: middle;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-repeat: no-repeat;
+            background-position: 50% 50%;
+            border: 2px solid transparent;
+            transition: .2s ease-in-out;
+            transition-property: background-color,border;
+            box-sizing: border-box;
+            cursor: pointer;
+            .border-radius(30px);
+            &:hover{
+              border-color: rgba(0, 0, 0, .4);;
+            }
+            &:checked{
+              border-color: #fff;
+            }
+            &#hikashop_product_characteristic_4_1{background-color: #000000;}
+            &#hikashop_product_characteristic_4_2{background-color: #3d2c20;}
+            &#hikashop_product_characteristic_4_3{background-color: #5a3f2c;}
+          }
+        }
+      }
+    }
+  }
 }
 a{
   &.hoverIcon{
@@ -270,6 +339,17 @@ a{
     &:hover{
       background-color: rgba(0, 0, 0, .1);
       .transition(all .3s ease-out);
+    }
+  }
+  &.productDescToggler{
+    color: @lightbrown;
+    svg{
+      .transition(all .3s ease-out);
+    }
+    &[aria-expanded="true"]{
+      svg{
+        .transform(rotate(180deg));
+      }
     }
   }
 }
@@ -369,6 +449,7 @@ img{image-rendering: optimizequality;image-rendering: -webkit-optimize-contrast;
 .uk-text-gold{color: @gold;}
 .uk-text-line-through{text-decoration: line-through;}
 .uk-background-transparent{background-color: transparent;}
+.uk-background-white{background-color: #fff;}
 .hoverPrimary{
   &:hover{
     color: @primary !important;
@@ -381,6 +462,14 @@ img{image-rendering: optimizequality;image-rendering: -webkit-optimize-contrast;
 }
 
 // UIKit Overrides
+.uk-lightbox{
+  .uk-lightbox-button{
+    &.uk-slidenav-previous,
+    &.uk-slidenav-next{
+      .transform(rotate(180deg));
+    }
+  }
+}
 .uk-checkbox,
 .uk-radio{
   &:checked,
@@ -439,6 +528,19 @@ img{image-rendering: optimizequality;image-rendering: -webkit-optimize-contrast;
     cursor: not-allowed;
   }
 }
+.uk-textarea{
+  background-color: #fff;
+  border: 2px solid @gold;
+  padding: 15px;
+  font-size: 14px;
+  &:focus{
+    border-color: @gold;
+  }
+  &[readonly]{
+    background-color: #f0f0f0;
+    cursor: not-allowed;
+  }
+}
 .uk-select{
   appearance: none;
   -webkit-appearance: none;
@@ -452,4 +554,59 @@ img{image-rendering: optimizequality;image-rendering: -webkit-optimize-contrast;
 }
 .uk-border-rounded-large{
   .border-radius(20px);
+}
+
+//Switch Toggle
+.switchToggle{
+  font-size: 0;
+  label{
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+    input{
+      opacity: 0;
+      width: 0;
+      height: 0;
+      &:checked{
+        + span{
+          background-color: @lightbrown;
+          &:before{
+            -webkit-transform: translateX(20px);
+            -ms-transform: translateX(20px);
+            transform: translateX(20px);
+          }
+        }
+      }
+      &:focus{
+        + span{
+          box-shadow: 0 0 1px @lightbrown;
+        }
+      }
+    }
+    span{
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #aaa;
+      -webkit-transition: .4s;
+      transition: .4s;
+      border-radius: 30px;
+      &:before{
+        position: absolute;
+        content: "";
+        height: 16px;
+        width: 16px;
+        left: 2px;
+        bottom: 2px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+        border-radius: 50%;
+      }
+    }
+  }
 }
