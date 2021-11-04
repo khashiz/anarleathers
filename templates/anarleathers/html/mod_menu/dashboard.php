@@ -30,7 +30,7 @@ if ($tagId = $params->get('tag_id', ''))
 // The menu class is deprecated. Use nav instead
 ?>
 <aside class="uk-width-1-1 uk-width-1-4@m">
-    <div>
+    <div data-uk-sticky="offset:70; bottom: true;">
         <div class="uk-card uk-card-default uk-card-bordered uk-border-rounded-large">
             <div class="uk-card-body uk-padding-small userMenu">
                 <span class="uk-card uk-card-default uk-card-bordered uk-display-inline-block uk-border-circle uk-padding-small uk-position-absolute uk-text-gold avatar">
@@ -39,7 +39,7 @@ if ($tagId = $params->get('tag_id', ''))
                 <div class="uk-text-center uk-margin-medium-top uk-margin-bottom uk-text-gold userName">
                     <span class="uk-display-block font"><?php echo $user->name; ?></span>
                     <?php if (!empty($userInfo->mobile)) { ?>
-                        <span class="uk-display-block font"><?php echo $userInfo->mobile; ?></span>
+                        <span class="uk-display-block font fnum"><?php echo $userInfo->mobile; ?></span>
                     <?php } ?>
                 </div>
                 <ul class="nav menu<?php echo $class_sfx; ?> mod-list"<?php echo $id; ?>>

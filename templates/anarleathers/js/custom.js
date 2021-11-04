@@ -24,6 +24,19 @@ jQuery(document).ready(function () {
     UIkit.util.on('#utilitiesDrop', 'hidden', function () {
         UIkit.scrollspy('#utilityIcons', {target: "> div"});
     });
+
+
+    // Navigation
+    jQuery('ul.mainMenuWrapper > li  a + ul > li > a').on('click', function () {
+        jQuery('ul.mainMenuWrapper > li').removeClass('expanded').addClass('collapsed');
+        jQuery(this).parents('.level-1').addClass('expanded').removeClass('collapsed');
+    });
+    UIkit.util.on('#mainMenu', 'shown', function () {
+        // UIkit.scrollspy('.mainMenuWrapper', {target: "> div"});
+    });
+    UIkit.util.on('#mainMenu', 'shown', function () {
+        // UIkit.modal('.mainMenuWrapper').toggle();
+    });
 });
 
 function shapeon(property) {
@@ -32,3 +45,33 @@ function shapeon(property) {
 function shapeoff() {
     jQuery('svg.homeMain').attr('class', ' homeMain uk-svg uk-height-1-1');
 }
+
+// Fullscreen Button
+let elem = document.documentElement;
+function openFullscreen() {
+    if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+    } else if (elem.webkitRequestFullscreen) { /* Safari */
+        elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) { /* IE11 */
+        elem.msRequestFullscreen();
+    }
+}
+function closeFullscreen() {
+    if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) { /* Safari */
+        document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) { /* IE11 */
+        document.msExitFullscreen();
+    }
+}
+
+let svg = document.getElementsByName("leatherTriangle");
+let gs = document.querySelectorAll("rect");
+
+gs.forEach(g => {
+    g.addEventListener("mouseenter", e => {
+        svg.appendChild(g);
+    });
+});
