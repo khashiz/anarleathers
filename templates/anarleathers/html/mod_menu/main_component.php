@@ -27,7 +27,7 @@ if ($item->anchor_rel)
 }
 
 $linktype = $item->title;
-
+/*
 if ($item->menu_image)
 {
 	if ($item->menu_image_css)
@@ -45,7 +45,7 @@ if ($item->menu_image)
 		$linktype .= '<span class="image-title">' . $item->title . '</span>';
 	}
 }
-
+*/
 if ($item->browserNav == 1)
 {
 	$attributes['target'] = '_blank';
@@ -56,5 +56,4 @@ elseif ($item->browserNav == 2)
 
 	$attributes['onclick'] = "window.open(this.href, 'targetWindow', '" . $options . "'); return false;";
 }
-
 echo JHtml::_('link', JFilterOutput::ampReplace(htmlspecialchars($item->flink, ENT_COMPAT, 'UTF-8', false)), $linktype, $attributes);

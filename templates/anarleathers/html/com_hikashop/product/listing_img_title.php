@@ -16,51 +16,78 @@ $haveLink = (int)$this->params->get('link_to_product_page', 1);
 if(!empty($this->row->extraData->top)) { echo implode("\r\n",$this->row->extraData->top); }
 
 ?>
+
 <div class="hikashop_listing_img_title" id="div_<?php echo $mainDivName.'_'.$this->row->product_id;  ?>">
     <div class="uk-margin-bottom listItemTitleSVG">
         <a href="<?php echo $link;?>" class="uk-display-inline-block">
             <img src="<?php echo JUri::base().'images/svg/titles/'.$this->row->title_shape.'.svg'; ?>" width="" height="80" alt="" data-uk-svg>
         </a>
     </div>
-<!-- IMAGE -->
-<?php if($this->config->get('thumbnail', 1)) { ?>
-	<div class="uk-position-relative listItemIMGContainer">
-		<div class="uk-position-relative">
-<?php if($haveLink) { ?>
-			<a href="<?php echo $link;?>" title="<?php echo $this->escape($this->row->product_name); ?>" class="uk-display-inline-block">
-<?php } ?>
-<?php
-	$img = $this->image->getThumbnail(
-		@$this->row->file_path,
-		array('width' => $this->image->main_thumbnail_x, 'height' => $this->image->main_thumbnail_y),
-		array('default' => true,'forcesize'=>$this->config->get('image_force_size',true),'scale'=>$this->config->get('image_scale_mode','inside'))
-	);
-	if($img->success) {
-		$html = '<img class="hikashop_product_listing_image" title="'.$this->escape(@$this->row->file_description).'" alt="'.$this->escape(@$this->row->file_name).'" src="'.$img->url.'"/>';
-		if($this->config->get('add_webp_images', 1) && function_exists('imagewebp') && !empty($img->webpurl)) {
-			$html = '
-			<picture>
-				<source srcset="'.$img->webpurl.'" type="image/webp">
-				<source srcset="'.$img->url.'" type="image/'.$img->ext.'">
-				'.$html.'
-			</picture>
-			';
-		}
-		echo $html;
-?>		<meta itemprop="image" content="<?php echo $img->url; ?>"/>
-<?php
-	}
-	if($this->params->get('display_badges', 1)) {
-		$this->classbadge->placeBadges($this->image, $this->row->badges, -10, 0);
-	}
-?>
-<?php if($haveLink) { ?>
-			</a>
-<?php } ?>
-		</div>
-	</div>
-<?php } ?>
-<!-- EO IMAGE -->
+    <?php if($this->row->thumbvideo) { ?>
+        <div>
+            <a href="<?php echo $link;?>" class="uk-display-block">
+                <div class="uk-cover-container">
+                    <canvas width="500" height="500"></canvas>
+                    <video src="https://www.w3schools.com/html/mov_bbb.mp4" autoplay loop muted playsinline uk-cover></video>
+                </div>
+            </a>
+        </div>
+    <?php } else { ?>
+        <!-- IMAGE -->
+        <?php if (empty($this->row->fading_images)) { ?>
+        <?php if($this->config->get('thumbnail', 1)) { ?>
+        <div class="uk-position-relative listItemIMGContainer">
+            <div class="uk-position-relative">
+                <?php if($haveLink) { ?>
+                <a href="<?php echo $link;?>" title="<?php echo $this->escape($this->row->product_name); ?>" class="uk-display-inline-block">
+                    <?php } ?>
+                    <?php
+                    $img = $this->image->getThumbnail(
+                        @$this->row->file_path,
+                        array('width' => $this->image->main_thumbnail_x, 'height' => $this->image->main_thumbnail_y),
+                        array('default' => true,'forcesize'=>$this->config->get('image_force_size',true),'scale'=>$this->config->get('image_scale_mode','inside'))
+                    );
+                    if($img->success) {
+                        $html = '<img class="hikashop_product_listing_image" title="'.$this->escape(@$this->row->file_description).'" alt="'.$this->escape(@$this->row->file_name).'" src="'.$img->url.'"/>';
+                        if($this->config->get('add_webp_images', 1) && function_exists('imagewebp') && !empty($img->webpurl)) {
+                            $html = '
+                <picture>
+                    <source srcset="'.$img->webpurl.'" type="image/webp">
+                    <source srcset="'.$img->url.'" type="image/'.$img->ext.'">
+                    '.$html.'
+                </picture>
+                ';
+                        }
+                        echo $html;
+                        ?>		<meta itemprop="image" content="<?php echo $img->url; ?>"/>
+                        <?php
+                    }
+                    if($this->params->get('display_badges', 1)) {
+                        $this->classbadge->placeBadges($this->image, $this->row->badges, -10, 0);
+                    }
+                    ?>
+                    <?php if($haveLink) { ?>
+                </a>
+            <?php } ?>
+            </div>
+        </div>
+        <?php } ?>
+        <?php } else { ?>
+        <style>
+            div.faderWrapper > a > div:nth-child(2){display: none}
+        </style>
+        <div class="uk-margin-auto faderWrapper" onmouseover="jQuery('.faderWrapper > a > div:nth-child(1)').fadeOut(0); jQuery('.faderWrapper > a > div:nth-child(2)').fadeIn(0);" onmouseleave="jQuery('.faderWrapper > a > div:nth-child(2)').fadeOut(0); jQuery('.faderWrapper > a > div:nth-child(1)').fadeIn(0);">
+            <a href="<?php echo $link;?>" class="uk-display-block">
+                <?php
+                $fieldClass = hikashop_get('class.field');
+                $field = $fieldClass->getField('fading_images', 'product');
+                echo $fieldClass->show($field,$this->row->fading_images);
+                ?>
+            </a>
+        </div>
+        <?php } ?>
+        <!-- EO IMAGE -->
+    <?php } ?>
 
 <!-- PRICE -->
 <?php
@@ -115,14 +142,9 @@ if(!empty($this->productFields)) {
 				continue;
 		}
 ?>
-	<dl class="hikashop_product_custom_<?php echo $oneExtraField->field_namekey;?>_line">
-		<dt class="hikashop_product_custom_name">
-			<?php echo $this->fieldsClass->getFieldName($oneExtraField);?>
-		</dt>
-		<dd class="hikashop_product_custom_value">
-			<?php echo $this->fieldsClass->show($oneExtraField,$this->row->$fieldName); ?>
-		</dd>
-	</dl>
+
+        <?php echo $this->fieldsClass->show($oneExtraField,$this->row->$fieldName); ?>
+
 <?php
 	}
 }

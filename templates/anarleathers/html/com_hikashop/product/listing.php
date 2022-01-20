@@ -154,51 +154,9 @@ if(!empty($title) && hikaInput::get()->getVar('hikashop_front_end_main', 0) && (
 
 $val = hikaInput::get()->getVar('hikashop_front_end_main',0);
 hikaInput::get()->set('hikashop_front_end_main',0);
+?>
 
-if(($this->params->get('show_image') && !empty($this->element->file_path)) || ($this->params->get('show_description', !$this->module) && !empty($this->element->category_description))) {
-?>
-		<div class="hikashop_category_description uk-margin-large-bottom">
-            <div class="uk-flex-center uk-grid-column-large uk-grid-row-collapse" data-uk-grid>
 <?php
-	if($this->params->get('show_image') && !empty($this->element->file_path)){
-		jimport('joomla.filesystem.file');
-		if(JFile::exists($this->image->getPath($this->element->file_path,false))){
-?>
-            <div class="uk-width-1-1 uk-width-auto uk-text-white">
-                <img src="<?php echo $this->image->getPath($this->element->file_path); ?>" class="hikashop_category_image" title="<?php echo $this->escape(@$this->element->file_description); ?>" alt="<?php echo $this->escape(@$this->element->file_name); ?>" class="uk-wiith-1-1" height="150" data-uk-svg/>
-            </div>
-            <div class="uk-width-1-1 uk-width-auto">
-                <div>
-                    <div class="uk-grid-small uk-flex-center uk-child-width-auto" data-uk-grid>
-                        <div>
-                            <div class="uk-height-1-1 uk-flex uk-flex-middle">
-                                <div class="catEngTitleWrapper">
-                                    <div><img src="<?php echo JUri::base().'images/sprite.svg#anarText' ?>" width="200" data-uk-svg></div>
-                                    <div><span class="uk-display-block uk-text-center uk-text-uppercase uk-text-primary fontEn catEngTitle"><?php echo $this->element->eng_title; ?></span></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="uk-visible@m">
-                            <img src="<?php echo JUri::base().'images/sprite.svg#anar' ?>" width="" height="150" alt="" data-uk-svg>
-                        </div>
-                    </div>
-                </div>
-            </div>
-<?php
-		}
-	}
-	if($this->params->get('show_description',!$this->module)&&!empty($this->element->category_description)){
-?>
-			<div class="hikashop_category_description_content"><?php
-				echo JHTML::_('content.prepare',$this->element->category_description);
-			?></div>
-<?php
-	}
-?>
-        </div>
-    </div>
-<?php
-}
 
 if(!empty($this->fields)) {
 	ob_start();
@@ -238,6 +196,107 @@ hikaInput::get()->set('hikashop_front_end_main',$val);
 
 $mainInfo = ob_get_clean();
 ob_start();
+
+if (!empty($this->element->ts_img_1)) { $slideList = explode('|', str_replace(' ', '', $this->element->ts_img_1)); ?>
+    <div class="uk-position-relative  uk-margin-large-bottom">
+        <div class="uk-position-relative uk-visible-toggle uk-light" data-uk-slideshow="animation: push; ratio:1920:600">
+
+            <div class="uk-slideshow-items">
+                <?php
+                $fieldClass = hikashop_get('class.field');
+                $field = $fieldClass->getField('ts_img_1', 'category');
+                echo $fieldClass->show($field,$this->element->ts_img_1);
+                ?>
+            </div>
+
+            <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" data-uk-slidenav-next data-uk-slideshow-item="previous"></a>
+            <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" data-uk-slidenav-previous data-uk-slideshow-item="next"></a>
+
+        </div>
+        <?php if(($this->params->get('show_image') && !empty($this->element->file_path)) || ($this->params->get('show_description', !$this->module) && !empty($this->element->category_description))) { ?>
+            <div class="hikashop_category_description covered uk-position-bottom-center">
+                <div class="uk-container">
+                    <div>
+                        <div class="uk-flex-center uk-grid-column-large uk-grid-row-collapse" data-uk-grid>
+                            <?php
+                            if($this->params->get('show_image') && !empty($this->element->file_path)){
+                                jimport('joomla.filesystem.file');
+                                if(JFile::exists($this->image->getPath($this->element->file_path,false))){
+                                    ?>
+                                    <div class="uk-width-1-1 uk-width-expand uk-text-white">
+                                        <img src="<?php echo $this->image->getPath($this->element->file_path); ?>" class="hikashop_category_image" title="<?php echo $this->escape(@$this->element->file_description); ?>" alt="<?php echo $this->escape(@$this->element->file_name); ?>" class="uk-wiith-1-1" height="150" data-uk-svg/>
+                                    </div>
+                                    <div class="uk-width-1-1 uk-width-auto">
+                                        <div>
+                                            <div class="uk-grid-small uk-flex-center uk-child-width-auto" data-uk-grid>
+                                                <div>
+                                                    <div class="uk-height-1-1 uk-flex uk-flex-middle">
+                                                        <div class="catEngTitleWrapper uk-text-white">
+                                                            <div><img src="<?php echo JUri::base().'images/sprite.svg#anarText' ?>" width="200" data-uk-svg></div>
+                                                            <div><span class="uk-display-block uk-text-center uk-text-uppercase uk-text-white fontEn catEngTitle"><?php echo $this->element->eng_title; ?></span></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="uk-visible@m uk-text-white">
+                                                    <img src="<?php echo JUri::base().'images/sprite.svg#anar' ?>" width="" height="150" alt="" data-uk-svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php } ?>
+                            <?php } ?>
+                            <?php if($this->params->get('show_description',!$this->module)&&!empty($this->element->category_description)) { ?>
+                                <div class="hikashop_category_description_content"><?php echo JHTML::_('content.prepare',$this->element->category_description); ?></div>
+                            <?php } ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
+    </div>
+
+<?php } else { ?>
+    <?php if(($this->params->get('show_image') && !empty($this->element->file_path)) || ($this->params->get('show_description', !$this->module) && !empty($this->element->category_description))) { ?>
+        <div class="hikashop_category_description uk-margin-large-top">
+            <div class="uk-flex-center uk-grid-column-large uk-grid-row-collapse" data-uk-grid>
+                <?php
+                if($this->params->get('show_image') && !empty($this->element->file_path)){
+                    jimport('joomla.filesystem.file');
+                    if(JFile::exists($this->image->getPath($this->element->file_path,false))){
+                        ?>
+                        <div class="uk-width-1-1 uk-width-auto uk-text-white">
+                            <img src="<?php echo $this->image->getPath($this->element->file_path); ?>" class="hikashop_category_image" title="<?php echo $this->escape(@$this->element->file_description); ?>" alt="<?php echo $this->escape(@$this->element->file_name); ?>" class="uk-wiith-1-1" height="150" data-uk-svg/>
+                        </div>
+                        <div class="uk-width-1-1 uk-width-auto">
+                            <div>
+                                <div class="uk-grid-small uk-flex-center uk-child-width-auto" data-uk-grid>
+                                    <div>
+                                        <div class="uk-height-1-1 uk-flex uk-flex-middle">
+                                            <div class="catEngTitleWrapper">
+                                                <div><img src="<?php echo JUri::base().'images/sprite.svg#anarText' ?>" width="200" data-uk-svg></div>
+                                                <div><span class="uk-display-block uk-text-center uk-text-uppercase uk-text-primary fontEn catEngTitle"><?php echo $this->element->eng_title; ?></span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="uk-visible@m">
+                                        <img src="<?php echo JUri::base().'images/sprite.svg#anar' ?>" width="" height="150" alt="" data-uk-svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php } ?>
+                <?php } ?>
+                <?php if($this->params->get('show_description',!$this->module)&&!empty($this->element->category_description)) { ?>
+                    <div class="hikashop_category_description_content"><?php echo JHTML::_('content.prepare',$this->element->category_description); ?></div>
+                <?php } ?>
+            </div>
+        </div>
+    <?php } ?>
+<?php } ?>
+
+
+
+<?php
 
 $display_filters = (int)$this->params->get('display_filters', -1);
 if($display_filters == -1) {

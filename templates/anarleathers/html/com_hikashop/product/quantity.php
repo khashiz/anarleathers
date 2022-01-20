@@ -123,7 +123,7 @@ $stock_class = ($stock != 0) ? "" : " hikashop_product_no_stock";
 
 <!-- ADD TO CART BUTTON -->
 <?php if($add_to_cart) { ?>
-    <div class="uk-width-expand">
+    <div class="uk-width-expand uk-margin-left">
         <a class="uk-button uk-button-gold uk-button-outline uk-height-1-1 uk-box-shadow-small uk-border-pill uk-width-1-1 uk-button-large uk-padding-remove-horizontal font" rel="nofollow" href="<?php echo hikashop_completeLink($classical_url); ?>" onclick="if(window.hikashop.addToCart) { return window.hikashop.addToCart(this); }" data-addToCart="<?php echo $this->row->product_id; ?>" data-addTo-div="hikashop_product_form" data-addTo-class="add_in_progress">
             <span>
                 <?php
@@ -143,7 +143,7 @@ $stock_class = ($stock != 0) ? "" : " hikashop_product_no_stock";
 
 <!-- WISHLIST BUTTON -->
 <?php if($add_to_wishlist) { ?>
-    <div class="uk-width-1-3 uk-margin-left uk-margin-right">
+    <div class="uk-width-1-3 uk-margin-left">
         <a class="uk-button uk-button-gold font uk-border-pill uk-button-large uk-padding-remove-horizontal uk-width-1-1 <?php echo $css_button . ' ' . $css_button_wishlist; ?>" rel="nofollow" href="<?php echo hikashop_completeLink($classical_url); ?>" onclick="if(window.hikashop.addToWishlist) { return window.hikashop.addToWishlist(this); }" data-addToWishlist="<?php echo $this->row->product_id; ?>" data-addTo-div="hikashop_product_form" data-addTo-class="add_in_progress">
             <span>
                 <?php

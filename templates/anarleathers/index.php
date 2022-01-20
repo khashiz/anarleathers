@@ -52,15 +52,17 @@ $total = count($socialsicons['icon']);
 <body class="<?php echo $pageclass.' '.$view.' '.$layout.' '.$task; ?>">
 <div data-uk-scrollspy="target: > *; delay: 200;">
     <!--Fullscreen Icon-->
-    <div class="uk-position-fixed uk-position-top-left uk-text-zero toggleScreen" data-uk-scrollspy-class="uk-animation-slide-left">
+    <div class="uk-position-fixed uk-position-top-left uk-text-zero toggleScreen frontZIndex " data-uk-scrollspy-class="uk-animation-slide-left">
         <div class="uk-padding-small">
             <a href="#" onclick="openFullscreen();"  data-uk-toggle="target: .toggleScreen" class="uk-padding-small uk-display-inline-block uk-text-primary uk-border-rounded hoverIcon toggleScreenLink"><img src="<?php echo JUri::base().'images/sprite.svg#expand' ?>" alt="" width="24" height="24" data-uk-svg></a>
         </div>
+        <jdoc:include type="modules" name="lang" style="none" />
     </div>
-    <div class="uk-position-fixed uk-position-top-left uk-text-zero toggleScreen" data-uk-scrollspy-class="uk-animation-slide-left" hidden>
+    <div class="uk-position-fixed uk-position-top-left uk-text-zero toggleScreen frontZIndex " data-uk-scrollspy-class="uk-animation-slide-left" hidden>
         <div class="uk-padding-small">
             <a href="#" onclick="closeFullscreen();"  data-uk-toggle="target: .toggleScreen" class="uk-padding-small uk-display-inline-block uk-text-primary uk-border-rounded hoverIcon toggleScreenLink"><img src="<?php echo JUri::base().'images/sprite.svg#collapse' ?>" alt="" width="24" height="24" data-uk-svg></a>
         </div>
+        <jdoc:include type="modules" name="lang" style="none" />
     </div>
     <!--Utility Icons-->
     <div class="uk-position-fixed uk-position-top-right uk-text-zero frontZIndex" data-uk-scrollspy-class="uk-animation-slide-right">
@@ -161,18 +163,22 @@ $total = count($socialsicons['icon']);
                         <img src="<?php echo JUri::base().'images/sprite.svg#homeMain'; ?>" class="uk-height-1-1 homeMain logo" data-uk-svg>
                     </div>
                     <div class="uk-position-absolute uk-position-top uk-width-1-1 uk-text-center leather" data-uk-scrollspy-class="uk-animation-slide-top">
-                        <a href="<?php echo JUri::base().'#leather'; ?>" class="uk-padding uk-display-inline-block uk-text-muted hoverPrimary" onmouseover="shapeon('leather')" onmouseleave="shapeoff()"><img src="<?php echo JUri::base().'images/sprite.svg#homeNavLeather' ?>" data-uk-svg></a>
+                        <a href="<?php echo JUri::base().'#leather'; ?>" class="uk-padding uk-display-inline-block uk-text-muted hoverPrimary" onmouseover="shapeon('leather','top')" onmouseleave="shapeoff('top')"><img src="<?php echo JUri::base().'images/sprite.svg#homeNavLeather' ?>" data-uk-svg></a>
                     </div>
                     <div class="uk-position-absolute uk-position-right uk-height-1-1 uk-flex uk-flex-middle" data-uk-scrollspy-class="uk-animation-slide-right">
-                        <a href="<?php echo JUri::base().'#main/decor'; ?>" class="uk-padding uk-display-inline-block uk-text-muted hoverPrimary" onmouseover="shapeon('decor')" onmouseleave="shapeoff()"><img src="<?php echo JUri::base().'images/sprite.svg#homeNavDecor' ?>" data-uk-svg></a>
+                        <a href="<?php echo JUri::base().'#main/decor'; ?>" class="uk-padding uk-display-inline-block uk-text-muted hoverPrimary" onmouseover="shapeon('decor','right')" onmouseleave="shapeoff('right')"><img src="<?php echo JUri::base().'images/sprite.svg#homeNavDecor' ?>" data-uk-svg></a>
                     </div>
                     <div class="uk-position-absolute uk-position-bottom uk-width-1-1 uk-text-center style" data-uk-scrollspy-class="uk-animation-slide-bottom">
-                        <a href="<?php echo JUri::base().'#style'; ?>" class="uk-padding uk-display-inline-block uk-text-muted hoverPrimary" onmouseover="shapeon('style')" onmouseleave="shapeoff()"><img src="<?php echo JUri::base().'images/sprite.svg#homeNavStyle' ?>" data-uk-svg></a>
+                        <a href="<?php echo JUri::base().'#style'; ?>" class="uk-padding uk-display-inline-block uk-text-muted hoverPrimary" onmouseover="shapeon('style','bottom')" onmouseleave="shapeoff('bottom')"><img src="<?php echo JUri::base().'images/sprite.svg#homeNavStyle' ?>" data-uk-svg></a>
                     </div>
                     <div class="uk-position-absolute uk-position-left uk-height-1-1 uk-flex uk-flex-middle" data-uk-scrollspy-class="uk-animation-slide-left">
-                        <a href="<?php echo JUri::base().'#main/jewelry'; ?>" class="uk-padding uk-display-inline-block uk-text-muted hoverPrimary" onmouseover="shapeon('jewelry')" onmouseleave="shapeoff()"><img src="<?php echo JUri::base().'images/sprite.svg#homeNavJewelry' ?>" data-uk-svg></a>
+                        <a href="<?php echo JUri::base().'#main/jewelry'; ?>" class="uk-padding uk-display-inline-block uk-text-muted hoverPrimary" onmouseover="shapeon('jewelry','left')" onmouseleave="shapeoff('left')"><img src="<?php echo JUri::base().'images/sprite.svg#homeNavJewelry' ?>" data-uk-svg></a>
                     </div>
                 </div>
+                <div class="hoverCover hor top <?php echo 'style-'.rand(1, 5); ?>"></div>
+                <div class="hoverCover hor bottom <?php echo 'style-'.rand(1, 5); ?>"></div>
+                <div class="hoverCover ver left <?php echo 'style-'.rand(1, 5); ?>"></div>
+                <div class="hoverCover ver right <?php echo 'style-'.rand(1, 5); ?>"></div>
             </div>
             <!-- Decor -->
             <div class="slide decor" data-anchor="decor">
@@ -223,9 +229,9 @@ $total = count($socialsicons['icon']);
     <jdoc:include type="message" />
     <jdoc:include type="component" />
 <?php } else { ?>
-    <div class="mainWrapper uk-padding-large uk-padding-remove-horizontal uk-flex uk-flex-middle" data-uk-height-viewport="expand: true">
-        <div class="uk-padding uk-padding-remove-vertical uk-flex-1">
-            <div class="uk-container <?php if (strpos($pageclass, 'xsmall')) {echo 'uk-container-xsmall';} elseif (strpos($pageclass, 'expand')) {echo 'uk-container-expand';} ?>">
+    <div class="mainWrapper uk-flex uk-flex-middle <?php if ($layout != 'listing'&& !strpos($pageclass, 'noPadding')) echo 'uk-padding-large uk-padding-remove-horizontal'; ?>" data-uk-height-viewport="expand: true">
+        <div class="uk-padding___ uk-padding-remove-vertical___ uk-flex-1">
+            <div class="uk-container__ <?php if (strpos($pageclass, 'xsmall')) {echo 'uk-container uk-container-xsmall';} elseif (strpos($pageclass, 'auth')) {echo 'uk-container';} elseif (strpos($pageclass, 'expand')) {echo 'uk-container-expand';} ?>">
                 <div>
                     <div class="uk-grid-medium" data-uk-grid>
                         <jdoc:include type="modules" name="sidestart" style="xhtml" />

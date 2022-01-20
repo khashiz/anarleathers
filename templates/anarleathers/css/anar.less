@@ -34,6 +34,17 @@
   -moz-box-shadow: @shadow;
   -webkit-box-shadow: @shadow;
 }
+html{
+  &.uk-offcanvas-page{
+    direction: ltr;
+    body{
+      overflow: scroll;
+      .mainWrapper{
+        direction: rtl;
+      }
+    }
+  }
+}
 body{
   &.boxed{
     div{
@@ -45,8 +56,37 @@ body{
   &:not(.plainBG){
     background: url("@{images}/bg-main.jpg") center top repeat;
   }
+  &.textPages{
+    background: url("@{images}/bg-about.jpg") center top repeat;
+  }
 }
 div{
+  &#hikashop_product_right_part{
+    > div{
+      padding-right: 70px;
+    }
+  }
+  &.langSwitcher{
+    ul{
+      li{
+        position: relative;
+        a{
+          font-size: 12px;
+          color: @primary;
+          writing-mode: tb-rl;
+          text-decoration: none;
+          .f500;
+          .font;
+          .transform(rotate(180deg));
+        }
+        &:not(:first-child){
+          padding-top: 10px;
+          border-top: 1px solid #ccc;
+          margin-top: 10px;
+        }
+      }
+    }
+  }
   &.hmWrapper{
     span{
       &.line{
@@ -92,12 +132,41 @@ div{
       .transition(color .3s ease-out);
     }
   }
+  &.hoverCover{
+    position: absolute;
+    background-color: red;
+    display: none;
+    &.hor{
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 50%;
+    }
+    &.ver{
+      top: 0;
+      bottom: 0;
+      height: 100%;
+      width: 50%;
+    }
+    &.top{
+      top: 0;
+    }
+    &.bottom{
+      bottom: 0;
+    }
+    &.left{
+      left: 0;
+    }
+    &.right{
+      right: 0;
+    }
+  }
   &.sectionWrapper{
     &.leather,
     &.decor,
     &.style,
     &.jewelry{
-      background: url("@{images}/bg-section.jpg") center no-repeat;
+      background: url("@{images}/bg-about.jpg") center no-repeat;
       background-size: cover;
     }
     &.leather{
@@ -252,6 +321,7 @@ div{
       .transition(box-shadow .3s ease-out);
       .listItemIMGContainer{
         &:before{
+          display: none;
           content: '';
           position: absolute;
           left: 40px;
@@ -407,6 +477,36 @@ div{
       }
     }
   }
+  &.hikashop_category_description{
+    &.covered{
+      width: 100%;
+      bottom: -60px;
+    }
+  }
+  &.hikashop_category_filter{
+    border-top: 1px solid @lightbrown;
+    border-bottom: 1px solid @lightbrown;
+    .transition(all .3s ease-out);
+    a{
+      &.filterTitle{
+        color: #333;
+        text-decoration: none;
+        .transition(color .3s ease-out);
+        &:hover{
+          text-decoration: none;
+          color: @lightbrown;
+        }
+      }
+    }
+    *{
+      &:before{
+        border-color: @lightbrown !important;
+      }
+    }
+    &.uk-active{
+      background-color: #fff;
+    }
+  }
   &.hikashop_product_characteristics{
     font-size: 0;
     padding-top: 10px;
@@ -492,6 +592,12 @@ svg{
     }
     > g{
       fill: @primary;
+    }
+    g{
+      &#beauty{
+        transform: scale(.7) translateY(-130px);
+        transform-origin: bottom;
+      }
     }
     &.leather{
       #triangleSmall{
@@ -601,10 +707,12 @@ ul{
         + ul{
           display: flex;
           flex-direction: row-reverse;
+          justify-content: center;
           opacity: 0;
           list-style: none;
           padding: 0;
           margin: 0;
+          width: 100%;
           .transition(all .3s ease-out);
           .transform(translateY(-20px));
           > li{
@@ -624,27 +732,69 @@ ul{
                 left: 0;
                 right: 0;
                 width: 100%;
+                height: 100%;
                 > li{
                   a{
                     display: block;
                     font-size: 14px;
                     color: #fff;
                     text-decoration: none;
-                    padding: 5px;
-                    text-align: center;
+                    width: 50%;
+                    text-align: left;
+                    padding: 5px 0 5px 70px;
+                    box-sizing: border-box;
+                    position: relative;
                     .font;
                     .transition(all .3s ease-out);
+                    &:before{
+                      content: '';
+                      position: absolute;
+                      height: 1px;
+                      width: 50px;
+                      left: 0;
+                      bottom: 50%;
+                      background-color: transparent;
+                      .transition(all .2s ease-out);
+                      .transform(scaleX(0));
+                      transform-origin: left;
+                      -webkit-transform-origin: left;
+                      -moz-transform-origin: left;
+                      -o-transform-origin: left;
+                    }
                     &:hover{
                       color: @gold;
+                      &:before{
+                        background-color: @gold;
+                        .transform(scaleX(100%));
+                      }
                     }
                   }
+                  &.current{
+                    > a{
+                      color: @gold;
+                      &:before{
+                        background-color: @gold;
+                        .transform(scaleX(100%));
+                      }
+                    }
+                  }
+                }
+                &:before{
+                  content: '';
+                  position: absolute;
+                  background: red;
+                  left: 0;
+                  top: 0;
+                  height: 0;
+                  width: 50%;
+                  .transition(all .3s ease-out);
                 }
                 &:after{
                   content: '';
                   position: absolute;
                   top: 0;
-                  left: 15px;
-                  right: 15px;
+                  left: 0;
+                  right: 0;
                   height: 1px;
                   background-color: @gold;
                 }
@@ -669,16 +819,35 @@ ul{
                 }
               }
             }
+            &.item-124{
+              > ul{
+                &:before{
+                  background-color: green;
+                  background-position: center center;
+                  background-repeat: no-repeat;
+                  background-size: cover;
+                }
+              }
+            }
           }
         }
       }
       &.expanded{
         height: 55vh;
-        padding: 30px;
+        padding: 30px 0;
+        > ul{
+          > li{
+            > ul{
+              &:before{
+                height: 100%;
+              }
+            }
+          }
+        }
       }
       &.collapsed{
         height: 15vh;
-        padding: 5px 30px;
+        padding: 5px 0;
       }
       &.expanded,
       &:hover{
@@ -695,6 +864,7 @@ ul{
 }
 
 // Utilities
+.cursorPointer{cursor: pointer;}
 ::selection{background-color: @primary}
 img{image-rendering: optimizequality;image-rendering: -webkit-optimize-contrast;}
 .f500{font-variation-settings: "wght" 500;}
@@ -728,7 +898,45 @@ img{image-rendering: optimizequality;image-rendering: -webkit-optimize-contrast;
   }
 }
 
+input{
+  + .filterCheckboxItem{
+    cursor: pointer;
+    border: 1px solid #ddd;
+    color: #333;
+    .transition(all .3s ease-out);
+    &:hover{
+      border-color: #666;
+    }
+  }
+  &[checked="checked"]{
+    + .filterCheckboxItem{
+      border-color: @lightbrown;
+      color: @lightbrown;
+      background-color: fade(@lightbrown, 15%);
+      .box-shadow(0 0 0 1px @lightbrown);
+    }
+  }
+}
+
 // UIKit Overrides
+.uk-modal{
+  z-index: 9999;
+  .uk-modal-close-full{
+    background-color: @gold;
+    color: #fff;
+  }
+}
+.uk-offcanvas{
+  &.filtersOffcanvas{
+    &.uk-open{
+      z-index: 9999;
+      background-color: rgba(0, 0, 0, .7);
+    }
+  }
+  .uk-offcanvas-bar{
+    background-color: #fff;
+  }
+}
 .uk-lightbox{
   .uk-lightbox-button{
     &.uk-slidenav-previous,

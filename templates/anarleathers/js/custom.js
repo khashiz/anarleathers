@@ -34,16 +34,18 @@ jQuery(document).ready(function () {
     UIkit.util.on('#mainMenu', 'shown', function () {
         // UIkit.scrollspy('.mainMenuWrapper', {target: "> div"});
     });
-    UIkit.util.on('#mainMenu', 'shown', function () {
-        // UIkit.modal('.mainMenuWrapper').toggle();
+    UIkit.util.on('#mainMenu', 'hidden', function () {
+        jQuery('ul.mainMenuWrapper > li').removeClass('expanded').addClass('collapsed');
     });
 });
 
-function shapeon(property) {
+function shapeon(property, side) {
     jQuery('svg.homeMain').addClass(property);
+    jQuery('.'+side).fadeIn();
 }
-function shapeoff() {
+function shapeoff(side) {
     jQuery('svg.homeMain').attr('class', ' homeMain uk-svg uk-height-1-1');
+    jQuery('.'+side).fadeOut();
 }
 
 // Fullscreen Button
