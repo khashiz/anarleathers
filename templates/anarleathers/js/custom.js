@@ -35,9 +35,17 @@ jQuery(document).ready(function () {
         // UIkit.scrollspy('.mainMenuWrapper', {target: "> div"});
     });
     UIkit.util.on('#mainMenu', 'hidden', function () {
-        jQuery('ul.mainMenuWrapper > li').removeClass('expanded').addClass('collapsed');
+        // jQuery('ul.mainMenuWrapper > li').removeClass('expanded').addClass('collapsed');
+    });
+
+    jQuery('#mainMenuToggler').click(function(){
+        jQuery(this).toggleClass('open');
     });
 });
+
+function toggleMainMenu() {
+    document.getElementById("utilitiesDropToggle").click();
+}
 
 function shapeon(property, side) {
     jQuery('svg.homeMain').addClass(property);

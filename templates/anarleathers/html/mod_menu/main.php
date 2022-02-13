@@ -18,9 +18,8 @@ if ($tagId = $params->get('tag_id', ''))
 
 // The menu class is deprecated. Use nav instead
 ?>
-<div id="mainMenu" class="uk-modal-full" uk-modal>
+<div id="mainMenu" class="uk-modal-full" data-uk-modal="esc-close:false">
     <div class="uk-modal-dialog">
-        <button class="uk-modal-close-full uk-close-large" type="button" data-uk-close></button>
         <div data-uk-height-viewport>
             <ul class="nav mainMenuWrapper menu<?php echo $class_sfx; ?> mod-list"<?php echo $id; ?>>
                 <?php foreach ($list as $i => &$item)

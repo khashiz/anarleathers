@@ -44,6 +44,27 @@ html{
       }
     }
   }
+  &.uk-modal-page{
+    .utilityIcons{
+      .icon{
+        color: @gold;
+      }
+      .hoverIcon{
+        &:hover{
+          background-color: rgba(255, 255, 255, .1);
+        }
+      }
+      #mainMenuToggler{
+        span{
+          background-color: @gold;
+        }
+      }
+    }
+    .uk-tooltip{
+      background-color: rgba(255, 255, 255, .1);
+      z-index: 9999;
+    }
+  }
 }
 body{
   &.boxed{
@@ -182,8 +203,11 @@ div{
         bottom: 160px;
       }
       .triangleWrapper{
-        max-width: 600px;
-        .transform(translateY(-25px));
+        height: 100vh;
+        box-sizing: border-box;
+        padding: 150px 0 180px;
+        //max-width: 600px;
+        //.transform(translateY(-25px));
         svg{
           overflow: visible;
           > g{
@@ -545,8 +569,16 @@ div{
       }
     }
   }
-  &.frontZIndex{
+  &.utilityIcons{
     z-index: 9999;
+    a{
+      &.icon{
+        color: @primary;
+      }
+    }
+  }
+  &.frontZIndex{
+    z-index: 9997;
   }
   &#mainMenu{
     > .uk-modal-dialog{
@@ -920,11 +952,7 @@ input{
 
 // UIKit Overrides
 .uk-modal{
-  z-index: 9999;
-  .uk-modal-close-full{
-    background-color: @gold;
-    color: #fff;
-  }
+  z-index: 9998;
 }
 .uk-offcanvas{
   &.filtersOffcanvas{
@@ -1099,6 +1127,63 @@ input{
   form{
     &.invoiceForm{
       padding: 70px;
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+#mainMenuToggler {
+  width: 32px;
+  height: 32px;
+  position: relative;
+  cursor: pointer;
+  .transition(all .3s ease-in-out);
+  .transform(rotate(0deg));
+  span{
+    display: block;
+    position: absolute;
+    height: 3px;
+    width: 100%;
+    background: @primary;
+    border-radius: 9px;
+    opacity: 1;
+    left: 0;
+    .border-radius(4px);
+    .transform(rotate(0deg));
+    .transition(all .3s ease-in-out);
+    &:nth-child(1){
+      top: 4px;
+    }
+    &:nth-child(2){
+      top: 50%;
+      margin-top: -1px;
+    }
+    &:nth-child(3){
+      top: 26px;
+    }
+  }
+  &.open{
+    span{
+      &:nth-child(1){
+        top: 15px;
+        .transform(rotate(45deg));
+      }
+      &:nth-child(2){
+        top: 16px;
+        .transform(rotate(-45deg));
+      }
+      &:nth-child(3){
+        top: 18px;
+        width: 0;
+        left: 50%;
+      }
     }
   }
 }
