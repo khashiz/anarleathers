@@ -48,9 +48,12 @@ $total = count($socialsicons['icon']);
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
     <meta name="theme-color" content="<?php echo $params->get('presetcolor'); ?>">
     <jdoc:include type="head" />
+    <!--BEGIN RAYCHAT CODE-->
+    <script type="text/javascript">!function(){function t(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,localStorage.getItem("rayToken")?t.src="https://app.raychat.io/scripts/js/"+o+"?rid="+localStorage.getItem("rayToken")+"&href="+window.location.href:t.src="https://app.raychat.io/scripts/js/"+o+"?href="+window.location.href;var e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(t,e)}var e=document,a=window,o="a3b17f72-b3b4-4815-9691-d6a9648b7772";"complete"==e.readyState?t():a.attachEvent?a.attachEvent("onload",t):a.addEventListener("load",t,!1)}();</script>
+    <!--END RAYCHAT CODE-->
 </head>
 <body class="<?php echo $pageclass.' '.$view.' '.$layout.' '.$task; ?>">
-
+<jdoc:include type="modules" name="search" style="none" />
 <div data-uk-scrollspy="target: > *; delay: 200;">
     <!--Fullscreen Icon-->
     <div class="uk-position-fixed uk-position-top-left uk-text-zero toggleScreen frontZIndex" data-uk-scrollspy-class="uk-animation-slide-left">
@@ -66,33 +69,34 @@ $total = count($socialsicons['icon']);
         <jdoc:include type="modules" name="lang" style="none" />
     </div>
     <!--Utility Icons-->
-    <div class="uk-position-fixed uk-position-top-right uk-text-zero utilityIcons" data-uk-scrollspy-class="uk-animation-slide-right" onmouseleave="UIkit.drop('#utilitiesDrop').hide();">
-        <div class="uk-padding-small">
-            <a href="<?php echo JUri::base().'#main/intro'; ?>" class="uk-padding-small uk-display-inline-block uk-border-rounded hoverIcon icon" id="utilitiesDropToggle" onmouseenter="toggleMainMenu()"><img src="<?php echo JUri::base().'images/sprite.svg#eye' ?>" alt="" width="32" height="32" data-uk-svg></a>
+    <div class="uk-position-fixed uk-position-top-right uk-text-zero utilityIcons" data-uk-scrollspy-class="uk-animation-slide-right">
+        <div class="uk-padding-small uk-flex">
+            <a href="<?php echo JUri::base().'#main/intro'; ?>" class="uk-padding-small uk-display-inline-block uk-border-rounded hoverIcon icon" id="utilitiesDropToggle" onmouseenter="toggleMainMenu()"><img src="<?php echo JUri::base().'images/sprite.svg#eye' ?>" alt="" width="36" height="36" data-uk-svg></a>
             <div data-uk-drop="pos: left-center; offset: 0; mode: click;" id="utilitiesDrop">
                 <div class="uk-padding-small">
                     <div id="utilityIcons" class="uk-child-width-auto uk-flex-nowrap uk-grid-collapse" data-uk-grid data-uk-scrollspy="cls: uk-animation-slide-left; target: > div; repeat: true; delay: 100; mode: hover">
                         <div>
-                            <a href="#mainMenu" data-uk-toggle class="uk-padding-small uk-display-inline-block uk-border-rounded hoverIcon icon" title="<?php echo JText::sprintf('NAV_MENU') ?>" data-uk-tooltip="cls: uk-active font; pos: bottom; offset: 15;">
-                                <div id="mainMenuToggler">
+                            <a href="#mainMenu" data-uk-toggle id="mainMenuToggler" class="uk-padding-small uk-display-inline-block uk-border-rounded hoverIcon icon" title="<?php echo JText::sprintf('NAV_MENU') ?>" data-uk-tooltip="cls: uk-active font; pos: bottom; offset: 15;">
+                                <div>
                                     <span></span>
                                     <span></span>
                                     <span></span>
                                 </div>
                             </a>
                         </div>
-                        <div><a href="<?php echo JRoute::_("index.php?Itemid=132"); ?>" class="uk-padding-small uk-display-inline-block uk-border-rounded hoverIcon icon" title="<?php echo JText::sprintf('NAV_CART') ?>" data-uk-tooltip="cls: uk-active font; pos: bottom; offset: 15;"><img src="<?php echo JUri::base().'images/sprite.svg#cart' ?>" alt="" width="32" height="32" class="uk-preserve-width" data-uk-svg></a></div>
-                        <div><a href="<?php echo JRoute::_("index.php?Itemid=131"); ?>" class="uk-padding-small uk-display-inline-block uk-border-rounded hoverIcon icon" title="<?php echo JText::sprintf('NAV_WISHLIST') ?>" data-uk-tooltip="cls: uk-active font; pos: bottom; offset: 15;"><img src="<?php echo JUri::base().'images/sprite.svg#wishlist' ?>" alt="" width="32" height="32" class="uk-preserve-width" data-uk-svg></a></div>
+                        <div><a href="<?php echo JRoute::_("index.php?Itemid=132"); ?>" class="uk-padding-small uk-display-inline-block uk-border-rounded hoverIcon icon" title="<?php echo JText::sprintf('NAV_CART') ?>" data-uk-tooltip="cls: uk-active font; pos: bottom; offset: 15;"><img src="<?php echo JUri::base().'images/sprite.svg#cart' ?>" alt="" width="22" height="22" class="uk-preserve-width" data-uk-svg></a></div>
+                        <div><a href="<?php echo JRoute::_("index.php?Itemid=131"); ?>" class="uk-padding-small uk-display-inline-block uk-border-rounded hoverIcon icon" title="<?php echo JText::sprintf('NAV_WISHLIST') ?>" data-uk-tooltip="cls: uk-active font; pos: bottom; offset: 15;"><img src="<?php echo JUri::base().'images/sprite.svg#wishlist' ?>" alt="" width="22" height="22" class="uk-preserve-width" data-uk-svg></a></div>
                         <div>
                             <?php if ($user->guest) { ?>
-                                <a href="#loginModal" data-uk-toggle class="uk-padding-small uk-display-inline-block uk-border-rounded hoverIcon icon" title="<?php echo JText::sprintf('NAV_LOGIN'); ?>" data-uk-tooltip="cls: uk-active font; pos: bottom; offset: 15;"><img src="<?php echo JUri::base().'images/sprite.svg#user' ?>" alt="" width="32" height="32" class="uk-preserve-width" data-uk-svg></a>
+                                <a href="#loginModal" data-uk-toggle class="uk-padding-small uk-display-inline-block uk-border-rounded hoverIcon icon" title="<?php echo JText::sprintf('NAV_LOGIN'); ?>" data-uk-tooltip="cls: uk-active font; pos: bottom; offset: 15;"><img src="<?php echo JUri::base().'images/sprite.svg#user' ?>" alt="" width="22" height="22" class="uk-preserve-width" data-uk-svg></a>
                             <?php } else { ?>
-                                <a href="#" class="uk-padding-small uk-display-inline-block uk-border-rounded hoverIcon" title="<?php echo JText::sprintf('NAV_USER_ACCOUNT', $user->name); ?>"><img src="<?php echo JUri::base().'images/sprite.svg#user' ?>" alt="" width="32" height="32" class="uk-preserve-width" data-uk-svg></a>
+                                <a href="#" class="uk-padding-small uk-display-inline-block uk-border-rounded hoverIcon icon" title="<?php echo JText::sprintf('NAV_USER_ACCOUNT', $user->name); ?>"><img src="<?php echo JUri::base().'images/sprite.svg#user' ?>" alt="" width="22" height="22" class="uk-preserve-width" data-uk-svg></a>
                                 <div class="userMenuDrop" data-uk-drop="offset: 20;">
                                     <div class="uk-card uk-card-body uk-card-bordered uk-border-rounded-large uk-card-default uk-padding-small"><jdoc:include type="modules" name="usermenu" style="xhtml"/></div>
                                 </div>
                             <?php } ?>
                         </div>
+                        <div><a href="#searchWrapper" data-uk-toggle="animation: uk-animation-fade" class="uk-padding-small uk-display-inline-block uk-border-rounded hoverIcon icon" title="<?php echo JText::sprintf('NAV_SEARCH') ?>" data-uk-tooltip="cls: uk-active font; pos: bottom; offset: 15;"><img src="<?php echo JUri::base().'images/sprite.svg#search' ?>" alt="" width="22" height="22" class="uk-preserve-width" data-uk-svg></a></div>
                     </div>
                 </div>
             </div>
@@ -123,16 +127,16 @@ $total = count($socialsicons['icon']);
             <div class="uk-height-1-1 uk-position-relative sectionWrapper anchorsWrapper leather">
                 <div class="shadow"></div>
                 <div class="uk-position-absolute whiteShade"></div>
-                <div class="uk-position-absolute uk-position-top uk-width-1-1 uk-text-center leather" data-uk-scrollspy-class="uk-animation-slide-top">
+                <div class="uk-position-absolute uk-position-z-index uk-position-top uk-width-1-1 uk-text-center leather" data-uk-scrollspy-class="uk-animation-slide-top">
                     <a href="#" class="uk-padding-small uk-display-inline-block uk-text-muted hoverPrimary"><img src="<?php echo JUri::base().'images/sprite.svg#leather-top' ?>" data-uk-svg></a>
                 </div>
-                <div class="uk-position-absolute uk-position-right uk-height-1-1 uk-flex uk-flex-middle" data-uk-scrollspy-class="uk-animation-slide-right">
+                <div class="uk-position-absolute uk-position-z-index uk-position-right uk-height-1-1 uk-flex uk-flex-middle" data-uk-scrollspy-class="uk-animation-slide-right">
                     <a href="#" class="uk-padding-small uk-display-inline-block uk-text-muted hoverPrimary"><img src="<?php echo JUri::base().'images/sprite.svg#leather-right' ?>" data-uk-svg></a>
                 </div>
-                <div class="uk-position-absolute uk-position-bottom uk-width-1-1 uk-text-center style" data-uk-scrollspy-class="uk-animation-slide-bottom">
+                <div class="uk-position-absolute uk-position-z-index uk-position-bottom uk-width-1-1 uk-text-center style" data-uk-scrollspy-class="uk-animation-slide-bottom">
                     <a href="<?php echo JUri::base().'#main/intro'; ?>" class="uk-padding-small uk-display-inline-block uk-text-muted hoverPrimary"><img src="<?php echo JUri::base().'images/sprite.svg#leather-bottom' ?>" data-uk-svg></a>
                 </div>
-                <div class="uk-position-absolute uk-position-left uk-height-1-1 uk-flex uk-flex-middle" data-uk-scrollspy-class="uk-animation-slide-left">
+                <div class="uk-position-absolute uk-position-z-index uk-position-left uk-height-1-1 uk-flex uk-flex-middle" data-uk-scrollspy-class="uk-animation-slide-left">
                     <a href="#" class="uk-padding-small uk-display-inline-block uk-text-muted hoverPrimary"><img src="<?php echo JUri::base().'images/sprite.svg#leather-left' ?>" data-uk-svg></a>
                 </div>
                 <div class="uk-position-center">
@@ -146,20 +150,24 @@ $total = count($socialsicons['icon']);
                 <div class="uk-height-1-1 uk-position-relative sectionWrapper anchorsWrapper jewelry">
                     <div class="shadow"></div>
                     <div class="uk-position-absolute whiteShade"></div>
+                    <?php /* ?>
                     <div class="uk-position-absolute uk-position-top uk-width-1-1 uk-text-center leather" data-uk-scrollspy-class="uk-animation-slide-top">
                         <a href="#" class="uk-padding uk-display-inline-block uk-text-muted fa-flip-vertical"><img src="<?php echo JUri::base().'images/sprite.svg#arrow-curve-h' ?>" data-uk-svg></a>
                     </div>
+                    <?php */ ?>
                     <div class="uk-position-absolute uk-position-right uk-height-1-1 uk-flex uk-flex-middle" data-uk-scrollspy-class="uk-animation-slide-right">
                         <a href="<?php echo JUri::base().'#main/intro'; ?>" class="uk-padding uk-display-inline-block uk-text-muted hoverPrimary"><img src="<?php echo JUri::base().'images/sprite.svg#jewelry-right' ?>" height="90" data-uk-svg></a>
                     </div>
+                    <?php /* ?>
                     <div class="uk-position-absolute uk-position-bottom uk-width-1-1 uk-text-center style" data-uk-scrollspy-class="uk-animation-slide-bottom">
                         <a href="#" class="uk-padding uk-display-inline-block uk-text-muted"><img src="<?php echo JUri::base().'images/sprite.svg#arrow-curve-h' ?>" data-uk-svg></a>
                     </div>
                     <div class="uk-position-absolute uk-position-left uk-height-1-1 uk-flex uk-flex-middle" data-uk-scrollspy-class="uk-animation-slide-left">
                         <a href="#" class="uk-padding uk-display-inline-block uk-text-muted"><img src="<?php echo JUri::base().'images/sprite.svg#jewelry-left' ?>" height="90" data-uk-svg></a>
                     </div>
+                    <?php */ ?>
                     <div class="uk-position-center">
-                        <div><img src="<?php echo JUri::base().'images/svg/coming-soon-jewelry.svg'; ?>" data-uk-svg></div>
+                        <div class="triangleWrapper"><img src="<?php echo JUri::base().'images/svg/downtriangle.svg'; ?>" class="uk-width-1-1 uk-height-1-1" data-uk-svg></div>
                     </div>
                 </div>
             </div>
@@ -172,22 +180,22 @@ $total = count($socialsicons['icon']);
                         <img src="<?php echo JUri::base().'images/sprite.svg#homeMain'; ?>" class="uk-height-1-1 homeMain logo" data-uk-svg>
                     </div>
                     <div class="uk-position-absolute uk-position-top uk-width-1-1 uk-text-center leather" data-uk-scrollspy-class="uk-animation-slide-top">
-                        <a href="<?php echo JUri::base().'#leather'; ?>" class="uk-padding uk-display-inline-block uk-text-muted hoverPrimary" onmouseover="shapeon('leather','top')" onmouseleave="shapeoff('top')"><img src="<?php echo JUri::base().'images/sprite.svg#homeNavLeather' ?>" data-uk-svg></a>
+                        <a href="<?php echo JUri::base().'#leather'; ?>" class="uk-padding uk-display-inline-block hoverPrimary" onmouseover="shapeon('leather','top')" onmouseleave="shapeoff('top')"><img src="<?php echo JUri::base().'images/sprite.svg#homeNavLeather' ?>" data-uk-svg></a>
                     </div>
                     <div class="uk-position-absolute uk-position-right uk-height-1-1 uk-flex uk-flex-middle" data-uk-scrollspy-class="uk-animation-slide-right">
-                        <a href="<?php echo JUri::base().'#main/decor'; ?>" class="uk-padding uk-display-inline-block uk-text-muted hoverPrimary" onmouseover="shapeon('decor','right')" onmouseleave="shapeoff('right')"><img src="<?php echo JUri::base().'images/sprite.svg#homeNavDecor' ?>" data-uk-svg></a>
+                        <a href="<?php echo JUri::base().'#main/decor'; ?>" class="uk-padding uk-display-inline-block hoverPrimary" onmouseover="shapeon('decor','right')" onmouseleave="shapeoff('right')"><img src="<?php echo JUri::base().'images/sprite.svg#homeNavDecor' ?>" data-uk-svg></a>
                     </div>
                     <div class="uk-position-absolute uk-position-bottom uk-width-1-1 uk-text-center style" data-uk-scrollspy-class="uk-animation-slide-bottom">
-                        <a href="<?php echo JUri::base().'#style'; ?>" class="uk-padding uk-display-inline-block uk-text-muted hoverPrimary" onmouseover="shapeon('style','bottom')" onmouseleave="shapeoff('bottom')"><img src="<?php echo JUri::base().'images/sprite.svg#homeNavStyle' ?>" data-uk-svg></a>
+                        <a href="<?php echo JUri::base().'#style'; ?>" class="uk-padding uk-display-inline-block hoverPrimary" onmouseover="shapeon('jewelry','bottom')" onmouseleave="shapeoff('bottom')"><img src="<?php echo JUri::base().'images/sprite.svg#homeNavStyle' ?>" data-uk-svg></a>
                     </div>
                     <div class="uk-position-absolute uk-position-left uk-height-1-1 uk-flex uk-flex-middle" data-uk-scrollspy-class="uk-animation-slide-left">
-                        <a href="<?php echo JUri::base().'#main/jewelry'; ?>" class="uk-padding uk-display-inline-block uk-text-muted hoverPrimary" onmouseover="shapeon('jewelry','left')" onmouseleave="shapeoff('left')"><img src="<?php echo JUri::base().'images/sprite.svg#homeNavJewelry' ?>" data-uk-svg></a>
+                        <a href="<?php echo JUri::base().'#main/jewelry'; ?>" class="uk-padding uk-display-inline-block hoverPrimary" onmouseover="shapeon('style','left')" onmouseleave="shapeoff('left')"><img src="<?php echo JUri::base().'images/sprite.svg#homeNavJewelry' ?>" data-uk-svg></a>
                     </div>
                 </div>
-                <div class="hoverCover hor top <?php echo 'style-'.rand(1, 5); ?>"></div>
-                <div class="hoverCover hor bottom <?php echo 'style-'.rand(1, 5); ?>"></div>
-                <div class="hoverCover ver left <?php echo 'style-'.rand(1, 5); ?>"></div>
-                <div class="hoverCover ver right <?php echo 'style-'.rand(1, 5); ?>"></div>
+                <div class="hoverCover hor top <?php echo 'style-'.rand(1, 3); ?>"></div>
+                <div class="hoverCover hor bottom <?php echo 'style-'.rand(1, 3); ?>"></div>
+                <div class="hoverCover ver left <?php echo 'style-'.rand(1, 3); ?>"></div>
+                <div class="hoverCover ver right <?php echo 'style-'.rand(1, 3); ?>"></div>
             </div>
             <!-- Decor -->
             <div class="slide decor" data-anchor="decor">

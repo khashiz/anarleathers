@@ -432,7 +432,7 @@ if(!empty($shows['taxes']) && isset($this->total->prices[0])) {
 					}
 					?>
 					<span class="hikashop_product_price_full">
-						<span class="hikashop_product_price hikashop_product_price_0">
+						<span class="hikashop_product_price">
 							<?php echo $total_price; ?>
 						</span>
 					</span>

@@ -166,7 +166,7 @@ window.localPage.setCookie = function (name,value,delay) {
 		}
 
 		if($row_fluid == 12)
-			echo '<div class="uk-child-width-1-1 uk-child-width-1-3@m uk-child-width-1-4@l" data-uk-grid data-uk-scrollspy="target: >div; cls: uk-animation-slide-bottom-small; delay: 200; repeat: false;">';
+			echo '<div class="uk-child-width-1-1 uk-child-width-1-3@m uk-child-width-1-4@l uk-grid-collapse" data-uk-grid data-uk-scrollspy="target: >div; cls: uk-animation-slide-bottom-small; delay: 200; repeat: false;">';
 		else
 			echo '<div class="hk-row-fluid hk-row-'.$row_fluid.'">';
 

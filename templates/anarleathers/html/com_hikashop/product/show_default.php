@@ -7,6 +7,9 @@
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
+$lang = JFactory::getLanguage();
+$languages = JLanguageHelper::getLanguages('lang_code');
+$languageCode = $languages[ $lang->getTag() ]->sef;
 ?><?php
 	$form = ',0';
 	if(!$this->config->get('ajax_add_to_cart', 1)) {
@@ -97,8 +100,8 @@ $imgInfo = $db->setQuery($imgQuery)->loadObject();
 
 </div>
 
-<div class="uk-child-width-1-1 uk-child-width-1-2@m uk-grid-large" data-uk-grid>
-	<div id="hikashop_product_left_part" class="uk-flex-first uk-flex-last@m">
+<div class="uk-grid-large" data-uk-grid>
+	<div id="hikashop_product_left_part" class="uk-width-1-1 uk-width-expand@m uk-flex-first uk-flex-last@m">
         <!-- LEFT BEGIN EXTRA DATA -->
         <?php if(!empty($this->element->extraData->leftBegin)) { echo implode("\r\n",$this->element->extraData->leftBegin); } ?>
         <!-- EO LEFT BEGIN EXTRA DATA -->
@@ -114,7 +117,7 @@ $imgInfo = $db->setQuery($imgQuery)->loadObject();
         <!-- EO LEFT END EXTRA DATA -->
 	</div>
 
-	<div id="hikashop_product_right_part">
+	<div id="hikashop_product_right_part" class="uk-width-1-1 uk-width-2-5@m">
         <div data-uk-sticky="offset: 70; bottom: true;">
             <!-- RIGHT BEGIN EXTRA DATA -->
             <?php if(!empty($this->element->extraData->rightBegin)) { echo implode("\r\n",$this->element->extraData->rightBegin); } ?>
@@ -128,7 +131,7 @@ $imgInfo = $db->setQuery($imgQuery)->loadObject();
                     <?php } ?>
                     <div class="uk-width-1-1 uk-width-1-2@m">
                         <div class="uk-text-left uk-text-brown uk-margin-small-bottom">
-                            <img src="<?php echo JUri::base().'images/svg/titles/'.$this->element->title_shape.'.svg'; ?>" class="uk-width-medium" height="80" alt="" data-uk-svg>
+                            <img src="<?php echo JUri::base().'images/svg/titles/'.$languageCode.'-'.$this->element->title_shape.'.svg'; ?>" class="uk-width-medium" height="80" alt="" data-uk-svg>
                         </div>
                         <div class="uk-text-left fontEn uk-text-uppercase uk-text-brown uk-h1 uk-margin-remove"><?php echo $this->element->p_eng_title ?></div>
                         <hr class="productSingleSep uk-margin-small-top uk-margin-small-bottom">
@@ -176,6 +179,7 @@ $imgInfo = $db->setQuery($imgQuery)->loadObject();
                         <!-- EO CHARACTERISTICS -->
                         <!-- CUSTOM ITEM FIELDS -->
                         <?php
+                                /*
                         if(!$this->params->get('catalogue') && ($this->config->get('display_add_to_cart_for_free_products') || ($this->config->get('display_add_to_wishlist_for_free_products', 1) && hikashop_level(1) && $this->params->get('add_to_wishlist') && $this->config->get('enable_wishlist', 1)) || !empty($this->element->prices))) {
                             if(!empty($this->itemFields)) {
                                 $form = ',\'hikashop_product_form\'';
@@ -188,6 +192,7 @@ $imgInfo = $db->setQuery($imgQuery)->loadObject();
                                 echo $this->loadTemplate();
                             }
                         }
+                        */
                         ?>
                         <!-- EO CUSTOM ITEM FIELDS -->
                     </div>

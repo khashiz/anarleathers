@@ -119,7 +119,7 @@ if(!empty($this->filters)){
 		$form_attributes.=' data-scroll="1"';
 	}
 ?>
-    <div class="uk-padding-large uk-padding-remove-horizontal">
+    <div class="uk-padding-large uk-padding-remove-horizontal uk-padding-remove-top">
         <div data-uk-sticky id="hikashop_filter_main_div_<?php echo $this->params->get('main_div_name'); ?>" class="hikashop_category_filter <?php echo $content_classes.$display_title_class; ?>" <?php echo $extra_attributes; ?>>
 <?php
 	if($this->params->get('module') == 'mod_hikashop_filter') {

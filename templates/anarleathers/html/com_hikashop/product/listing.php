@@ -198,10 +198,10 @@ $mainInfo = ob_get_clean();
 ob_start();
 
 if (!empty($this->element->ts_img_1)) { $slideList = explode('|', str_replace(' ', '', $this->element->ts_img_1)); ?>
-    <div class="uk-position-relative  uk-margin-large-bottom">
+    <div class="uk-position-relative">
         <div class="uk-position-relative uk-visible-toggle uk-light" data-uk-slideshow="animation: push; ratio:1920:600">
 
-            <div class="uk-slideshow-items">
+            <div class="uk-slideshow-items categorySlideshow">
                 <?php
                 $fieldClass = hikashop_get('class.field');
                 $field = $fieldClass->getField('ts_img_1', 'category');
@@ -213,8 +213,8 @@ if (!empty($this->element->ts_img_1)) { $slideList = explode('|', str_replace(' 
             <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" data-uk-slidenav-previous data-uk-slideshow-item="next"></a>
 
         </div>
-        <?php if(($this->params->get('show_image') && !empty($this->element->file_path)) || ($this->params->get('show_description', !$this->module) && !empty($this->element->category_description))) { ?>
-            <div class="hikashop_category_description covered uk-position-bottom-center">
+        <?php /* if(($this->params->get('show_image') && !empty($this->element->file_path)) || ($this->params->get('show_description', !$this->module) && !empty($this->element->category_description))) { ?>
+            <div class="hikashop_category_description covered uk-position-bottom-center uk-hidden">
                 <div class="uk-container">
                     <div>
                         <div class="uk-flex-center uk-grid-column-large uk-grid-row-collapse" data-uk-grid>
@@ -252,7 +252,7 @@ if (!empty($this->element->ts_img_1)) { $slideList = explode('|', str_replace(' 
                     </div>
                 </div>
             </div>
-        <?php } ?>
+        <?php } */ ?>
     </div>
 
 <?php } else { ?>

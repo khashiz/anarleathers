@@ -21,7 +21,7 @@ if(!empty($this->categories)) {
 	}
 }
 ?>
-<div itemscope itemtype="https://schema.org/Product" id="hikashop_product_<?php echo preg_replace('#[^a-z0-9]#i','_',@$this->element->product_code); ?>_page" class="hikashop_product_page <?php echo implode(' ',$classes); ?>">
+<div itemscope itemtype="https://schema.org/Product" id="hikashop_product_<?php echo preg_replace('#[^a-z0-9]#i','_',@$this->element->product_code); ?>_page" class="<?php echo implode(' ',$classes); ?>">
 <?php
 $app = JFactory::getApplication();
 if(empty($this->element)) {
@@ -404,7 +404,7 @@ $this->params->set('show_price_weight', 0);
 $this->product = $this->element;
 
 ?>
-	<div class="hikashop_submodules" id="hikashop_submodules" style="clear:both">
+	<div class="hikashop_submodules uk-text-center uk-margin-large-top" id="hikashop_submodules" style="clear:both">
 <?php
 	if(!empty ($this->modules) && is_array($this->modules)) {
 		jimport('joomla.application.module.helper');

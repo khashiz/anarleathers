@@ -35,11 +35,12 @@ jQuery(document).ready(function () {
         // UIkit.scrollspy('.mainMenuWrapper', {target: "> div"});
     });
     UIkit.util.on('#mainMenu', 'hidden', function () {
+        UIkit.drop('#utilitiesDrop').hide();
         // jQuery('ul.mainMenuWrapper > li').removeClass('expanded').addClass('collapsed');
     });
 
     jQuery('#mainMenuToggler').click(function(){
-        jQuery(this).toggleClass('open');
+        jQuery('#mainMenuToggler > div').toggleClass('open');
     });
 });
 
@@ -50,10 +51,12 @@ function toggleMainMenu() {
 function shapeon(property, side) {
     jQuery('svg.homeMain').addClass(property);
     jQuery('.'+side).fadeIn();
+    jQuery('.hoverPrimary').css('color', '#fff');
 }
 function shapeoff(side) {
     jQuery('svg.homeMain').attr('class', ' homeMain uk-svg uk-height-1-1');
     jQuery('.'+side).fadeOut();
+    jQuery('.hoverPrimary').css('color', '');
 }
 
 // Fullscreen Button

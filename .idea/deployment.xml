@@ -9,11 +9,31 @@
           </mappings>
         </serverdata>
       </paths>
+      <paths name="Ajin Group">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
       <paths name="Anar Leather">
         <serverdata>
           <mappings>
             <mapping deploy="/public_html" local="$PROJECT_DIR$" web="/" />
           </mappings>
+          <excludedPaths>
+            <excludedPath path="/public_html/.gitignore" />
+            <excludedPath path="/public_html/.htaccess" />
+            <excludedPath path="/public_html/configuration.php" />
+            <excludedPath path="/public_html/hikashoplic.txt" />
+            <excludedPath path="/public_html/htaccess.txt" />
+            <excludedPath path="/public_html/index.php" />
+            <excludedPath path="/public_html/LICENSE.txt" />
+            <excludedPath path="/public_html/README.txt" />
+            <excludedPath path="/public_html/robots.txt" />
+            <excludedPath path="/public_html/robots.txt.dist" />
+            <excludedPath path="/public_html/web.config.txt" />
+          </excludedPaths>
         </serverdata>
       </paths>
       <paths name="Bahar Institute">
@@ -23,7 +43,35 @@
           </mappings>
         </serverdata>
       </paths>
+      <paths name="Digikala Reservation">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="Iran Carpet">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="Lois Zone">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
       <paths name="Mahoor">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="Old Persian">
         <serverdata>
           <mappings>
             <mapping local="$PROJECT_DIR$" web="/" />
@@ -58,13 +106,6 @@
           </mappings>
         </serverdata>
       </paths>
-      <paths name="Steel Arvin TMP">
-        <serverdata>
-          <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
-          </mappings>
-        </serverdata>
-      </paths>
       <paths name="azimuth">
         <serverdata>
           <mappings>
@@ -87,6 +128,20 @@
         </serverdata>
       </paths>
       <paths name="rskwoods">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="steelarvin.com">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="uCheck">
         <serverdata>
           <mappings>
             <mapping local="$PROJECT_DIR$" web="/" />

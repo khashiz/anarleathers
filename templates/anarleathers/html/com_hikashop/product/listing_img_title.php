@@ -7,6 +7,9 @@
  * @license	GNU/GPLv3 http://www.gnu.org/licenses/gpl-3.0.html
  */
 defined('_JEXEC') or die('Restricted access');
+$lang = JFactory::getLanguage();
+$languages = JLanguageHelper::getLanguages('lang_code');
+$languageCode = $languages[ $lang->getTag() ]->sef;
 ?><?php
 $mainDivName = $this->params->get('main_div_name', '');
 
@@ -20,7 +23,7 @@ if(!empty($this->row->extraData->top)) { echo implode("\r\n",$this->row->extraDa
 <div class="hikashop_listing_img_title" id="div_<?php echo $mainDivName.'_'.$this->row->product_id;  ?>">
     <div class="uk-margin-bottom listItemTitleSVG">
         <a href="<?php echo $link;?>" class="uk-display-inline-block">
-            <img src="<?php echo JUri::base().'images/svg/titles/'.$this->row->title_shape.'.svg'; ?>" width="" height="80" alt="" data-uk-svg>
+            <img src="<?php echo JUri::base().'images/svg/titles/'.$languageCode.'-'.$this->row->title_shape.'.svg'; ?>" width="" height="80" alt="" data-uk-svg>
         </a>
     </div>
     <?php if($this->row->thumbvideo) { ?>
@@ -28,7 +31,7 @@ if(!empty($this->row->extraData->top)) { echo implode("\r\n",$this->row->extraDa
             <a href="<?php echo $link;?>" class="uk-display-block">
                 <div class="uk-cover-container">
                     <canvas width="500" height="500"></canvas>
-                    <video src="https://www.w3schools.com/html/mov_bbb.mp4" autoplay loop muted playsinline uk-cover></video>
+                    <video src="<?php echo JUri::base().'images/video/video-'.$this->row->product_id.'.mp4'; ?>" autoplay loop muted playsinline data-uk-cover></video>
                 </div>
             </a>
         </div>
