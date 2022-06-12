@@ -60,168 +60,161 @@ defined('_JEXEC') or die('Restricted access');
 	foreach($this->rows as &$row) {
 		$order_link = hikashop_completeLink('order&task=show&cid='.$row->order_id.$url_itemid.$cancel_url);
 ?>
-		<div class="hk-card hk-card-default hk-card-order" data-order-container="<?php echo (int)$row->order_id; ?>">
-			<div class="hk-card-header">
-				<a class="hk-row-fluid" href="<?php echo $order_link; ?>">
+		<div class="uk-card uk-card-default uk-box-shadow-small uk-card-bordered uk-border-rounded-large uk-overflow-hidden" data-order-container="<?php echo (int)$row->order_id; ?>">
+			<div class="uk-card-header">
+                <a class="uk-text-center uk-child-width-1-4 uk-grid-divider uk-link-reset uk-grid-small" href="<?php echo $order_link; ?>" data-uk-grid>
+                    <?php
+                    $status = "";
+                    switch ($row->order_status) {
+                        case "confirmed":
+                        case "delivered":
+                        case "shipped":
+                            $status = "uk-text-success";
+                            break;
+                        case "cancelled":
+                        case "refunded":
+                            $status = "uk-text-danger";
+                            break;
+                        default:
+                            $status = "";
+                    }
+                    ?>
+                    <!-- ORDER STATUS -->
+                    <div>
+                        <span class="uk-text-small font fnum f600 <?php echo $status; ?>"><?php echo hikashop_orderStatus($row->order_status); ?></span>
+                    </div>
+                    <!-- EO ORDER STATUS -->
 
-					<div class="hkc-sm-6 hika_cpanel_date">
-<!-- ORDER DATE -->
-						<i class="fa fa-clock"></i>
-						<?php echo hikashop_getDate((int)$row->order_created, '%d %B %Y %H:%M'); ?>
-<!-- EO ORDER DATE -->
-					</div>
-					<div class="hkc-sm-6 hika_cpanel_price">
-<!-- ORDER TOTAL -->
-						<i class="fa fa-credit-card"></i>
-						<?php echo $this->currencyClass->format($row->order_full_price, $row->order_currency_id); ?>
-<!-- EO ORDER TOTAL -->
-					</div>
-				</a>
+                    <div class="hika_cpanel_date">
+                        <!-- ORDER DATE -->
+                        <span class="uk-text-small font fnum f600 uk-text-gold"><?php echo hikashop_getDate((int)$row->order_created, 'D ، d M Y'); ?></span>
+                        <!-- EO ORDER DATE -->
+                    </div>
+                    <div class="hika_cpanel_price">
+                        <!-- ORDER TOTAL -->
+                        <span class="uk-text-small font fnum f600 uk-text-gold"><?php echo $this->currencyClass->format($row->order_full_price, $row->order_currency_id); ?></span>
+                        <!-- EO ORDER TOTAL -->
+                    </div>
+                    <!-- ORDER NUMBER -->
+                    <div>
+                        <span class="uk-text-small font f600 uk-text-gold"><?php echo  JText::_('ORDER_NUMBER').$row->order_number; ?></span>
+                        <?php if(!empty($row->order_invoice_number)) { ?>
+                            <span class="hika_invoice_number_title"><?php echo JText::_('INVOICE_NUMBER'); ?> : </span>
+                            <span class="hika_invoice_number_value"><?php echo $row->order_invoice_number; ?></span>
+                        <?php } ?>
+                    </div>
+                    <!-- EO ORDER NUMBER -->
+                </a>
 			</div>
 <!-- END GRID -->
-			<div class="hk-card-body">
-				<div class="hk-row-fluid">
-					<div class="hkc-sm-4 hika_order_left_div">
-<!-- TOP LEFT EXTRA DATA -->
-<?php if(!empty($row->extraData->topLeft)) { echo implode("\r\n", $row->extraData->topLeft); } ?>
-<!-- EO TOP LEFT EXTRA DATA -->
-<!-- ORDER NUMBER -->
-						<a class="hika_order_number" href="<?php echo $order_link; ?>">
-							<span class="hika_order_number_title"><?php echo  JText::_('ORDER_NUMBER'); ?> : </span>
-							<span class="hika_order_number_value"><?php echo $row->order_number; ?></span>
-<?php if(!empty($row->order_invoice_number)) { ?>
-							<br class="hika_order_number_invoice_separator"/>
-							<span class="hika_invoice_number_title"><?php echo JText::_('INVOICE_NUMBER'); ?> : </span>
-							<span class="hika_invoice_number_value"><?php echo $row->order_invoice_number; ?></span>
-<?php } ?>
-						</a>
-<!-- EO ORDER NUMBER -->
-<!-- BOTTOM LEFT EXTRA DATA -->
-<?php if(!empty($row->extraData->bottomLeft)) { echo implode("\r\n", $row->extraData->bottomLeft); } ?>
-<!-- EO BOTTOM LEFT EXTRA DATA -->
-					</div>
-					<div class="hkc-sm-3 hika_order_info">
-<!-- BEFORE INFO EXTRA DATA -->
-<?php if(!empty($row->extraData->beforeInfo)) { echo implode("\r\n", $row->extraData->beforeInfo); } ?>
-<!-- EO BEFORE INFO EXTRA DATA -->
-<!-- SHIPPING ADDRESS -->
-<?php if(!empty($row->order_shipping_address_id) && !empty($this->address_data[(int)$row->order_shipping_address_id])) { ?>
-						<div class="hika_order_shipping_address" data-toggle="hk-tooltip" data-title="<?php echo $this->escape($this->address_html[(int)$row->order_shipping_address_id]); ?>">
-							<div class="hika_order_shipping_address_title"><?php echo JText::_('HIKA_LISTING_ORDER_SHIP'); ?></div>
-							<span class="hika_order_shipping_address_value">
-								<i class="fas fa-map-marker-alt"></i>
-								<?php echo $this->address_data[(int)$row->order_shipping_address_id]->address_firstname . ' ' . $this->address_data[(int)$row->order_shipping_address_id]->address_lastname; ?>
-							</span>
-						</div>
-<?php } ?>
-<!-- EO SHIPPING ADDRESS -->
-<!-- AFTER INFO EXTRA DATA -->
-<?php if(!empty($row->extraData->afterInfo)) { echo implode("\r\n", $row->extraData->afterInfo); } ?>
-<!-- EO AFTER INFO EXTRA DATA -->
-					</div>
-					<div class="hkc-sm-2 hika_order_status">
-<!-- TOP MIDDLE EXTRA DATA -->
-<?php if(!empty($row->extraData->topMiddle)) { echo implode("\r\n", $row->extraData->topMiddle); } ?>
-<!-- EO TOP MIDDLE EXTRA DATA -->
-<!-- ORDER STATUS -->
-						<span class="order-label order-label-<?php echo preg_replace('#[^a-z_0-9]#i', '_', str_replace(' ','_', $row->order_status)); ?>"><?php
-							echo hikashop_orderStatus($row->order_status);
-						?></span>
-<!-- EO ORDER STATUS -->
-<!-- BOTTOM MIDDLE EXTRA DATA -->
-<?php if(!empty($row->extraData->bottomMiddle)) { echo implode("\r\n", $row->extraData->bottomMiddle); } ?>
-<!-- EO BOTTOM MIDDLE EXTRA DATA -->
-					</div>
-					<div class="hkc-sm-2 hika_order_action">
-<!-- TOP RIGHT EXTRA DATA -->
-<?php if(!empty($row->extraData->topRight)) { echo implode("\r\n", $row->extraData->topRight); } ?>
-<!-- EO TOP RIGHT EXTRA DATA -->
-<!-- ACTIONS BUTTON -->
-<?php
-		$dropData = array();
-		$dropData[] = array(
-			'name' => '<i class="fas fa-search-plus"></i>'.JText::_('HIKA_DETAILS'),
-			'link' => $order_link
-		);
+			<div class="uk-card-body uk-padding-small">
 
-		if(!empty($row->show_print_button)) {
-			$print_invoice = true;
-			$dropData[] = array(
-				'name' => '<i class="fas fa-print"></i> '. JText::_('PRINT_INVOICE'),
-				'link' => '#print_invoice',
-				'click' => 'return window.localPage.printInvoice('.(int)$row->order_id.');',
-			);
-		}
-		if(!empty($row->show_cancel_button)) {
-			$cancel_orders = true;
-			$dropData[] = array(
-				'name' => '<i class="fas fa-ban"></i> '. JText::_('CANCEL_ORDER'),
-				'link' => '#cancel_order',
-				'click' => 'return window.localPage.cancelOrder('.(int)$row->order_id.',\''.$row->order_number.'\');',
-			);
-		}
-		if(!empty($row->show_payment_button) && bccomp($row->order_full_price, 0, 5) > 0) {
-			$url_param = ($this->payment_change) ? '&select_payment=1' : '';
-			$url = hikashop_completeLink('order&task=pay&order_id='.$row->order_id.$url_param.$url_itemid);
-			if($this->config->get('force_ssl',0) && strpos('https://',$url) === false)
-				$url = str_replace('http://','https://', $url);
-			$dropData[] = array(
-				'name' => '<i class="fas fa-money-bill-alt"></i> '. JText::_('PAY_NOW'),
-				'link' => $url
-			);
-		}
-		if($this->config->get('allow_reorder', 0)) {
-			$url = hikashop_completeLink('order&task=reorder&order_id='.$row->order_id.$url_itemid);
-			if($this->config->get('force_ssl',0) && strpos('https://',$url) === false)
-				$url = str_replace('http://','https://', $url);
-			$dropData[] = array(
-				'name' => '<i class="fas fa-redo-alt"></i> '. JText::_('REORDER'),
-				'link' => $url
-			);
-		}
-		if(!empty($row->show_contact_button)) {
-			$url = hikashop_completeLink('order&task=contact&order_id='.$row->order_id.$url_itemid);
-			$dropData[] = array(
-				'name' => '<i class="far fa-envelope"></i> '. JText::_('CONTACT_US_ABOUT_YOUR_ORDER'),
-				'link' => $url
-			);
-		}
-
-		if(!empty($row->actions)) {
-			$dropData = array_merge($dropData, $row->actions);
-		}
-
-		if(!empty($dropData)) {
-			echo $this->dropdownHelper->display(
-				JText::_('HIKASHOP_ACTIONS'),
-				$dropData,
-				array('type' => 'btn',  'right' => true, 'up' => false)
-			);
-		}
-?>
-<!-- EO ACTIONS BUTTON -->
-<!-- BOTTOM RIGHT EXTRA DATA -->
-<?php if(!empty($row->extraData->bottomRight)) { echo implode("\r\n", $row->extraData->bottomRight); } ?>
-<!-- EO BOTTOM RIGHT EXTRA DATA -->
-					</div>
-					<div class="hkc-sm-1 hika_order_more">
-<!-- PRODUCTS LISTING BUTTON -->
-<?php if($row->order_id == $this->row->order_id) { ?>
-						<a class="hikabtn hikabtn-default " data-toggle="hk-tooltip" data-title="<?php echo $this->escape(JText::_('HIDE_PRODUCTS')); ?>" href="#" onclick="return window.localPage.handleDetails(this, <?php echo (int)$row->order_id; ?>);"><i class="fas fa-angle-up"></i></a>
-<?php } else { ?>
-						<a class="hikabtn hikabtn-default" data-toggle="hk-tooltip" data-title="<?php echo $this->escape(JText::_('DISPLAY_PRODUCTS')); ?>" href="#" onclick="return window.localPage.handleDetails(this, <?php echo (int)$row->order_id; ?>);"><i class="fas fa-angle-down"></i></a>
-<?php } ?>
-<!-- EO PRODUCTS LISTING BUTTON -->
-					</div>
+				<div>
+                    <?php
+                    if($row->order_id == $this->row->order_id) {
+                        $this->setLayout('order_products');
+                        echo $this->loadTemplate();
+                    }
+                    ?>
 				</div>
 			</div>
 <!-- END GRID -->
-<?php
-		if($row->order_id == $this->row->order_id) {
-			$this->setLayout('order_products');
-			echo $this->loadTemplate();
-		}
-?>
+
+            <div class="uk-card-footer uk-padding-small uk-background-muted">
+                <div class="uk-child-width-1-1 uk-child-width-auto@m uk-grid-small" data-uk-grid>
+                    <!-- TOP RIGHT EXTRA DATA -->
+                    <?php if(!empty($row->extraData->topRight)) { echo implode("\r\n", $row->extraData->topRight); } ?>
+                    <!-- EO TOP RIGHT EXTRA DATA -->
+                    <!-- ACTIONS BUTTON -->
+                    <?php
+                    $dropData = array();
+                    $dropData[] = array(
+                        'class' => 'uk-button-default uk-background-white',
+                        'name' => JText::_('HIKA_ORDER_DETAILS'),
+                        'link' => $order_link
+                    );
+
+                    if(!empty($row->show_print_button)) {
+                        $print_invoice = true;
+                        $dropData[] = array(
+                            'class' => 'uk-button-default uk-background-white',
+                            'name' => JText::_('PRINT_INVOICE'),
+                            'link' => '#print_invoice',
+                            'click' => 'return window.localPage.printInvoice('.(int)$row->order_id.');',
+                        );
+                    }
+                    if(!empty($row->show_cancel_button)) {
+                        $cancel_orders = true;
+                        $dropData[] = array(
+                            'name' => '<i class="fas fa-ban"></i> '. JText::_('CANCEL_ORDER'),
+                            'link' => '#cancel_order',
+                            'click' => 'return window.localPage.cancelOrder('.(int)$row->order_id.',\''.$row->order_number.'\');',
+                        );
+                    }
+                    if(!empty($row->show_payment_button) && bccomp($row->order_full_price, 0, 5) > 0) {
+                        $url_param = ($this->payment_change) ? '&select_payment=1' : '';
+                        $url = hikashop_completeLink('order&task=pay&order_id='.$row->order_id.$url_param.$url_itemid);
+                        if($this->config->get('force_ssl',0) && strpos('https://',$url) === false)
+                            $url = str_replace('http://','https://', $url);
+                        $dropData[] = array(
+                            'class' => 'uk-button-gold',
+                            'name' => JText::_('PAY_NOW'),
+                            'link' => $url
+                        );
+                    }
+                    if($this->config->get('allow_reorder', 0)) {
+                        $url = hikashop_completeLink('order&task=reorder&order_id='.$row->order_id.$url_itemid);
+                        if($this->config->get('force_ssl',0) && strpos('https://',$url) === false)
+                            $url = str_replace('http://','https://', $url);
+                        $dropData[] = array(
+                            'name' => '<i class="fas fa-redo-alt"></i> '. JText::_('REORDER'),
+                            'link' => $url
+                        );
+                    }
+                    if(!empty($row->show_contact_button)) {
+                        $url = hikashop_completeLink('order&task=contact&order_id='.$row->order_id.$url_itemid);
+                        $dropData[] = array(
+                            'class' => 'uk-button-default uk-background-white',
+                            'name' => JText::_('CONTACT_US_ABOUT_YOUR_ORDER'),
+                            'link' => $url
+                        );
+                    }
+
+                    if(!empty($row->actions)) {
+                        $dropData = array_merge($dropData, $row->actions);
+                    }
+
+                    /*
+                    if(!empty($dropData)) {
+                        echo $this->dropdownHelper->display(
+                            JText::_('HIKASHOP_ACTIONS'),
+                            $dropData,
+                            array('type' => 'btn',  'right' => true, 'up' => false)
+                        );
+                    }
+                    */
+
+                    echo '<div class="uk-child-width-1-1 uk-child-width-auto@m uk-grid-small" data-uk-grid>';
+                    for ($k=0;$k<count($dropData);$k++){
+                        echo '<div><a href="'.$dropData[$k]['link'].'" onclick="'.$dropData[$k]['click'].'" class="uk-button uk-border-pill uk-width-1-1 uk-box-shadow-small font f600 uk-height-1-1 '.$dropData[$k]['class'].'">'.$dropData[$k]['name'].'</a></div>';
+                    }
+                    ?>
+                    <!-- PRODUCTS LISTING BUTTON -->
+                    <div>
+                        <?php if($row->order_id == $this->row->order_id) { ?>
+                            <a class="uk-button uk-border-pill uk-width-1-1 uk-box-shadow-small font f600 uk-height-1-1 uk-button-default uk-background-white" data-title="<?php echo $this->escape(JText::_('HIDE_PRODUCTS')); ?>" href="#" onclick="return window.localPage.handleDetails(this, <?php echo (int)$row->order_id; ?>);"><i class="fas fa-angle-up"></i></a>
+                        <?php } else { ?>
+                            <a class="uk-button uk-border-pill uk-width-1-1 uk-box-shadow-small font f600 uk-height-1-1 uk-button-default uk-background-white" data-title="<?php echo $this->escape(JText::_('DISPLAY_PRODUCTS')); ?>" href="#" onclick="return window.localPage.handleDetails(this, <?php echo (int)$row->order_id; ?>);"><i class="fas fa-angle-down"></i></a>
+                        <?php } ?>
+                    </div>
+                    <!-- EO PRODUCTS LISTING BUTTON -->
+                    <!-- EO ACTIONS BUTTON -->
+
+                    <?php echo '</div>'; ?>
+
+
+                </div>
+            </div>
 		</div>
 <?php
 		$i++;

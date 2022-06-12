@@ -1,4 +1,20 @@
+function appearChildren(wrapperID) {
+    let elems = jQuery('#'+wrapperID).children();
+    jQuery(elems).each(function(index) {
+        jQuery(this).delay(100*index).fadeIn(500);
+    });
+}
+function disappearChildren(wrapperID) {
+    let elems = jQuery('#'+wrapperID).children();
+    jQuery(elems).each(function(index) {
+        jQuery(this).delay(100*index).fadeOut(500);
+    });
+}
+
+
 jQuery(document).ready(function () {
+
+    // Converting latin numbers to persian
     jQuery('.fnum').persiaNumber('fa');
     jQuery('#anarContainer').fullpage({
         anchors: ['leather', 'main', 'style'],
@@ -7,47 +23,48 @@ jQuery(document).ready(function () {
         controlArrows: false,
         scrollingSpeed: 500,
         fitToSection:false,
-        // afterLoad: function(origin, destination, direction){
-        //     if(origin.anchor === "leather" || destination.anchor === "leather"){
-        //         UIkit.scrollspy('div.sectionWrapper.leather > div', {target: "> div", cls: "uk-animation-fade", repeat: false, delay: 300});
-        //     }
-        //     if(origin.anchor === "style" || destination.anchor === "style"){
-        //         UIkit.scrollspy('div.sectionWrapper.decor .animateShow', {target: ".animateShow", cls: "uk-animation-fade", repeat: false, delay: 300});
-        //     }
-        // }
     });
-    // fullpage_api.setAllowScrolling(false);
 
+    // Social networks toggle
     UIkit.util.on('#socialsDrop', 'hidden', function () {
         UIkit.scrollspy('#socialIcons', {target: "> div"});
     });
-    UIkit.util.on('#utilitiesDrop', 'hidden', function () {
+
+    // Utility icons
+    UIkit.util.on('#utilityIcons', 'hidden', function () {
         UIkit.scrollspy('#utilityIcons', {target: "> div"});
     });
 
 
     // Navigation
-    jQuery('ul.mainMenuWrapper > li  a + ul > li > a').on('click', function () {
+    jQuery('ul.mainMenuWrapper > li  a + ul > li > a.toggler').on('hover', function () {
         jQuery('ul.mainMenuWrapper > li').removeClass('expanded').addClass('collapsed');
         jQuery(this).parents('.level-1').addClass('expanded').removeClass('collapsed');
     });
-    UIkit.util.on('#mainMenu', 'shown', function () {
-        // UIkit.scrollspy('.mainMenuWrapper', {target: "> div"});
-    });
+    UIkit.util.on('#mainMenu', 'shown', function () {});
     UIkit.util.on('#mainMenu', 'hidden', function () {
-        UIkit.drop('#utilitiesDrop').hide();
-        // jQuery('ul.mainMenuWrapper > li').removeClass('expanded').addClass('collapsed');
+        disappearChildren('utilityIconsWrapper');
+        jQuery('#eye').attr('data-status','off');
     });
-
     jQuery('#mainMenuToggler').click(function(){
         jQuery('#mainMenuToggler > div').toggleClass('open');
     });
+
+
 });
 
-function toggleMainMenu() {
-    document.getElementById("utilitiesDropToggle").click();
+function eyeAction() {
+    let eye = jQuery('#eye');
+    if (eye.attr('data-status') == 'off') {
+        appearChildren('utilityIconsWrapper');
+        eye.attr('data-status','on');
+    } else {
+        disappearChildren('utilityIconsWrapper');
+        eye.attr('data-status','off');
+    }
 }
 
+// Home side backgrounds toggle
 function shapeon(property, side) {
     jQuery('svg.homeMain').addClass(property);
     jQuery('.'+side).fadeIn();
@@ -82,7 +99,6 @@ function closeFullscreen() {
 
 let svg = document.getElementsByName("leatherTriangle");
 let gs = document.querySelectorAll("rect");
-
 gs.forEach(g => {
     g.addEventListener("mouseenter", e => {
         svg.appendChild(g);

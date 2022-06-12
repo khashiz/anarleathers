@@ -87,7 +87,7 @@ if ($tagId = $params->get('tag_id', ''))
                     // The next item is deeper.
                     if ($item->deeper)
                     {
-                        echo '<ul class="nav-child uk-flex-1 unstyled small level-'.$item->level.'" '.(($item->level == 2 ? "data-uk-drop='mode:click;animation:uk-animation-fade;offset:5'":"")).'>';
+                        echo '<ul class="nav-child uk-flex-1 unstyled small level-'.$item->level.'" '.(($item->level == 2 ? "data-uk-drop='mode:hover;animation:uk-animation-fade;offset:5'":"")).'>';
                     }
                     // The next item is shallower.
                     elseif ($item->shallower)

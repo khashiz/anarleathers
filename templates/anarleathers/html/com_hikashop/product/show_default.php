@@ -16,6 +16,17 @@ $languageCode = $languages[ $lang->getTag() ]->sef;
 		$form = ',\'hikashop_product_form\'';
 	}
 ?>
+
+<div data-uk-slideshow="autoplay: true; autoplay-interval: 2000; ratio: 3:1;">
+    <div class="uk-slideshow-items categorySlideshow">
+        <?php
+        $fieldClass = hikashop_get('class.field');
+        $field = $fieldClass->getField('topslideimage', 'product');
+        echo $fieldClass->show($field,$this->element->topslideimage);
+        ?>
+    </div>
+</div>
+
 <div id="hikashop_product_top_part" class="uk-margin-large-bottom">
 <!-- TOP BEGIN EXTRA DATA -->
 <?php if(!empty($this->element->extraData->topBegin)) { echo implode("\r\n",$this->element->extraData->topBegin); } ?>
@@ -68,24 +79,15 @@ $imgInfo = $db->setQuery($imgQuery)->loadObject();
 
     <div class="hikashop_category_description">
         <div class="uk-flex-center uk-grid-column-large uk-grid-row-collapse" data-uk-grid>
-            <div class="uk-width-1-1 uk-width-auto uk-text-white">
-                <img src="<?php echo JUri::base().'images/com_hikashop/upload/'.$imgInfo->file_path; ?>" class="hikashop_category_image" title="" alt="women-bags" height="150" data-uk-svg>
-            </div>
             <div class="uk-width-1-1 uk-width-auto">
                 <div>
                     <div class="uk-grid-small uk-flex-center uk-child-width-auto" data-uk-grid>
                         <div>
                             <div class="uk-height-1-1 uk-flex uk-flex-middle">
                                 <div class="catEngTitleWrapper">
-                                    <div>
-                                        <img src="<?php echo JUri::base().'images/sprite.svg#anarText'; ?>" width="200" data-uk-svg>
-                                    </div>
                                     <div><span class="uk-display-block uk-text-center uk-text-uppercase uk-text-primary fontEn catEngTitle"><?php echo $catInfo->eng_title; ?></span></div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="uk-visible@m">
-                            <img src="<?php echo JUri::base().'images/sprite.svg#anar'; ?>" width="" height="150" alt="" data-uk-svg>
                         </div>
                     </div>
                 </div>

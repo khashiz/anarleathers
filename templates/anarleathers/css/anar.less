@@ -4,6 +4,7 @@
 @gray: #b7b7b7;
 @gold: #a4946c;
 @brown: #58402e;
+@medbrown: #3d2c20;
 @lightbrown: #9e8469;
 @danger: #DC2626;
 @success: #22C55E;
@@ -47,7 +48,7 @@ html{
   &.uk-modal-page{
     .utilityIcons{
       .icon{
-        color: @gold;
+        color: @gold !important;
       }
       .hoverIcon{
         &:hover{
@@ -75,15 +76,17 @@ body{
     }
   }
   &:not(.plainBG){
-    background: url("@{images}/bg-main.jpg") center top repeat;
-    background-size: contain;
+    background: url("@{images}/tile_bg.jpg") center top repeat;
   }
   &.textPages{
-    background: url("@{images}/bg-about.jpg") center top repeat;
-    background-size: contain;
+    background: url("@{images}/bg-about.jpg") center top no-repeat fixed;
+    background-size: cover;
   }
 }
 div{
+  &.screenToggler{
+    padding-top: 6px;
+  }
   &.searchWrapper{
     background-color: #fff;
     z-index: 9999;
@@ -133,16 +136,14 @@ div{
         a{
           font-size: 12px;
           color: @primary;
-          writing-mode: tb-rl;
           text-decoration: none;
+          padding: 15px 15px 10px;
           .f500;
           .font;
-          .transform(rotate(180deg));
-        }
-        &:not(:first-child){
-          padding-top: 10px;
-          border-top: 1px solid #ccc;
-          margin-top: 10px;
+          .transition(all .3s ease-out);
+          &:hover{
+            background-color: #f5f5f5;
+          }
         }
       }
     }
@@ -216,30 +217,6 @@ div{
       width: 50%;
     }
     */
-    &.top{
-      top: 0;
-      &.style-1{background-image: url("../../../images/homebg/top-1.jpg");}
-      &.style-2{background-image: url("../../../images/homebg/top-2.jpg");}
-      &.style-3{background-image: url("../../../images/homebg/top-3.jpg");}
-    }
-    &.bottom{
-      bottom: 0;
-      &.style-1{background-image: url("../../../images/homebg/bottom-1.jpg");}
-      &.style-2{background-image: url("../../../images/homebg/bottom-2.jpg");}
-      &.style-3{background-image: url("../../../images/homebg/bottom-3.jpg");}
-    }
-    &.left{
-      left: 0;
-      &.style-1{background-image: url("../../../images/homebg/left-1.jpg");}
-      &.style-2{background-image: url("../../../images/homebg/left-2.jpg");}
-      &.style-3{background-image: url("../../../images/homebg/left-3.jpg");}
-    }
-    &.right{
-      right: 0;
-      &.style-1{background-image: url("../../../images/homebg/right-1.jpg");}
-      &.style-2{background-image: url("../../../images/homebg/right-2.jpg");}
-      &.style-3{background-image: url("../../../images/homebg/right-3.jpg");}
-    }
   }
   &.sectionWrapper{
     &.leather,
@@ -330,8 +307,8 @@ div{
         bottom: 160px;
       }
       .hexagonWrapper{
-        max-width: 480px;
-        .transform(translateY(-25px));
+        height: 60vh;
+        box-sizing: border-box;
         svg{
           overflow: visible;
           > g{
@@ -442,6 +419,7 @@ div{
   }
   &.productWrapper{
     > div{
+      .box-shadow(0 0 0 1px @gold);
       .transition(box-shadow .3s ease-out);
       .listItemIMGContainer{
         &:before{
@@ -463,13 +441,14 @@ div{
         }
       }
       &:hover{
-        .box-shadow(0 0 0 2px rgba(0, 0, 0, .2));
+        .box-shadow(0 0 0 1px rgba(0, 0, 0, .8));
         .listItemTitleSVG{
           a{
             opacity: 1;
             color: @brown;
           }
         }
+        ul.colorsList,
         .hikashop_product_price_full{
           opacity: 1;
         }
@@ -618,6 +597,7 @@ div{
       &.filterTitle{
         color: #333;
         text-decoration: none;
+        padding: 17px;
         .transition(color .3s ease-out);
         &:hover{
           text-decoration: none;
@@ -664,9 +644,6 @@ div{
             &:checked{
               border-color: #fff;
             }
-            &#hikashop_product_characteristic_4_1{background-color: #000000;}
-            &#hikashop_product_characteristic_4_2{background-color: #3d2c20;}
-            &#hikashop_product_characteristic_4_3{background-color: #5a3f2c;}
           }
         }
       }
@@ -697,6 +674,30 @@ div{
     }
   }
 }
+
+input{
+  &#hikashop_product_characteristic_4_1{background-color: #000000;}
+  &#hikashop_product_characteristic_4_2{background-color: @medbrown;}
+  &#hikashop_product_characteristic_4_3{background-color: @lightbrown;}
+}
+span{
+  &.listingColors{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+    .border-radius(50px);
+    &.black,
+    &.Black{background-color: #000;}
+    &.medbrown{background-color: @medbrown;}
+    &.lightbrown{background-color: @lightbrown;}
+  }
+}
+
+
+
+
+
 a{
   &.toggleScreenLink{
     &:hover{
@@ -795,8 +796,9 @@ svg{
 .hikashop_product_price_full{
   font-variation-settings: "wght" 600, "DSTY" 3, "KSHD" 150;
   color: #000;
-  text-shadow: 1px 1px 1px #fff;
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, .5);
   opacity: 0;
+  font-size: 14px;
   .transition(opacity .3s ease-out);
 }
 .sectionTitle{
@@ -834,6 +836,7 @@ span{
     top: 4px;
   }
 }
+
 ul{
   &.mainMenuWrapper{
     padding: 0;
@@ -898,7 +901,14 @@ ul{
                 right: 0;
                 width: 100%;
                 height: 100%;
+                flex-direction: column;
                 > li{
+                  flex-basis: 0;
+                  flex-shrink: 1;
+                  flex-grow: 1;
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: center;
                   a{
                     display: block;
                     font-size: 14px;
@@ -906,7 +916,7 @@ ul{
                     text-decoration: none;
                     width: 50%;
                     text-align: left;
-                    padding: 5px 0 5px 70px;
+                    padding: 0 0 0 70px;
                     box-sizing: border-box;
                     position: relative;
                     .font;
@@ -962,6 +972,9 @@ ul{
                   right: 0;
                   height: 1px;
                   background-color: @gold;
+                }
+                &.uk-open{
+                  display: flex;
                 }
               }
               &:after{
@@ -1026,6 +1039,161 @@ ul{
       }
     }
   }
+  &.colorsList{
+    margin-left: 15px;
+    opacity: 0;
+    .transition(opacity .3s ease-out);
+  }
+}
+
+ul{
+  &.mainNav{
+    padding: 0;
+    margin: 0;
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+    width: 25vw;
+    position: relative;
+
+    // All ULs
+    ul{
+      position: absolute;
+      height: 100vh;
+      width: 25vw;
+      left: 100%;
+      display: flex;
+      top: 0;
+      flex-direction: column;
+      padding: 0;
+      margin: 0;
+      justify-content: center;
+      opacity: 0;
+      .transition(all .3s ease-out);
+      .transform(scaleX(0));
+    }
+
+    // All LIs
+    li{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-grow: 1;
+      flex-basis: 0;
+      flex-shrink: 1;
+      &:hover{
+        > a{
+          opacity: 1;
+          color: #fff;
+          &:after{
+            width: 5px;
+            right: -2px;
+            background-color: #fff;
+          }
+          + ul{
+            opacity: 1;
+            .transform(scaleX(1));
+          }
+        }
+      }
+    }
+
+    // All Anchors
+    a{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+      position: relative;
+      width: 100%;
+      height: 100%;
+      color: @gold;
+      .font;
+      .transition(all .3s ease-out);
+      &:after{
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 1px;
+        height: 100%;
+        background-color: fade(@gold, 40%);
+        .transition(all .3s ease-out);
+        .border-radius(5px);
+      }
+    }
+
+    >li{
+      >a{
+        font-size: 4rem;
+        line-height: 10rem;
+        + ul{
+          >li{
+            >a{
+              font-size: 2rem;
+              line-height: 5rem;
+              +ul{
+                >li{
+                  > a{
+                    font-size: 1rem;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+
+footer{
+  background-color: #a29960;
+  fieldset{
+    padding: 0;
+    margin: 0;
+    border: none;
+    outline: none;
+  }
+  div{
+    &.rsform-block-newsletter{
+      input{
+        border: none;
+        outline: none;
+        width: 100%;
+        height: 54px;
+        border-radius: 100px;
+        padding: 0 120px 0 20px;
+        box-sizing: border-box;
+        text-align: center;
+        font-size: 18px;
+        color: #222;
+        font-weight: 700;
+        .font;
+      }
+      button{
+        background: #a29960;
+        color: #fff;
+        margin-right: 10px;
+      }
+    }
+  }
+  .socials{
+    a{
+      &:hover{
+        color: @primary;
+      }
+    }
+  }
+}
+.formValidation{
+  > span{
+    .font;
+  }
 }
 
 // Utilities
@@ -1041,6 +1209,7 @@ img{image-rendering: optimizequality;image-rendering: -webkit-optimize-contrast;
 .font{font-family: "Pinar", sans-serif}
 .fontEn{font-family: 'Montserrat', sans-serif;}
 .noBorder{border: none;}
+.uk-lineheight-zero{line-height: 0;}
 .uk-text-zero{font-size: 0;}
 .uk-text-tiny{font-size: 12px;}
 .uk-text-white{color: #fff;}
@@ -1085,6 +1254,28 @@ input{
 }
 
 // UIKit Overrides
+.uk-notification{
+  direction: rtl;
+  a{display: none;}
+  .uk-notification-message{
+    padding: 20px;
+    .border-radius(5px);
+    .box-shadow(0 8px 15px 0 rgba(0, 0, 0, .08));
+    div{
+      color: #fff;
+      text-align: center;
+      font-size: 14px;
+      .f500;
+      .font;
+    }
+    &.uk-notification-message-success{
+      background-color: @success;
+    }
+    &.uk-notification-message-danger{
+      background-color: @danger;
+    }
+  }
+}
 .uk-modal{
   z-index: 9996;
 }
@@ -1126,6 +1317,9 @@ input{
     font-size: 12px;
     padding: 10px;
     .font;
+  }
+  .hikashop_product_price_full{
+    opacity: 1;
   }
 }
 .uk-card{
@@ -1316,6 +1510,37 @@ input{
           width: 0;
           left: 50%;
         }
+      }
+    }
+  }
+}
+
+
+
+// Side filter backgrounds
+input{
+  &[name="filter_Colors_2[]"]{
+    + label{
+      color: transparent;
+    }
+    &[value="1"]{
+      + label{
+        background-color: #000;
+      }
+    }
+    &[value="1"]{
+      + label{
+        background-color: #000;
+      }
+    }
+    &[value="4"]{
+      + label{
+        background-color: #3d2c20;
+      }
+    }
+    &[value="5"]{
+      + label{
+        background-color: #9e8469;
       }
     }
   }

@@ -30,6 +30,11 @@ else
         <div>
             <div>
                 <div class="uk-grid-divider uk-grid-small" data-uk-grid>
+                    <div class="uk-width-auto">
+                        <div class="uk-height-1-1 uk-flex uk-flex-middle">
+                            <button type="button" class="uk-button uk-button-link uk-padding-remove uk-width-1-1 uk-text-bold font" data-uk-toggle="target: #searchWrapper; animation: uk-animation-fade"><img src="<?php echo JUri::base().'images/sprite.svg#close' ?>" alt="" width="24" height="24" data-uk-svg></button>
+                        </div>
+                    </div>
                     <div class="uk-width-expand">
                         <form action="<?php echo JRoute::_('index.php'); ?>" method="post" class="form-inline" role="search">
                             <?php
@@ -70,11 +75,6 @@ else
                             <input type="hidden" name="option" value="com_search" />
                             <input type="hidden" name="Itemid" value="<?php echo $mitemid; ?>" />
                         </form>
-                    </div>
-                    <div class="uk-width-small">
-                        <div class="uk-height-1-1 uk-flex uk-flex-middle">
-                            <button type="button" class="uk-button uk-button-link uk-width-1-1 uk-text-bold font" data-uk-toggle="target: #searchWrapper; animation: uk-animation-fade"><?php echo JText::_('CLOSE'); ?></button>
-                        </div>
                     </div>
                 </div>
             </div>

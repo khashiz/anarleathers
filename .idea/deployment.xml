@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" serverName="Anar Leather">
+  <component name="PublishConfigData" serverName="Anar Leather" confirmBeforeUploading="false">
+    <option name="confirmBeforeUploading" value="false" />
     <serverData>
       <paths name="Abadis">
         <serverdata>
@@ -43,6 +44,13 @@
           </mappings>
         </serverdata>
       </paths>
+      <paths name="Didavaran">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
       <paths name="Digikala Reservation">
         <serverdata>
           <mappings>
@@ -51,6 +59,13 @@
         </serverdata>
       </paths>
       <paths name="Iran Carpet">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="Kian Accessories">
         <serverdata>
           <mappings>
             <mapping local="$PROJECT_DIR$" web="/" />
@@ -106,6 +121,13 @@
           </mappings>
         </serverdata>
       </paths>
+      <paths name="Steel Arvin">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
       <paths name="azimuth">
         <serverdata>
           <mappings>
@@ -114,34 +136,6 @@
         </serverdata>
       </paths>
       <paths name="demoiselle">
-        <serverdata>
-          <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
-          </mappings>
-        </serverdata>
-      </paths>
-      <paths name="faradid">
-        <serverdata>
-          <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
-          </mappings>
-        </serverdata>
-      </paths>
-      <paths name="rskwoods">
-        <serverdata>
-          <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
-          </mappings>
-        </serverdata>
-      </paths>
-      <paths name="steelarvin.com">
-        <serverdata>
-          <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
-          </mappings>
-        </serverdata>
-      </paths>
-      <paths name="uCheck">
         <serverdata>
           <mappings>
             <mapping local="$PROJECT_DIR$" web="/" />

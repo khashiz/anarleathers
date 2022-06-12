@@ -125,7 +125,7 @@ b                       <?php foreach ($this->otpConfig->otep as $otep) : ?>
         <div class="control-group uk-margin-medium-top">
             <div class="controls uk-child-width-auto uk-grid-small" data-uk-grid>
                 <div>
-                    <button type="submit" class="uk-button uk-button-gold uk-box-shadow-small uk-border-pill uk-width-1-1 uk-height-1-1 font validate"><?php echo JText::_('JSUBMIT'); ?></button>
+                    <button type="submit" class="uk-button uk-button-gold uk-box-shadow-small uk-border-pill uk-width-1-1 uk-height-1-1 font validate"><?php echo JText::_('JEDIT'); ?></button>
                 </div>
                 <div>
                     <a class="uk-button uk-button-default uk-box-shadow-small uk-border-pill uk-width-1-1 font validate" href="<?php echo JRoute::_('index.php?Itemid=112'); ?>" title="<?php echo JText::_('JCANCEL'); ?>"><?php echo JText::_('JCANCEL'); ?></a>

@@ -199,7 +199,7 @@ ob_start();
 
 if (!empty($this->element->ts_img_1)) { $slideList = explode('|', str_replace(' ', '', $this->element->ts_img_1)); ?>
     <div class="uk-position-relative">
-        <div class="uk-position-relative uk-visible-toggle uk-light" data-uk-slideshow="animation: push; ratio:1920:600">
+        <div class="uk-position-relative uk-visible-toggle uk-light" data-uk-slideshow="animation: push; ratio:5:2">
 
             <div class="uk-slideshow-items categorySlideshow">
                 <?php

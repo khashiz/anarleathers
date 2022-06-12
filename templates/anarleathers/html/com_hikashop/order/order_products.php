@@ -23,7 +23,7 @@ if(count($this->row->products) > $max_products) {
 }
 
 ?>
-<div id="hika_order_<?php echo $this->row->order_id; ?>_details" class="hk-list-group hika_order_products">
+<div id="hika_order_<?php echo $this->row->order_id; ?>_details" class="uk-child-width-1-2 uk-child-width-auto@m uk-grid-small" data-uk-grid>
 	<?php if(!empty($this->row->extraData->beforeProductsListing)) { echo implode("\r\n", $this->row->extraData->beforeProductsListing); } ?>
 <?php
 $group = $this->config->get('group_options',0);
@@ -34,20 +34,22 @@ foreach($this->row->products as $product) {
 	if(!empty($product->product_id) && !empty($this->products[$product->product_id]) && !empty($this->products[$product->product_id]->product_published))
 		$link = hikashop_contentLink('product&task=show&cid='.$product->product_id.'&name='.@$this->products[$product->product_id]->alias . $url_itemid, $this->products[$product->product_id]);
 ?>
-	<div class="hk-list-group-item hika_order_product">
+	<div class="">
 <!-- PRODUCT IMAGE -->
 <?php
 	$img = $this->imageHelper->getThumbnail(@$product->images[0]->file_path, array(50, 50), array('default' => true, 'forcesize' => true,  'scale' => 'outside'));
 	if(!empty($img) && $img->success) {
 ?>
-		<a class="hika_order_product_image_link" href="<?php echo $link; ?>"><img class="hika_order_product_image" src="<?php echo $img->url; ?>" alt="" /></a>
+		<a class="uk-card uk-card-default uk-border-rounded uk-box-shadow-small uk-display-inline-block uk-padding-small uk-position-relative" href="<?php echo $link; ?>">
+            <span class="orderQuantityCount uk-flex uk-flex-center uk-flex-middle fnum uk-background-primary uk-text-white font f600 uk-position-top-left"><?php echo $product->order_product_quantity; ?></span>
+            <img class="hika_order_product_image" src="<?php echo $img->url; ?>" alt="" /></a>
 <?php
 	}
 ?>
 <!-- EO PRODUCT IMAGE -->
 		<a href="<?php echo $link; ?>">
 <!-- PRODUCT NAME -->
-			<span class="hika_order_product_name"><?php echo $product->order_product_name; ?></span>
+			<span class="uk-hidden"><?php echo $product->order_product_name; ?></span>
 <!-- EO PRODUCT NAME -->
 <!-- PRODUCT CODE -->
 <?php
@@ -72,10 +74,7 @@ foreach($this->row->products as $product) {
 ?>
 		</a>
 <!-- PRODUCT PRICE -->
-		<p class="hika_order_product_price">
-			<span class="hika_cpanel_product_price_quantity">
-				<?php echo $product->order_product_quantity; ?>
-			</span>
+		<p class="uk-hidden">
 			<span class="hika_cpanel_product_price_times"> x
 			</span>
 			<span class="hika_cpanel_product_price_amount">
@@ -89,15 +88,12 @@ foreach($this->row->products as $product) {
 		echo '<p class="hikashop_order_product_extra">' . (is_string($product->extraData) ? $product->extraData : implode('<br/>', $product->extraData)) . '</p>';
 ?>
 <!-- EO PRODUCT EXTRA DATA -->
-		<div style="clear:both;"></div>
 	</div>
 <?php
 }
 if($show_more) {
 ?>
-	<a href="<?php echo $order_link; ?>" class="hk-list-group-item hika_cpanel_product hika_order_product_more"><span><?php
-		echo JText::_('SHOW_MORE_PRODUCTS');
-	?> <i class="fa fa-arrow-right"></i></span></a>
+	<a href="<?php echo $order_link; ?>" class=""><?php echo JText::_('SHOW_MORE_PRODUCTS'); ?></a>
 <?php
 }
 ?>

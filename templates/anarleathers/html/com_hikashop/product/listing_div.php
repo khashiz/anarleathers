@@ -86,7 +86,7 @@ if(!empty($this->rows)) {
 
 	if(empty($this->tmpl_ajax)) {
 ?>
-<div id="hikashop_products_switcher_<?php echo $mainDivName; ?>" class="hikashop_products <?php echo @$cookie_value; ?>"<?php echo $attributes; ?> itemscope="" itemtype="https://schema.org/itemListElement">
+<div id="hikashop_products_switcher_<?php echo $mainDivName; ?>" class="uk-padding-large hikashop_products <?php echo @$cookie_value; ?>"<?php echo $attributes; ?> itemscope="" itemtype="https://schema.org/itemListElement">
 <?php
 	}
 	if ($switchMode) {
@@ -166,7 +166,7 @@ window.localPage.setCookie = function (name,value,delay) {
 		}
 
 		if($row_fluid == 12)
-			echo '<div class="uk-child-width-1-1 uk-child-width-1-3@m uk-child-width-1-4@l uk-grid-collapse" data-uk-grid data-uk-scrollspy="target: >div; cls: uk-animation-slide-bottom-small; delay: 200; repeat: false;">';
+			echo '<div class="uk-child-width-1-1 uk-child-width-1-3@m uk-flex-center uk-grid-large" data-uk-grid data-uk-scrollspy="target: >div; cls: uk-animation-slide-bottom-small; delay: 200; repeat: false;">';
 		else
 			echo '<div class="hk-row-fluid hk-row-'.$row_fluid.'">';
 
@@ -176,15 +176,16 @@ window.localPage.setCookie = function (name,value,delay) {
 
 		foreach($this->rows as $row) {
 ?>
-		<div class="productWrapper" itemprop="itemList" itemscope="" itemtype="http://schema.org/ItemList">
-			<div class="uk-padding uk-border-rounded">
+		<div class="uk-position-relative productWrapper" itemprop="itemList" itemscope="" itemtype="http://schema.org/ItemList">
+			<div class="uk-border-rounded uk-position-relative uk-overflow-hidden">
 				<div class="uk-text-center">
 <?php
 			$this->quantityLayout = $this->getProductQuantityLayout($row);
 			$this->row =& $row;
 			$this->setLayout('listing_' . $itemLayoutType);
 			echo $this->loadTemplate();
-			unset($this->row);
+
+unset($this->row);
 ?>
 				</div>
 			</div>
@@ -199,7 +200,7 @@ window.localPage.setCookie = function (name,value,delay) {
 
 		echo '</div>';
 	}
-?> <div style="clear:both"></div>
+?>
 <?php
 
 	if($infinite_scroll && empty($this->tmpl_ajax) && $this->pageInfo->elements->page > 1) {

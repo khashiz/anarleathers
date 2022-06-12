@@ -95,7 +95,7 @@ defined('_JEXEC') or die('Restricted access');
 			<th class="uk-text-center hikashop_cart_price_title title"><?php echo JText::_('CART_PRODUCT_UNIT_PRICE'); ?></th>
 <!-- EO UNIT PRICE HEADER -->
 <!-- QUANTITY HEADER -->
-			<th class="hikashop_cart_quantity_title title"><?php
+			<th class="uk-text-center hikashop_cart_quantity_title title"><?php
 				echo JText::_('PRODUCT_QUANTITY');
 			?></th>
 <!-- EO QUANTITY HEADER -->
@@ -348,7 +348,7 @@ defined('_JEXEC') or die('Restricted access');
 <!-- EO UNIT PRICE -->
 <!-- QUANTITY -->
 			<td data-title="<?php echo JText::_('PRODUCT_QUANTITY'); ?>">
-                <div class="uk-grid-small uk-grid-divider" data-uk-grid>
+                <div class="uk-grid-small uk-grid-divider uk-flex-center" data-uk-grid>
 <?php
 	if(!empty($this->manage)) {
 		if($this->cart->cart_type == 'wishlist') {

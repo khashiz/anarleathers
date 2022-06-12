@@ -19,13 +19,14 @@ $haveLink = (int)$this->params->get('link_to_product_page', 1);
 if(!empty($this->row->extraData->top)) { echo implode("\r\n",$this->row->extraData->top); }
 
 ?>
-
 <div class="hikashop_listing_img_title" id="div_<?php echo $mainDivName.'_'.$this->row->product_id;  ?>">
-    <div class="uk-margin-bottom listItemTitleSVG">
+    <?php /* ?>
+    <div class="uk-margin-top uk-position-top-center listItemTitleSVG">
         <a href="<?php echo $link;?>" class="uk-display-inline-block">
             <img src="<?php echo JUri::base().'images/svg/titles/'.$languageCode.'-'.$this->row->title_shape.'.svg'; ?>" width="" height="80" alt="" data-uk-svg>
         </a>
     </div>
+    <?php */ ?>
     <?php if($this->row->thumbvideo) { ?>
         <div>
             <a href="<?php echo $link;?>" class="uk-display-block">
@@ -42,7 +43,7 @@ if(!empty($this->row->extraData->top)) { echo implode("\r\n",$this->row->extraDa
         <div class="uk-position-relative listItemIMGContainer">
             <div class="uk-position-relative">
                 <?php if($haveLink) { ?>
-                <a href="<?php echo $link;?>" title="<?php echo $this->escape($this->row->product_name); ?>" class="uk-display-inline-block">
+                <a href="<?php echo $link;?>" title="<?php echo $this->escape($this->row->product_name); ?>" class="uk-display-block uk-cover-container">
                     <?php } ?>
                     <?php
                     $img = $this->image->getThumbnail(
@@ -51,7 +52,7 @@ if(!empty($this->row->extraData->top)) { echo implode("\r\n",$this->row->extraDa
                         array('default' => true,'forcesize'=>$this->config->get('image_force_size',true),'scale'=>$this->config->get('image_scale_mode','inside'))
                     );
                     if($img->success) {
-                        $html = '<img class="hikashop_product_listing_image" title="'.$this->escape(@$this->row->file_description).'" alt="'.$this->escape(@$this->row->file_name).'" src="'.$img->url.'"/>';
+                        $html = '<canvas width="800" height="800"></canvas><img data-uk-cover class="hikashop_product_listing_image" title="'.$this->escape(@$this->row->file_description).'" alt="'.$this->escape(@$this->row->file_name).'" src="'.$img->url.'"/>';
                         if($this->config->get('add_webp_images', 1) && function_exists('imagewebp') && !empty($img->webpurl)) {
                             $html = '
                 <picture>
