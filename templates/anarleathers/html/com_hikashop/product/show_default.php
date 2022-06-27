@@ -17,15 +17,17 @@ $languageCode = $languages[ $lang->getTag() ]->sef;
 	}
 ?>
 
-<div data-uk-slideshow="autoplay: true; autoplay-interval: 2000; ratio: 3:1;">
-    <div class="uk-slideshow-items categorySlideshow">
-        <?php
-        $fieldClass = hikashop_get('class.field');
-        $field = $fieldClass->getField('topslideimage', 'product');
-        echo $fieldClass->show($field,$this->element->topslideimage);
-        ?>
+<?php
+$fieldClass = hikashop_get('class.field');
+$field = $fieldClass->getField('topslideimage', 'product');
+?>
+<?php if (!empty($fieldClass->show($field,$this->element->topslideimage))) { ?>
+    <div data-uk-slideshow="autoplay: true; autoplay-interval: 2000; ratio: 3:1;">
+        <div class="uk-slideshow-items categorySlideshow">
+            <?php echo $fieldClass->show($field,$this->element->topslideimage); ?>
+        </div>
     </div>
-</div>
+<?php } ?>
 
 <div id="hikashop_product_top_part" class="uk-margin-large-bottom">
 <!-- TOP BEGIN EXTRA DATA -->
@@ -77,7 +79,7 @@ $imgQuery
 $imgInfo = $db->setQuery($imgQuery)->loadObject();
 ?>
 
-    <div class="hikashop_category_description">
+    <div class="hikashop_category_description uk-hidden">
         <div class="uk-flex-center uk-grid-column-large uk-grid-row-collapse" data-uk-grid>
             <div class="uk-width-1-1 uk-width-auto">
                 <div>
@@ -324,7 +326,7 @@ $imgInfo = $db->setQuery($imgQuery)->loadObject();
 </div>
 </div>
 <!-- END GRID -->
-<div id="hikashop_product_bottom_part" class="hikashop_product_bottom_part">
+<div id="hikashop_product_bottom_part" class="hikashop_product_bottom_part uk-hidden">
 <!-- BOTTOM BEGIN EXTRA DATA -->
 <?php if(!empty($this->element->extraData->bottomBegin)) { echo implode("\r\n",$this->element->extraData->bottomBegin); } ?>
 <!-- EO BOTTOM BEGIN EXTRA DATA -->

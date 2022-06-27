@@ -166,7 +166,7 @@ window.localPage.setCookie = function (name,value,delay) {
 		}
 
 		if($row_fluid == 12)
-			echo '<div class="uk-child-width-1-1 uk-child-width-1-3@m uk-flex-center uk-grid-large" data-uk-grid data-uk-scrollspy="target: >div; cls: uk-animation-slide-bottom-small; delay: 200; repeat: false;">';
+			echo '<div class="uk-child-width-1-2 uk-child-width-1-3@m uk-flex-center uk-grid-large" data-uk-grid data-uk-scrollspy="target: >div; cls: uk-animation-slide-bottom-small; delay: 200; repeat: false;">';
 		else
 			echo '<div class="hk-row-fluid hk-row-'.$row_fluid.'">';
 
@@ -189,7 +189,9 @@ unset($this->row);
 ?>
 				</div>
 			</div>
+
 		</div>
+
 <?php
 			if($current_column >= $columns) {
 				$current_row++;
@@ -236,11 +238,11 @@ unset($this->row);
 			$cid = '&cid='.(int)(is_array($this->pageInfo->filter->cid) ? reset($this->pageInfo->filter->cid) : $this->pageInfo->filter->cid);
 
 ?>
-		<div class="hikashop_infinite_scroll" id="<?php echo $mainDivName; ?>_infinite_scroll">
-			<a href="#" onclick="return window.localPage.infiniteScroll('<?php echo $mainDivName; ?>');">
-				<span><?php echo JText::_('HIKA_LOAD_MORE'); ?></span>
-			</a>
-		</div>
+		<div class="uk-text-center hikashop_infinite_scroll" id="<?php echo $mainDivName; ?>_infinite_scroll">
+            <div class="uk-margin-medium-top">
+                <span data-uk-spinner></span>
+            </div>
+        </div>
 <script type="text/javascript">
 if(!window.localPage) window.localPage = {};
 window.localPage.infiniteScrollEvents = {};

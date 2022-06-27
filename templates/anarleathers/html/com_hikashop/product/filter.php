@@ -84,22 +84,17 @@ if(!empty($this->filters)){
 
 
 	if($this->collapsable){
-		$content_classes .= ' hikashop_filter_collapsable_content';
-		$title_classes = 'hikashop_filter_collapsable_title';
+		$content_classes .= '';
+		$title_classes = '';
 		$display_title_class = '_mobile';
 
 		if($this->collapsable == 'always'){
 			$display_title_class = '_always';
-			$extra_attributes .= ' style="display: none;"';
+			$extra_attributes .= '';
 		}
 ?>
-<div class="<?php echo $title_classes.$display_title_class; ?>">
-	<div onclick="if(window.hikashop.toggleOverlayBlock('hikashop_filter_main_div_<?php echo $this->params->get('main_div_name'); ?>', 'toggle')) return false;">
-		<div>
-			<h3>ffffff<?php echo JText::_('FILTERS'); ?></h3>
-		</div>
-	</div>
-</div>
+
+
 <?php
 	}
 	if($this->ajax) {
@@ -120,7 +115,10 @@ if(!empty($this->filters)){
 	}
 ?>
     <div>
-        <div data-uk-sticky id="hikashop_filter_main_div_<?php echo $this->params->get('main_div_name'); ?>" class="hikashop_category_filter <?php echo $content_classes.$display_title_class; ?>" <?php echo $extra_attributes; ?>>
+        <div class="uk-container uk-hidden@m ltr">
+            <span class="uk-display-block uk-padding-small uk-padding-remove-horizontal uk-text-small fontEn f500"><?php echo JText::sprintf('SHOW_FILTERS'); ?></span>
+        </div>
+        <div data-uk-sticky="media: @m;" id="hikashop_filter_main_div_<?php echo $this->params->get('main_div_name'); ?>" class="hikashop_category_filter <?php echo $content_classes.$display_title_class; ?>" <?php echo $extra_attributes; ?>>
 <?php
 	if($this->params->get('module') == 'mod_hikashop_filter') {
 ?>
@@ -145,8 +143,8 @@ if(!empty($this->filters)){
         <div class="uk-container">
 		<form action="<?php echo $url; ?>" method="post" name="hikashop_filter_form_<?php echo $this->params->get('main_div_name'); ?>" <?php echo $form_attributes; ?> enctype="multipart/form-data">
 <?php
-echo '<div class="uk-child-width-auto uk-flex-center uk-grid-divider ltr" data-uk-grid>';
-echo '<div><span class="uk-display-inline-block uk-padding-small fontEn uk-h4 uk-margin-remove filterTitle">'.JText::sprintf('SHOW_FILTERS').'</span></div>';
+echo '<div class="uk-child-width-1-2 uk-child-width-auto@m uk-flex-right uk-flex-center@m uk-grid-divider ltr uk-grid-row-collapse" data-uk-grid>';
+echo '<div class="uk-width-1-1 uk-visible@m"><span class="uk-display-inline-block uk-padding-small fontEn uk-h4 uk-margin-remove filterTitle">'.JText::sprintf('SHOW_FILTERS').'</span></div>';
 	while($count<$this->maxFilter+1){
 		$height='';
 		$activeClass = '';
@@ -161,7 +159,7 @@ echo '<div><span class="uk-display-inline-block uk-padding-small fontEn uk-h4 uk
 		if(!empty($html[$count])){
 			if($filters[$count]->filter_options['column_width']>$this->maxColumn) $filters[$count]->filter_options['column_width'] = $this->maxColumn;
 			 ?>
-		<div class="hikashop_filter_main hikashop_filter_main_<?php echo $filters[$count]->filter_namekey; ?>">
+		<div class=" hikashop_filter_main_<?php echo $filters[$count]->filter_namekey; ?>">
 			<?php echo '<div class="'.$activeClass.'hikashop_filter_'.$filters[$count]->filter_namekey.'">'.$html[$count].'</div>'; ?>
 		</div>
 			<?php

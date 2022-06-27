@@ -18,7 +18,7 @@ $tagHelper = hikashop_get('helper.tags');
 if(!$tagHelper->isCompatible())
 	return;
 
-?><div id="hikashop_product_tags_main" class="hikashop_product_tags"><?php
+?><div id="hikashop_product_tags_main" class="hikashop_product_tags uk-hidden"><?php
 if(!empty($this->element->main)){
 	$main_prod =& $this->element->main;
 }else{

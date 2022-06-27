@@ -6,6 +6,7 @@ function appearChildren(wrapperID) {
 }
 function disappearChildren(wrapperID) {
     let elems = jQuery('#'+wrapperID).children();
+    elems = elems.get().reverse();
     jQuery(elems).each(function(index) {
         jQuery(this).delay(100*index).fadeOut(500);
     });
