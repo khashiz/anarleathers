@@ -50,7 +50,7 @@ $total = count($socialsicons['icon']);
     <jdoc:include type="head" />
 </head>
 <body class="<?php echo $pageclass.' view_'.$view.' layout_'.$layout.' task_'.$task; ?>">
-<div class="mobileBar uk-text-center uk-hidden@s uk-width-1-1 uk-position-z-index <?php if ($pageclass == 'home') {echo 'uk-position-fixed';} ?>">
+<div class="mobileBar uk-text-center uk-hidden@s uk-width-1-1 uk-position-z-index <?php if (strpos($pageclass, 'home')) {echo 'uk-position-fixed';} ?>">
     <div class="logo">
         <div class="uk-container">
             <a href="<?php echo JUri::base(); ?>" title="<?php echo $sitename; ?>" class="uk-padding-small uk-display-inline-block uk-text-white"><img src="<?php echo JUri::base().'images/logo_small.svg' ?>" alt="<?php echo $sitename; ?>" width="78" height="24" data-uk-svg></a>
@@ -174,19 +174,19 @@ $total = count($socialsicons['icon']);
                 <div class="uk-position-absolute whiteShade"></div>
                 <div class="uk-position-absolute uk-position-z-index uk-position-top uk-width-1-1 uk-text-center leather" data-uk-scrollspy-class="uk-animation-slide-top">
                     <a href="#" class="uk-visible@m uk-padding-small uk-display-inline-block uk-text-muted hoverPrimary"><img src="<?php echo JUri::base().'images/sprite.svg#leather-top' ?>" data-uk-svg></a>
-                    <a href="#" class="uk-hidden@m">aaaaa</a>
+                    <a href="#" class="uk-hidden">aaaaa</a>
                 </div>
                 <div class="uk-position-absolute uk-position-z-index uk-position-right uk-height-1-1 uk-flex uk-flex-middle" data-uk-scrollspy-class="uk-animation-slide-right">
                     <a href="<?php echo JUri::base().'leather/gifts'; ?>" class="uk-visible@m uk-padding-small uk-display-inline-block uk-text-muted hoverPrimary"><img src="<?php echo JUri::base().'images/sprite.svg#leather-right' ?>" data-uk-svg></a>
-                    <a href="<?php echo JUri::base().'leather/gifts'; ?>" class="uk-hidden@m">aaaaa</a>
+                    <a href="<?php echo JUri::base().'leather/gifts'; ?>" class="uk-hidden">aaaaa</a>
                 </div>
                 <div class="uk-position-absolute uk-position-z-index uk-position-bottom uk-width-1-1 uk-text-center style" data-uk-scrollspy-class="uk-animation-slide-bottom">
                     <a href="<?php echo JUri::base().'#main/intro'; ?>" class="uk-visible@m uk-padding-small uk-display-inline-block uk-text-muted hoverPrimary"><img src="<?php echo JUri::base().'images/sprite.svg#leather-bottom' ?>" data-uk-svg></a>
-                    <a href="<?php echo JUri::base().'#main/intro'; ?>" class="uk-hidden@m">aaaaa</a>
+                    <a href="<?php echo JUri::base().'#main/intro'; ?>" class="uk-hidden@m uk-display-inline-block uk-padding-small uk-text-primary"><img src="<?php echo JUri::base().'images/sprite.svg#felesh-bottom'; ?>" width="55" height="26" alt="Felesh Bottom" data-uk-svg></a>
                 </div>
                 <div class="uk-position-absolute uk-position-z-index uk-position-left uk-height-1-1 uk-flex uk-flex-middle" data-uk-scrollspy-class="uk-animation-slide-left">
                     <a href="<?php echo JUri::base().'leather/sets'; ?>" class="uk-visible@m uk-padding-small uk-display-inline-block uk-text-muted hoverPrimary"><img src="<?php echo JUri::base().'images/sprite.svg#leather-left' ?>" data-uk-svg></a>
-                    <a href="<?php echo JUri::base().'leather/sets'; ?>" class="uk-hidden@m">aaaaa</a>
+                    <a href="<?php echo JUri::base().'leather/sets'; ?>" class="uk-hidden">aaaaa</a>
                 </div>
                 <div class="uk-position-center uk-padding uk-padding-remove-vertical">
                     <div class="triangleWrapper"><img src="<?php echo JUri::base().'images/svg/triangle.svg'; ?>" class="uk-width-1-1 uk-height-1-1" data-uk-svg></div>
@@ -206,7 +206,7 @@ $total = count($socialsicons['icon']);
                     <?php */ ?>
                     <div class="uk-position-absolute uk-position-right uk-height-1-1 uk-flex uk-flex-middle" data-uk-scrollspy-class="uk-animation-slide-right">
                         <a href="<?php echo JUri::base().'#main/intro'; ?>" class="uk-visible@m uk-padding uk-display-inline-block uk-text-muted hoverPrimary"><img src="<?php echo JUri::base().'images/sprite.svg#jewelry-right' ?>" height="90" data-uk-svg></a>
-                        <a href="<?php echo JUri::base().'#main/intro'; ?>" class="uk-hidden@m">aaaaa</a>
+                        <a href="<?php echo JUri::base().'#main/intro'; ?>" class="uk-hidden">aaaaa</a>
                     </div>
                     <?php /* ?>
                     <div class="uk-position-absolute uk-position-bottom uk-width-1-1 uk-text-center style" data-uk-scrollspy-class="uk-animation-slide-bottom">
@@ -231,19 +231,19 @@ $total = count($socialsicons['icon']);
                     </div>
                     <div class="uk-position-absolute uk-position-top uk-width-1-1 uk-text-center leather" data-uk-scrollspy-class="uk-animation-slide-top">
                         <a href="<?php echo JUri::base().'#leather'; ?>" class="uk-visible@m uk-padding uk-display-inline-block hoverPrimary" onmouseover="shapeon('leather','top')" onmouseleave="shapeoff('top')"><img src="<?php echo JUri::base().'images/sprite.svg#homeNavLeather' ?>" data-uk-svg></a>
-                        <a href="<?php echo JUri::base().'#leather'; ?>" class="uk-hidden@m">aaaaa</a>
+                        <a href="<?php echo JUri::base().'#leather'; ?>" class="uk-hidden@m uk-display-inline-block uk-text-primary" style="padding-top: 140px;"><img src="<?php echo JUri::base().'images/sprite.svg#felesh-up'; ?>" width="55" height="26" alt="Felesh Up" data-uk-svg></a>
                     </div>
                     <div class="uk-position-absolute uk-position-right uk-height-1-1 uk-flex uk-flex-middle" data-uk-scrollspy-class="uk-animation-slide-right">
                         <a href="<?php echo JUri::base().'#main/decor'; ?>" class="uk-visible@m uk-padding uk-display-inline-block hoverPrimary" onmouseover="shapeon('decor','right')" onmouseleave="shapeoff('right')"><img src="<?php echo JUri::base().'images/sprite.svg#homeNavDecor' ?>" data-uk-svg></a>
-                        <a href="<?php echo JUri::base().'#main/decor'; ?>" class="uk-hidden@m">aaaaa</a>
+                        <a href="<?php echo JUri::base().'#main/decor'; ?>" class="uk-padding-small uk-hidden@m uk-text-primary"><img src="<?php echo JUri::base().'images/sprite.svg#felesh-right'; ?>" width="26" height="55" alt="Felesh Right" data-uk-svg></a>
                     </div>
                     <div class="uk-position-absolute uk-position-bottom uk-width-1-1 uk-text-center style" data-uk-scrollspy-class="uk-animation-slide-bottom">
                         <a href="<?php echo JUri::base().'#style'; ?>" class="uk-visible@m uk-padding uk-display-inline-block hoverPrimary" onmouseover="shapeon('jewelry','bottom')" onmouseleave="shapeoff('bottom')"><img src="<?php echo JUri::base().'images/sprite.svg#homeNavStyle' ?>" data-uk-svg></a>
-                        <a href="<?php echo JUri::base().'#style'; ?>" class="uk-hidden@m">aaaaa</a>
+                        <a href="<?php echo JUri::base().'#style'; ?>" class="uk-hidden@m uk-display-inline-block uk-text-primary" style="padding-bottom: 140px;"><img src="<?php echo JUri::base().'images/sprite.svg#felesh-bottom'; ?>" width="55" height="26" alt="Felesh Bottom" data-uk-svg></a>
                     </div>
                     <div class="uk-position-absolute uk-position-left uk-height-1-1 uk-flex uk-flex-middle" data-uk-scrollspy-class="uk-animation-slide-left">
                         <a href="<?php echo JUri::base().'#main/jewelry'; ?>" class="uk-visible@m uk-padding uk-display-inline-block hoverPrimary" onmouseover="shapeon('style','left')" onmouseleave="shapeoff('left')"><img src="<?php echo JUri::base().'images/sprite.svg#homeNavJewelry' ?>" data-uk-svg></a>
-                        <a href="<?php echo JUri::base().'#main/jewelry'; ?>" class="uk-hidden@m">aaaaa</a>
+                        <a href="<?php echo JUri::base().'#main/jewelry'; ?>" class="uk-padding-small uk-hidden@m uk-text-primary"><img src="<?php echo JUri::base().'images/sprite.svg#felesh-left'; ?>" width="26" height="55" alt="Felesh Left" data-uk-svg></a>
                     </div>
                 </div>
                 <div class="hoverCover hor top"><img src="<?php echo JUri::base().'images/homebg/top-'.rand(1, 3).'.jpg'; ?>" width="" height="" alt="" data-uk-cover></div>
@@ -258,19 +258,19 @@ $total = count($socialsicons['icon']);
                     <div class="uk-position-absolute whiteShade"></div>
                     <div class="uk-position-absolute uk-position-top uk-width-1-1 uk-text-center leather" data-uk-scrollspy-class="uk-animation-slide-top">
                         <a href="#" class="uk-visible@m uk-padding uk-display-inline-block uk-text-muted hoverPrimary"><img src="<?php echo JUri::base().'images/sprite.svg#decor-top' ?>" data-uk-svg></a>
-                        <a href="#" class="uk-hidden@m">aaaaa</a>
+                        <a href="#" class="uk-hidden">aaaaa</a>
                     </div>
                     <div class="uk-position-absolute uk-position-right uk-height-1-1 uk-flex uk-flex-middle" data-uk-scrollspy-class="uk-animation-slide-right">
                         <a href="<?php echo JUri::base().'decoration/interior-design'; ?>" class="uk-visible@m uk-padding uk-display-inline-block uk-text-muted hoverPrimary"><img src="<?php echo JUri::base().'images/sprite.svg#decor-right' ?>" data-uk-svg></a>
-                        <a href="<?php echo JUri::base().'decoration/interior-design'; ?>" class="uk-hidden@m">aaaaa</a>
+                        <a href="<?php echo JUri::base().'decoration/interior-design'; ?>" class="uk-hidden">aaaaa</a>
                     </div>
                     <div class="uk-position-absolute uk-position-bottom uk-width-1-1 uk-text-center style" data-uk-scrollspy-class="uk-animation-slide-bottom">
                         <a href="<?php echo JUri::base().'decoration'; ?>" class="uk-visible@m uk-padding uk-display-inline-block uk-text-muted hoverPrimary"><img src="<?php echo JUri::base().'images/sprite.svg#decor-bottom' ?>" data-uk-svg></a>
-                        <a href="<?php echo JUri::base().'decoration'; ?>" class="uk-hidden@m">aaaaa</a>
+                        <a href="<?php echo JUri::base().'decoration'; ?>" class="uk-hidden">aaaaa</a>
                     </div>
                     <div class="uk-position-absolute uk-position-left uk-height-1-1 uk-flex uk-flex-middle" data-uk-scrollspy-class="uk-animation-slide-left">
                         <a href="<?php echo JUri::base().'#main/intro'; ?>" class="uk-visible@m uk-padding uk-display-inline-block uk-text-muted hoverPrimary"><img src="<?php echo JUri::base().'images/sprite.svg#decor-left' ?>" data-uk-svg></a>
-                        <a href="<?php echo JUri::base().'#main/intro'; ?>" class="uk-hidden@m">aaaaa</a>
+                        <a href="<?php echo JUri::base().'#main/intro'; ?>" class="uk-hidden">aaaaa</a>
                     </div>
                     <div class="uk-position-center uk-padding uk-padding-remove-vertical">
                         <div class="hexagonWrapper"><img src="<?php echo JUri::base().'images/svg/hexagon.svg'; ?>" class="uk-width-1-1 uk-height-1-1" data-uk-svg></div>

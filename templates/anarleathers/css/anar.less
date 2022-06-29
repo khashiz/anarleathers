@@ -499,6 +499,17 @@ div{
         .transform(translateY(-15px));
       }
     }
+    @media(max-width: 939px){
+      transform-origin: left;
+      .transform(translateY(-92px) translateX(40px) scale(0.6));
+      > div{
+        > div{
+          &.uk-text-gold{
+            .transform(translateY(10px));
+          }
+        }
+      }
+    }
   }
   &.userMenu{
     ul{
