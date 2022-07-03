@@ -144,7 +144,7 @@ if(!empty($this->filters)){
 		<form action="<?php echo $url; ?>" method="post" name="hikashop_filter_form_<?php echo $this->params->get('main_div_name'); ?>" <?php echo $form_attributes; ?> enctype="multipart/form-data">
 <?php
 echo '<div class="uk-child-width-1-2 uk-child-width-auto@m uk-flex-right uk-flex-center@m uk-grid-divider ltr uk-grid-row-collapse" data-uk-grid>';
-echo '<div class="uk-width-1-1 uk-visible@m"><span class="uk-display-inline-block uk-padding-small fontEn uk-h4 uk-margin-remove filterTitle">'.JText::sprintf('SHOW_FILTERS').'</span></div>';
+echo '<div class="uk-width-auto uk-visible@m"><span class="uk-display-inline-block uk-padding-small fontEn uk-h4 uk-margin-remove filterTitle">'.JText::sprintf('SHOW_FILTERS').'</span></div>';
 	while($count<$this->maxFilter+1){
 		$height='';
 		$activeClass = '';

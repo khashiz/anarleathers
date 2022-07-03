@@ -122,7 +122,7 @@ $imgInfo = $db->setQuery($imgQuery)->loadObject();
 	</div>
 
 	<div id="hikashop_product_right_part" class="uk-width-1-1 uk-width-2-5@m">
-        <div data-uk-sticky="offset: 70; bottom: true;">
+        <div data-uk-sticky="offset: 70; bottom: true; media: @m;">
             <!-- RIGHT BEGIN EXTRA DATA -->
             <?php if(!empty($this->element->extraData->rightBegin)) { echo implode("\r\n",$this->element->extraData->rightBegin); } ?>
             <!-- EO RIGHT BEGIN EXTRA DATA -->
@@ -232,7 +232,7 @@ $imgInfo = $db->setQuery($imgQuery)->loadObject();
                                 <?php } ?>
                                 <!-- EO ADD TO CART BUTTON -->
                                 <!-- CONTACT US BUTTON -->
-                                <div id="hikashop_product_contact_mai" class="hikashop_product_contact_main uk-width-1-4">
+                                <div id="hikashop_product_contact_mai" class="hikashop_product_contact_main uk-width-1-3 uk-width-1-4@m">
                                     <?php
                                     $contact = (int)$this->config->get('product_contact', 0);
                                     if(hikashop_level(1) && ($contact == 2 || ($contact == 1 && !empty($this->element->product_contact)))) {

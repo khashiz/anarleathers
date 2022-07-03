@@ -32,6 +32,7 @@ if (strpos($pageclass, 'home')) {
     JHtml::_('stylesheet', 'fullpage.min.css', array('version' => 'auto', 'relative' => true));
 }
 JHtml::_('stylesheet', 'anar.css', array('version' => 'auto', 'relative' => true));
+JHtml::_('stylesheet', 'mobileNav.css', array('version' => 'auto', 'relative' => true));
 
 // Add js
 JHtml::_('script', 'uikit.min.js', array('version' => 'auto', 'relative' => true));
@@ -50,18 +51,30 @@ $total = count($socialsicons['icon']);
     <jdoc:include type="head" />
 </head>
 <body class="<?php echo $pageclass.' view_'.$view.' layout_'.$layout.' task_'.$task; ?>">
-<div class="mobileBar uk-text-center uk-hidden@s uk-width-1-1 uk-position-z-index <?php if (strpos($pageclass, 'home')) {echo 'uk-position-fixed';} ?>">
+<div class="mobileBar uk-text-center uk-hidden@s uk-width-1-1 uk-position-z-index uk-position-relative <?php if (strpos($pageclass, 'home')) {echo 'uk-position-fixed';} ?>">
     <div class="logo">
         <div class="uk-container">
             <a href="<?php echo JUri::base(); ?>" title="<?php echo $sitename; ?>" class="uk-padding-small uk-display-inline-block uk-text-white"><img src="<?php echo JUri::base().'images/logo_small.svg' ?>" alt="<?php echo $sitename; ?>" width="78" height="24" data-uk-svg></a>
         </div>
     </div>
-    <div class="icons uk-background-white">
+    <div class="icons uk-background-white uk-position-relative">
         <div class="uk-container">
             <div>
                 <div class="uk-child-width-auto uk-flex-center uk-grid-small" data-uk-grid>
-                    <div>a</div>
-                    <div>a</div>
+                    <div>
+                        <a href="<?php echo JUri::base().'anar'; ?>" class="icon uk-flex uk-flex-middle uk-padding-small uk-padding-remove-horizontal uk-text-primary cursorPointer"><img src="<?php echo JUri::base().'images/sprite.svg#eye' ?>" alt="" width="24" height="24" data-uk-svg></a>
+                    </div>
+                    <div>
+                        <input type="checkbox" class="uk-hidden hamMenuMobileOpener" id="mainMenuTogglerMobile" />
+                        <label for="mainMenuTogglerMobile" class="icon uk-flex uk-flex-middle uk-height-1-1 uk-padding-small uk-padding-remove-horizontal">
+                            <div>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </label>
+                        <jdoc:include type="modules" name="offcanvas" style="none" />
+                    </div>
                     <div>
                         <a href="<?php echo JUri::base().'auth'; ?>" class="icon uk-flex uk-flex-middle uk-height-1-1 uk-text-primary" title="<?php echo JText::sprintf('NAV_LOGIN'); ?>"><img src="<?php echo JUri::base().'images/sprite.svg#user' ?>" alt="" width="24" height="24" class="uk-preserve-width" data-uk-svg></a>
                     </div>

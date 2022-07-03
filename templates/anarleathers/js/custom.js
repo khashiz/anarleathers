@@ -50,8 +50,21 @@ jQuery(document).ready(function () {
     jQuery('#mainMenuToggler').click(function(){
         jQuery('#mainMenuToggler > div').toggleClass('open');
     });
+    jQuery('#mainMenuTogglerMobile').click(function(){
+        jQuery('#mainMenuToggler > div').toggleClass('open');
+    });
 
 
+    let mobLevel1 = jQuery('ul.nav-links > li > a');
+    let mobLevel2 = jQuery('ul.nav-links > li > a + ul > li > a');
+    mobLevel1.click(function(e) {
+        e.preventDefault();
+        jQuery(this).toggleClass('open');
+    });
+    mobLevel2.click(function(e) {
+        e.preventDefault();
+        jQuery(this).toggleClass('open');
+    });
 });
 
 function eyeAction() {

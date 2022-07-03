@@ -43,7 +43,7 @@ if(!empty($this->row->extraData->top)) { echo implode("\r\n",$this->row->extraDa
         <div class="uk-position-relative listItemIMGContainer">
             <div class="uk-position-relative">
                 <?php if($haveLink) { ?>
-                <a href="<?php echo $link;?>" title="<?php echo $this->escape($this->row->product_name); ?>" class="uk-display-block uk-cover-container">
+                <a href="<?php echo $link;?>" title="<?php echo $this->escape($this->row->product_name); ?>" class="uk-display-block uk-cover-container productContainer">
                     <?php } ?>
                     <?php
                     $img = $this->image->getThumbnail(
@@ -80,7 +80,7 @@ if(!empty($this->row->extraData->top)) { echo implode("\r\n",$this->row->extraDa
         <style>
             div.faderWrapper > a > div:nth-child(2){display: none}
         </style>
-        <div class="uk-margin-auto faderWrapper" onmouseover="jQuery('.faderWrapper > a > div:nth-child(1)').fadeOut(0); jQuery('.faderWrapper > a > div:nth-child(2)').fadeIn(0);" onmouseleave="jQuery('.faderWrapper > a > div:nth-child(2)').fadeOut(0); jQuery('.faderWrapper > a > div:nth-child(1)').fadeIn(0);">
+        <div class="uk-margin-auto faderWrapper productContainer" onmouseover="jQuery('.faderWrapper > a > div:nth-child(1)').fadeOut(0); jQuery('.faderWrapper > a > div:nth-child(2)').fadeIn(0);" onmouseleave="jQuery('.faderWrapper > a > div:nth-child(2)').fadeOut(0); jQuery('.faderWrapper > a > div:nth-child(1)').fadeIn(0);">
             <a href="<?php echo $link;?>" class="uk-display-block">
                 <?php
                 $fieldClass = hikashop_get('class.field');

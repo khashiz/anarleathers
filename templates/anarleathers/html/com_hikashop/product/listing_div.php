@@ -177,7 +177,7 @@ window.localPage.setCookie = function (name,value,delay) {
 		foreach($this->rows as $row) {
 ?>
 		<div class="uk-position-relative productWrapper" itemprop="itemList" itemscope="" itemtype="http://schema.org/ItemList">
-			<div class="uk-border-rounded uk-position-relative uk-overflow-hidden">
+			<div class="uk-border-rounded uk-position-relative">
 				<div class="uk-text-center">
 <?php
 			$this->quantityLayout = $this->getProductQuantityLayout($row);

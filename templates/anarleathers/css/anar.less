@@ -72,6 +72,9 @@ body{
     div{
       &.mainWrapper{
         padding-top: 110px;
+        @media(max-width: 939px){
+          padding: 0;
+        }
       }
     }
   }
@@ -127,6 +130,9 @@ div{
   &#hikashop_product_right_part{
     > div{
       padding-right: 70px;
+      @media(max-width: 939px){
+        padding: 0 15px;
+      }
     }
   }
   &.langSwitcher{
@@ -419,8 +425,16 @@ div{
   }
   &.productWrapper{
     > div{
-      .box-shadow(0 0 0 1px @gold);
-      .transition(box-shadow .3s ease-out);
+      .productContainer{
+        display: block;
+        overflow: hidden;
+        .border-radius(10px);
+        .box-shadow(0 0 0 1px @gold);
+        .transition(box-shadow .3s ease-out);
+        &:hover{
+          .box-shadow(0 0 0 1px rgba(0, 0, 0, .8));
+        }
+      }
       .listItemIMGContainer{
         &:before{
           display: none;
@@ -441,7 +455,6 @@ div{
         }
       }
       &:hover{
-        .box-shadow(0 0 0 1px rgba(0, 0, 0, .8));
         .listItemTitleSVG{
           a{
             opacity: 1;
@@ -451,6 +464,35 @@ div{
         ul.colorsList,
         .hikashop_product_price_full{
           opacity: 1;
+          position: relative !important;
+          width: 100%;
+          margin: 0 15px 0 0;
+          white-space: nowrap;
+        }
+      }
+    }
+    @media(max-width: 939px){
+      > div{
+        ul.colorsList,
+        .hikashop_product_price_full{
+          opacity: 1;
+        }
+      }
+      .uk-position-bottom-left{
+        display: block;
+        margin: 0 !important;
+        text-align: right;
+        width: 100%;
+        position: relative !important;
+        > *{
+          display: flex;
+          margin: 5px 0 0 !important;
+          width: 100%;
+          text-align: right !important;
+          justify-content: flex-start !important;
+          &:first-child{
+            margin: 10px 0 0 !important;
+          }
         }
       }
     }
@@ -1475,7 +1517,8 @@ input{
 
 
 
-#mainMenuToggler{
+#mainMenuToggler,
+label[for="mainMenuTogglerMobile"]{
   > div{
     width: 22px;
     height: 22px;
