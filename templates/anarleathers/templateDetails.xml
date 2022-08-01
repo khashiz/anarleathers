@@ -38,6 +38,26 @@
 					</fieldset>
 				</field>
 			</fieldset>
+			<fieldset name="mobile_boxes" label="TPL_NETP_MOBILE_BOXES">
+				<field name="mobile_boxes" type="repeatable" icon="list" label="TPL_NETP_ITEMS">
+					<fieldset hidden="true" name="items" repeat="true">
+						<field name="bg" type="media" label="TPL_NETP_BACKGROUND" />
+						<field name="title" type="text" label="TPL_NETP_TITLE" />
+						<field name="link" type="menuitem" label="TPL_NETP_URL" />
+						<field name="svg" type="text" label="TPL_NETP_SVG" />
+						<field name="svg_width" type="number" label="TPL_NETP_SVG_WIDTH" default="150" />
+						<field name="pos" type="list" label="TPL_NETP_POSITION">
+							<option value="top-left">NTP_TOP_LEFT</option>
+							<option value="top-center">NTP_TOP_CENTER</option>
+							<option value="top-right">NTP_TOP_RIGHT</option>
+							<option value="bottom-left">NTP_BOTTOM_LEFT</option>
+							<option value="bottom-center">NTP_BOTTOM_CENTER</option>
+							<option value="bottom-right">NTP_BOTTOM_RIGHT</option>
+							<option value="center">NTP_TOP_CENTER</option>
+						</field>
+					</fieldset>
+				</field>
+			</fieldset>
 		</fields>
 	</config>
 </extension>

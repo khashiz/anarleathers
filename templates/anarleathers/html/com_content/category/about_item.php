@@ -23,7 +23,8 @@ $isUnpublished = ($this->item->state == 0 || $this->item->publish_up > $currentD
 	|| ($this->item->publish_down < $currentDate && $this->item->publish_down !== JFactory::getDbo()->getNullDate());
 
 ?>
-<a href="<?php echo ContentHelperRoute::getArticleRoute($this->item->slug, $this->item->catid, $this->item->language); ?>" class="uk-padding uk-display-inline-block uk-text-muted hoverPrimary"><img src="<?php echo JUri::base().'images/sprite.svg#'.$this->item->alias; ?>" data-uk-svg></a>
+<a href="<?php echo ContentHelperRoute::getArticleRoute($this->item->slug, $this->item->catid, $this->item->language); ?>" class="uk-padding uk-display-inline-block uk-text-muted hoverPrimary uk-visible@m"><img src="<?php echo JUri::base().'images/sprite.svg#'.$this->item->alias; ?>" data-uk-svg></a>
+<a href="<?php echo ContentHelperRoute::getArticleRoute($this->item->slug, $this->item->catid, $this->item->language); ?>" class="uk-padding uk-display-inline-block uk-text-muted hoverPrimary uk-hidden@s"><img src="<?php echo JUri::base().'images/sprite.svg#'.$this->item->alias.'mob'; ?>" data-uk-svg></a>
 
 
 <?php /* ?>

@@ -24,6 +24,7 @@ jQuery(document).ready(function () {
         controlArrows: false,
         scrollingSpeed: 500,
         fitToSection:false,
+        // responsiveWidth: 939
     });
 
     // Social networks toggle
@@ -58,12 +59,22 @@ jQuery(document).ready(function () {
     let mobLevel1 = jQuery('ul.nav-links > li > a');
     let mobLevel2 = jQuery('ul.nav-links > li > a + ul > li > a');
     mobLevel1.click(function(e) {
-        e.preventDefault();
-        jQuery(this).toggleClass('open');
+        if (!jQuery(this).hasClass('direct')) {e.preventDefault();}
+        if (jQuery(this).hasClass('open')) {
+            jQuery(this).removeClass('open');
+        } else {
+            mobLevel1.removeClass('open');
+            jQuery(this).toggleClass('open');
+        }
     });
     mobLevel2.click(function(e) {
-        e.preventDefault();
-        jQuery(this).toggleClass('open');
+        if (!jQuery(this).hasClass('direct')) {e.preventDefault();}
+        if (jQuery(this).hasClass('open')) {
+            jQuery(this).removeClass('open');
+        } else {
+            mobLevel2.removeClass('open');
+            jQuery(this).toggleClass('open');
+        }
     });
 });
 

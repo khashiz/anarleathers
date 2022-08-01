@@ -27,6 +27,7 @@
     visibility: hidden;
     transform: translateY(-20px);
     transition: all .3s;
+    height: 0;
     > a {
       background: #fff;
       display: block;
@@ -52,7 +53,7 @@
             align-items: center;
             transform: scale(0);
             height: 0;
-            color: #a29960;
+            color: #c5b358;
             text-decoration: none;
             + ul{
               transition: all .3s;
@@ -68,21 +69,21 @@
                   align-items: center;
                   transform: scale(0);
                   height: 0;
-                  color: #a29960;
+                  color: #c5b358;
                   text-decoration: none;
                   + ul{
                     transition: all .3s;
                     background-color: #fff;
                   }
                   &.open{
-                    background-color: #a29960;
+                    background-color: #c5b358;
                     color: #fff;
                   }
                 }
               }
             }
             &.open{
-              background-color: #a29960;
+              background-color: #c5b358;
               color: #fff;
               + ul{
                 > li{
@@ -143,6 +144,7 @@
       opacity: 1;
       visibility: visible;
       transform: translateY(0);
+      height: auto;
       @for $i from 1 through 4 {
         &:nth-child(#{$i}) {
           transition-delay: ($i - 1)/10+s;

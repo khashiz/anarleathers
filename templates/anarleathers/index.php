@@ -46,27 +46,30 @@ $total = count($socialsicons['icon']);
 <!DOCTYPE html>
 <html lang="<?php echo JFactory::getLanguage()->getTag(); ?>" dir="<?php echo JFactory::getLanguage()->isRtl() ? 'rtl' : 'ltr'; ?>">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no" />
     <meta name="theme-color" content="<?php echo $params->get('presetcolor'); ?>">
     <jdoc:include type="head" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sen&display=swap" rel="stylesheet">
 </head>
 <body class="<?php echo $pageclass.' view_'.$view.' layout_'.$layout.' task_'.$task; ?>">
-<div class="mobileBar uk-text-center uk-hidden@s uk-width-1-1 uk-position-z-index uk-position-relative <?php if (strpos($pageclass, 'home')) {echo 'uk-position-fixed';} ?>">
+<div class="mobileBar uk-text-center uk-hidden@s uk-width-1-1 uk-position-z-index-2" <?php echo strpos($pageclass, 'home') ? '' : 'data-uk-sticky';  ?>>
     <div class="logo">
         <div class="uk-container">
-            <a href="<?php echo JUri::base(); ?>" title="<?php echo $sitename; ?>" class="uk-padding-small uk-display-inline-block uk-text-white"><img src="<?php echo JUri::base().'images/logo_small.svg' ?>" alt="<?php echo $sitename; ?>" width="78" height="24" data-uk-svg></a>
+            <a href="<?php echo JUri::base(); ?>" title="<?php echo $sitename; ?>" class="uk-padding-tiny uk-display-inline-block uk-text-secondary"><img src="<?php echo JUri::base().'images/sprite.svg#anar' ?>" alt="<?php echo $sitename; ?>" width="" height="60" data-uk-svg></a>
         </div>
     </div>
-    <div class="icons uk-background-white uk-position-relative">
+    <div class="icons uk-position-relative">
         <div class="uk-container">
-            <div>
-                <div class="uk-child-width-auto uk-flex-center uk-grid-small" data-uk-grid>
-                    <div>
-                        <a href="<?php echo JUri::base().'anar'; ?>" class="icon uk-flex uk-flex-middle uk-padding-small uk-padding-remove-horizontal uk-text-primary cursorPointer"><img src="<?php echo JUri::base().'images/sprite.svg#eye' ?>" alt="" width="24" height="24" data-uk-svg></a>
+            <div class="uk-padding-tiny uk-padding-remove-horizontal">
+                <div class="uk-child-width-expand uk-text-center uk-flex-center uk-grid-collapse iconsWrapper" data-uk-grid>
+                    <div class="uk-flex uk-flex-center">
+                        <a href="<?php echo JUri::base().'anar'; ?>" class="icon uk-flex uk-flex-middle uk-text-secondary cursorPointer"><img src="<?php echo JUri::base().'images/sprite.svg#eye' ?>" alt="" width="24" height="24" data-uk-svg></a>
                     </div>
-                    <div>
+                    <div class="uk-flex uk-flex-center">
                         <input type="checkbox" class="uk-hidden hamMenuMobileOpener" id="mainMenuTogglerMobile" />
-                        <label for="mainMenuTogglerMobile" class="icon uk-flex uk-flex-middle uk-height-1-1 uk-padding-small uk-padding-remove-horizontal">
+                        <label for="mainMenuTogglerMobile" class="icon uk-flex uk-flex-middle uk-height-1-1">
                             <div>
                                 <span></span>
                                 <span></span>
@@ -75,29 +78,50 @@ $total = count($socialsicons['icon']);
                         </label>
                         <jdoc:include type="modules" name="offcanvas" style="none" />
                     </div>
-                    <div>
-                        <a href="<?php echo JUri::base().'auth'; ?>" class="icon uk-flex uk-flex-middle uk-height-1-1 uk-text-primary" title="<?php echo JText::sprintf('NAV_LOGIN'); ?>"><img src="<?php echo JUri::base().'images/sprite.svg#user' ?>" alt="" width="24" height="24" class="uk-preserve-width" data-uk-svg></a>
+                    <div class="uk-flex uk-flex-center">
+                        <a href="<?php echo JUri::base().'auth'; ?>" class="icon uk-flex uk-flex-middle uk-height-1-1 uk-text-secondary" title="<?php echo JText::sprintf('NAV_LOGIN'); ?>"><img src="<?php echo JUri::base().'images/sprite.svg#user' ?>" alt="" width="24" height="24" class="uk-preserve-width" data-uk-svg></a>
                     </div>
-                    <div>
-                        <a href="<?php echo JRoute::_("index.php?Itemid=132"); ?>" class="icon uk-flex uk-flex-middle uk-height-1-1 uk-text-primary" title="<?php echo JText::sprintf('NAV_CART') ?>"><img src="<?php echo JUri::base().'images/sprite.svg#cart' ?>" alt="" width="24" height="24" class="uk-preserve-width" data-uk-svg></a>
+                    <div class="uk-flex uk-flex-center">
+                        <a href="<?php echo JRoute::_("index.php?Itemid=132"); ?>" class="icon uk-flex uk-flex-middle uk-height-1-1 uk-text-secondary" title="<?php echo JText::sprintf('NAV_CART') ?>"><img src="<?php echo JUri::base().'images/sprite.svg#cart' ?>" alt="" width="24" height="24" class="uk-preserve-width" data-uk-svg></a>
                     </div>
+                    <?php /* ?>
                     <div>
-                        <a href="<?php echo JRoute::_("index.php?Itemid=131"); ?>" class="icon uk-flex uk-flex-middle uk-height-1-1 uk-text-primary" title="<?php echo JText::sprintf('NAV_WISHLIST') ?>"><img src="<?php echo JUri::base().'images/sprite.svg#wishlist' ?>" alt="" width="24" height="24" class="uk-preserve-width" data-uk-svg></a>
+                        <a href="<?php echo JRoute::_("index.php?Itemid=131"); ?>" class="icon uk-flex uk-flex-middle uk-height-1-1 uk-text-secondary" title="<?php echo JText::sprintf('NAV_WISHLIST') ?>"><img src="<?php echo JUri::base().'images/sprite.svg#wishlist' ?>" alt="" width="24" height="24" class="uk-preserve-width" data-uk-svg></a>
                     </div>
-                    <div>
-                        <a href="#searchWrapper" data-uk-toggle="animation: uk-animation-fade" class="icon uk-flex uk-flex-middle uk-height-1-1 uk-text-primary" title="<?php echo JText::sprintf('NAV_SEARCH') ?>"><img src="<?php echo JUri::base().'images/sprite.svg#search' ?>" alt="" width="24" height="24" class="uk-preserve-width" data-uk-svg></a>
+                    <?php */ ?>
+                    <div class="uk-flex uk-flex-center">
+                        <a href="#searchWrapper" data-uk-toggle="animation: uk-animation-fade" class="icon uk-flex uk-flex-middle uk-height-1-1 uk-text-secondary" title="<?php echo JText::sprintf('NAV_SEARCH') ?>"><img src="<?php echo JUri::base().'images/sprite.svg#search' ?>" alt="" width="24" height="24" class="uk-preserve-width" data-uk-svg></a>
                     </div>
-                    <div>
-                        <a href="tel:02100000000" class="icon uk-flex uk-flex-middle uk-height-1-1 uk-text-primary" title="<?php echo JText::sprintf('CALL') ?>"><img src="<?php echo JUri::base().'images/sprite.svg#phone' ?>" alt="" width="24" height="24" class="uk-preserve-width" data-uk-svg></a>
+                    <div class="uk-flex uk-flex-center">
+                        <a href="tel:02100000000" class="icon uk-flex uk-flex-middle uk-height-1-1 uk-text-secondary" title="<?php echo JText::sprintf('CALL') ?>"><img src="<?php echo JUri::base().'images/sprite.svg#phone' ?>" alt="" width="24" height="24" class="uk-preserve-width" data-uk-svg></a>
                     </div>
+	                <?php /* ?>
                     <div>
                         <jdoc:include type="modules" name="lang" style="none" />
                     </div>
+                    <?php */ ?>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<?php
+$mobile_boxes = json_decode( $params->get('mobile_boxes'),true);
+$total_boxes = count($mobile_boxes['bg']);
+?>
+<?php if (strpos($pageclass, 'home')) { ?>
+<div class="uk-flex-1 uk-flex uk-flex-column uk-position-relative uk-position-z-index uk-hidden@s">
+    <div class="uk-flex-1 uk-flex uk-flex-column mobileHome">
+	    <?php for($b=0;$b<$total;$b++) { ?>
+		    <?php if ($mobile_boxes['bg'][$b] != '') { ?>
+                <a href="<?php echo JRoute::_("index.php?Itemid={$mobile_boxes['link'][$b]}"); ?>" class="uk-display-block uk-position-relative uk-flex-1 homeMobileBox leather uk-text-white" style="background-image: url('<?php echo $mobile_boxes['bg'][$b]; ?>');">
+                    <span class="uk-display-inline-block uk-position-<?php echo $mobile_boxes['pos'][$b]; ?>"><img src="<?php echo JUri::base().'images/sprite.svg#mob-'.$mobile_boxes['svg'][$b]; ?>" width="150" data-uk-svg></span>
+                </a>
+		    <?php } ?>
+	    <?php } ?>
+    </div>
+</div>
+<?php } ?>
 <jdoc:include type="modules" name="search" style="none" />
 <div class="uk-visible@s" ata-uk-scrollspy="target: > *; delay: 200;">
     <!--Fullscreen Icon-->
@@ -179,7 +203,7 @@ $total = count($socialsicons['icon']);
     <?php } ?>
 </div>
 <?php if (strpos($pageclass, 'home')) { ?>
-    <div id="anarContainer">
+    <div id="anarContainer" class="uk-visible@m">
         <!-- Leather -->
         <div class="section" data-section="leather">
             <div class="uk-height-1-1 uk-position-relative sectionWrapper anchorsWrapper leather">

@@ -72,7 +72,7 @@ if ($params->get('dropdown', 0) && !$params->get('dropdownimage', 1))
                 </ul>
             </div>
         <?php else : ?>
-            <ul class="uk-flex uk-text-zero uk-padding-small uk-margin-remove" dir="<?php echo JFactory::getLanguage()->isRtl() ? 'rtl' : 'ltr'; ?>">
+            <ul class="uk-flex uk-flex-column uk-text-zero uk-padding-small uk-margin-remove" dir="<?php echo JFactory::getLanguage()->isRtl() ? 'rtl' : 'ltr'; ?>">
                 <?php foreach ($list as $language) : ?>
                     <?php if (!$language->active) : ?>
                         <li>

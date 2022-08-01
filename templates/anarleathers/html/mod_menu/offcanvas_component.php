@@ -28,6 +28,7 @@ if ($item->anchor_rel)
 
 $linktype = $item->title;
 
+/*
 if ($item->menu_image)
 {
 	if ($item->menu_image_css)
@@ -45,6 +46,7 @@ if ($item->menu_image)
 		$linktype .= '<span class="image-title">' . $item->title . '</span>';
 	}
 }
+*/
 
 if ($item->browserNav == 1)
 {

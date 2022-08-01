@@ -71,12 +71,12 @@ $afterDisplayContent = trim(implode("\n", $results));
 
 	<?php $leadingcount = 1; ?>
 	<?php if (!empty($this->lead_items)) : ?>
-        <div id="anarContainer">
-            <div class="section active">
+        <div>
+            <div>
                 <div class="slide active" data-anchor="intro">
                     <span class="line two"></span>
                     <span class="line three"></span>
-                    <div class="uk-height-1-1 uk-position-relative anchorsWrapper uk-position-z-index" data-uk-scrollspy="target: > div; delay: 200;">
+                    <div class="uk-position-relative anchorsWrapper uk-position-z-index" data-uk-scrollspy="target: > div; delay: 200;" data-uk-height-viewport="offset-true: true">
                         <div class="uk-position-absolute uk-position-center uk-height-1-1 uk-flex uk-flex-middle uk-flex-center uk-text-primary" data-uk-height-viewport data-uk-scrollspy-class="uk-animation-fade">
                             <img src="<?php echo JUri::base().'images/sprite.svg#dot'; ?>" class="" data-uk-svg>
                         </div>
